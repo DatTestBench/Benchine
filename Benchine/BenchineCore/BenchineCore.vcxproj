@@ -97,7 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\include\vld;.\include\SDL2_ttf-2.0.15;.\include\SDL2_mixer-2.0.4;.\include\SDL2_image-2.0.5;.\include\SDL2-2.0.12;.\include\Catch2;.\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\include\glm;$(SolutionDir)\include\Catch2;$(SolutionDir)\include\SDL2-2.0.12;$(SolutionDir)\include\SDL2_image-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.4;$(SolutionDir)\include\SDL2_ttf-2.0.15;$(SolutionDir)\include\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <PrecompiledHeaderFile>BenchinePCH.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -110,6 +110,9 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories />
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,7 +121,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\include\vld;.\include\SDL2_ttf-2.0.15;.\include\SDL2_mixer-2.0.4;.\include\SDL2_image-2.0.5;.\include\SDL2-2.0.12;.\include\Catch2;.\include\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\include\glm;$(SolutionDir)\include\Catch2;$(SolutionDir)\include\SDL2-2.0.12;$(SolutionDir)\include\SDL2_image-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.4;$(SolutionDir)\include\SDL2_ttf-2.0.15;$(SolutionDir)\include\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <PrecompiledHeaderFile>BenchinePCH.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -131,17 +134,23 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>BenchinePCH.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\include\glm;$(SolutionDir)\include\Catch2;$(SolutionDir)\include\SDL2-2.0.12;$(SolutionDir)\include\SDL2_image-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.4;$(SolutionDir)\include\SDL2_ttf-2.0.15;$(SolutionDir)\include\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,24 +160,25 @@
       <AdditionalLibraryDirectories>.\lib\vld\Win32;.\lib\SDL2_ttf-2.0.15\x86;.\lib\SDL2_mixer-2.0.4\x86;.\lib\SDL2_image-2.0.5\x86;.\lib\SDL2-2.0.12\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)lib\SDL2-2.0.12\x86\SDL2.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\vld\Win32\vld_x86.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\vld\Win32\dbghelp.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_image-2.0.5\x86\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_mixer-2.0.4\x86\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf-2.0.15\x86\*.dll" "$(OutDir)" /y /D</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories />
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>BenchinePCH.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)\include\glm;$(SolutionDir)\include\Catch2;$(SolutionDir)\include\SDL2-2.0.12;$(SolutionDir)\include\SDL2_image-2.0.5;$(SolutionDir)\include\SDL2_mixer-2.0.4;$(SolutionDir)\include\SDL2_ttf-2.0.15;$(SolutionDir)\include\vld;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,26 +188,55 @@ xcopy "$(SolutionDir)lib\SDL2_ttf-2.0.15\x86\*.dll" "$(OutDir)" /y /D</Command>
       <AdditionalLibraryDirectories>.\lib\vld\Win64;.\lib\SDL2_ttf-2.0.15\x64;.\lib\SDL2_mixer-2.0.4\x64;.\lib\SDL2_image-2.0.5\x64;.\lib\SDL2-2.0.12\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)lib\SDL2-2.0.12\x64\SDL2.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\vld\Win64\vld_x64.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\vld\Win64\dbghelp.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_image-2.0.5\x64\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_mixer-2.0.4\x64\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf-2.0.15\x64\*.dll" "$(OutDir)" /y /D
-</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <Lib>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BenchineCore.cpp" />
+    <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="BaseGame.cpp" />
+    <ClCompile Include="BenchineRunner.cpp" />
+    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FPSComponent.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TextComponent.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="BenchinePCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseGame.h" />
     <ClInclude Include="BenchinePCH.h" />
+    <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="BenchineRunner.h" />
+    <ClInclude Include="Components.h" />
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="FPSComponent.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="TextComponent.h" />
+    <ClInclude Include="Texture2D.h" />
+    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,20 +1,27 @@
-// BubbleBobble.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 #include "BubbleBobblePCH.h"
-#include <iostream>
+#include "BubbleBobble.h"
+#include "Scenes/FPSScene.h"
 
-int main()
+
+// This is the only actual useful function here >_>
+void BubbleBobble::Initialize()
 {
-	
+	SceneManager::GetInstance()->AddScene(new FPSScene("FPSScene"));
+
+
+
+
+	SceneManager::GetInstance()->Initialize();
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+void BubbleBobble::Update(float dT)
+{
+	UNUSED(dT);
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+void BubbleBobble::Draw() const
+{
+
+}
+
+
