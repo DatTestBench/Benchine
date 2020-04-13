@@ -19,6 +19,10 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
+// IMGUI
+#include "imgui.h"
+#include "imgui_sdl.h"
+
 // Macros
 #define DEL_ROF(className) \
 className(const className&) = delete; \

@@ -51,5 +51,7 @@ void FPSScene::Update(float dT)
 
 void FPSScene::Draw() const
 {
+	ImGui::Begin("Test");
 
+	ImGui::End();
 }

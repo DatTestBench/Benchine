@@ -49,6 +49,7 @@ public:
 			}
 
 
+			ImGui::NewFrame();
 			pRenderer->SetupRender();
 			m_pGame->BaseDraw();
 			pRenderer->PresentRender();

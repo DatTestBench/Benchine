@@ -4,7 +4,6 @@
 #if _DEBUG
 #include "vld.h"
 #endif
-#include <SDL.h>
 #include "BubbleBobble.h"
 #include "BenchineRunner.h"
 

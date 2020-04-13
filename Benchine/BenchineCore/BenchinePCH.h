@@ -11,13 +11,19 @@
 #include <thread>
 
 #define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
 #include <windows.h>
+
+// IMGUI
+#include "imgui.h"
+#include "imgui_sdl.h"
 
 // SDL
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+
 
 // Macros
 #define DEL_ROF(className) \

@@ -18,6 +18,9 @@ void Renderer::SetupRender() const
 
 void Renderer::PresentRender() const
 {
+	ImGui::Render();
+	ImGuiSDL::Render(ImGui::GetDrawData());
+
 	SDL_RenderPresent(m_pRenderer);
 }
 
