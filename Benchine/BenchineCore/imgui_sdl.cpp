@@ -1,4 +1,3 @@
-#include "BenchinePCH.h"
 #include "imgui_sdl.h"
 
 #include "SDL.h"
