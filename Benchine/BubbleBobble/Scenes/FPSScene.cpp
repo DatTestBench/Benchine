@@ -26,6 +26,9 @@ void FPSScene::Initialize()
 
 	AddGameObject(m_pFPSCounter);
 
+	InputManager::GetInstance()->AddInputBinding(InputBinding(Shoot, InputState::Pressed, 'S', -1, GamepadButton::A));
+	InputManager::GetInstance()->AddInputBinding(InputBinding(Shoot, InputState::Pressed, 'A', -1, GamepadButton::A));
+
 	/*auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
 auto go = std::make_shared<GameObject>();
@@ -47,11 +50,14 @@ void FPSScene::Update(float dT)
 {
 	UNUSED(dT);
 	m_pFPSText->SetText(std::to_string(m_pFPSComponent->GetFPS()));
+
+	if (InputManager::GetInstance()->IsBindingActive(Shoot))
+	{
+		Logger::Log<LEVEL_DEBUG>("FPSScene::Update") << "Shoot!";
+	}
 }
 
 void FPSScene::Draw() const
 {
-	ImGui::Begin("Test");
 
-	ImGui::End();
 }

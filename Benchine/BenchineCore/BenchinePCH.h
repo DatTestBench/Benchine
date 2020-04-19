@@ -7,8 +7,11 @@
 #include <sstream>
 #include <memory>
 #include <vector>
+#include <map>
+#include <functional>
 #include <chrono>
 #include <thread>
+#include <algorithm>
 
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
@@ -50,3 +53,4 @@ inline void SafeDelete(T& pObject)
 #include "Renderer.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "Logger.h"

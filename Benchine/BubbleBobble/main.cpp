@@ -5,12 +5,13 @@
 #include "vld.h"
 #endif
 #include "BubbleBobble.h"
-#include "BenchineRunner.h"
+#include "Benchine.h"
+
 
 
 int main(int, char* [])
 {
-	BenchineRunner engine;
+	Benchine engine;
 	engine.Run<BubbleBobble>();
 	return 0;
 }

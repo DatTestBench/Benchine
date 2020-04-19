@@ -4,16 +4,20 @@
 
 void Renderer::Init(SDL_Window * window)
 {
-	m_pRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	// TODO: pass renderer settings for ImGuiSDL
+	m_pRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (m_pRenderer == nullptr) 
 	{
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 	}
+	ImGui::CreateContext();
+	ImGuiSDL::Initialize(m_pRenderer, 1280, 720);
 }
 
 void Renderer::SetupRender() const
 {
 	SDL_RenderClear(m_pRenderer);
+	ImGui::NewFrame();
 }
 
 void Renderer::PresentRender() const

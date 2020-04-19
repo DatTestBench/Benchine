@@ -20,5 +20,10 @@ private:
 	FPSComponent* m_pFPSComponent;
 	TextComponent* m_pFPSText;
 
+	enum Inputs :int
+	{
+		Shoot
+	};
+
 };
 

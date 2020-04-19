@@ -1,16 +1,16 @@
 #include "BenchinePCH.h"
-#include "BenchineRunner.h"
+#include "Benchine.h"
 
 
-void BenchineRunner::Initialize()
+void Benchine::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		throw std::runtime_error(std::string("SDL_Init Error: ") + SDL_GetError());
 	}
 
-	constexpr int width = 640;
-	constexpr int height = 480;
+	constexpr int width = 1280;
+	constexpr int height = 720;
 
 	m_pWindow = SDL_CreateWindow(
 		"Benchine",
@@ -26,20 +26,15 @@ void BenchineRunner::Initialize()
 	}
 
 	Renderer::GetInstance()->Init(m_pWindow);
-	const auto pRenderer = Renderer::GetInstance()->GetSDLRenderer();
-
-	ImGui::CreateContext();
-	ImGuiSDL::Initialize(pRenderer, width, height);
-
 
 }
 
-void BenchineRunner::LoadGame() const
+void Benchine::LoadGame() const
 {
 	m_pGame->BaseInitialize();
 }
 
-void BenchineRunner::Cleanup()
+void Benchine::Cleanup()
 {
 	delete m_pGame;
 	Renderer::GetInstance()->Destroy();

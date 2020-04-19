@@ -22,6 +22,9 @@
     <Filter Include="ImGUI">
       <UniqueIdentifier>{da1f077c-f191-4230-a21d-c5b301c84a1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Debugging">
+      <UniqueIdentifier>{5408523a-6de6-42c7-b1c0-2163a4bc1dd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp">
@@ -58,9 +61,6 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="BenchineRunner.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -81,6 +81,12 @@
     </ClCompile>
     <ClCompile Include="imgui_sdl.cpp">
       <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Benchine.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Debugging</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +133,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="BenchineRunner.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -156,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="imgui_sdl.h">
       <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="Benchine.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

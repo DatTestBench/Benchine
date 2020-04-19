@@ -2,17 +2,15 @@
 #include "InputManager.h"
 #include <SDL.h>
 
-
 bool InputManager::ProcessInput()
 {
 
 	ImGuiIO& io = ImGui::GetIO();
 
 	int wheel = 0;
+	ClearInputs();
 
-	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	XInputGetState(0, &m_CurrentState);
-
+	// SDL
 	SDL_Event e;
 	while (SDL_PollEvent(&e))
 	{
@@ -20,17 +18,21 @@ bool InputManager::ProcessInput()
 		{
 			return true;
 		}
-		if (e.type == SDL_KEYDOWN)
+		if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
 		{
-			
+			LogKeyDown(e.key.keysym.scancode);
+		}
+		if (e.type == SDL_KEYUP)
+		{
+			LogKeyUp(e.key.keysym.scancode);
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
-			
+
 		}
 		if (e.type == SDL_WINDOWEVENT)
 		{
-			if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) 
+			if (e.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 			{
 				io.DisplaySize.x = static_cast<float>(e.window.data1);
 				io.DisplaySize.y = static_cast<float>(e.window.data2);
@@ -42,6 +44,50 @@ bool InputManager::ProcessInput()
 		}
 	}
 
+	// XINPUT https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
+	DWORD dwResult;
+
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
+
+		// Get the state of the controller
+		dwResult = XInputGetState(i, &state);
+		if (dwResult == ERROR_SUCCESS && !m_Controllers[i].isConnected)
+		{
+			// Controller Connected
+			m_Controllers[i].isConnected = true;
+			Logger::Log<LEVEL_DEBUG>("InputManager::ProcessInput()") << "Controller Connected";
+
+
+		}
+		else if (dwResult != ERROR_SUCCESS && m_Controllers[i].isConnected)
+		{
+			// Controller Disconnected
+			m_Controllers[i].isConnected = false;
+			Logger::Log<LEVEL_DEBUG>("InputManager::ProcessInput()") << "Controller Disconnected";
+
+		}
+
+		// Bind all inputs to each controller
+		m_Controllers[i].buttons[GamepadButton::DPAD_UP] = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
+		m_Controllers[i].buttons[GamepadButton::DPAD_DOWN] = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
+		m_Controllers[i].buttons[GamepadButton::DPAD_LEFT] = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT;
+		m_Controllers[i].buttons[GamepadButton::DPAD_RIGHT] = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
+		m_Controllers[i].buttons[GamepadButton::START] = state.Gamepad.wButtons & XINPUT_GAMEPAD_START;
+		m_Controllers[i].buttons[GamepadButton::BACK] = state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK;
+		m_Controllers[i].buttons[GamepadButton::LEFT_THUMB] = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB;
+		m_Controllers[i].buttons[GamepadButton::RIGHT_THUMB] = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB;
+		m_Controllers[i].buttons[GamepadButton::LEFT_SHOULDER] = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER;
+		m_Controllers[i].buttons[GamepadButton::RIGHT_SHOULDER] = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER;
+		m_Controllers[i].buttons[GamepadButton::A] = state.Gamepad.wButtons & XINPUT_GAMEPAD_A;
+		m_Controllers[i].buttons[GamepadButton::B] = state.Gamepad.wButtons & XINPUT_GAMEPAD_B;
+		m_Controllers[i].buttons[GamepadButton::X] = state.Gamepad.wButtons & XINPUT_GAMEPAD_X;
+		m_Controllers[i].buttons[GamepadButton::Y] = state.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
+
+	}
+
 	int mouseX, mouseY;
 	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
@@ -50,22 +96,85 @@ bool InputManager::ProcessInput()
 	io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
 	io.MouseWheel = static_cast<float>(wheel);
 
+
+
+	for (auto& bind : m_InputBinds)
+	{
+		// Keyboard Checks
+		bool keyBoardActive = false;
+		for (auto& keyEvent : m_KeyEvents)
+		{
+			if (keyEvent.keyCode == bind.second.keyCode && keyEvent.state == bind.second.inputState)
+			{
+				keyBoardActive = true;
+				keyEvent.processed = true;
+			}
+		}
+
+		// XINPUT Checks
+		bool controllerActive = false;
+		if (m_Controllers[bind.second.controllerId].buttons[bind.second.button])
+		{
+			controllerActive = true;
+		}
+
+		bind.second.isActive = keyBoardActive || controllerActive;
+	}
+
+
+
 	return false;
 }
 
-bool InputManager::IsPressed(ControllerButton button) const
+
+bool InputManager::AddInputBinding(InputBinding binding)
 {
-	switch (button)
+	size_t oldSize = m_InputBinds.size();
+	m_InputBinds.try_emplace(binding.actionId, binding);
+	size_t newSize = m_InputBinds.size();
+
+	if (oldSize == newSize)
 	{
-	case ControllerButton::ButtonA:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_A;
-	case ControllerButton::ButtonB:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_B;
-	case ControllerButton::ButtonX:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_X;
-	case ControllerButton::ButtonY:
-		return m_CurrentState.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
-	default: return false;
+		Logger::Log<LEVEL_WARNING>("InputManager::AddInputBinding()") << "Input with ID " << binding.actionId << " already exists";
+		return false;
 	}
+	return true;
 }
 
+bool InputManager::IsBindingActive(int actionId)
+{
+	return m_InputBinds.at(actionId).isActive;
+}
+
+bool InputManager::IsPressed(GamepadButton button, int controllerId)
+{
+
+	if (m_Controllers[controllerId].isConnected)
+	{
+		return m_Controllers[controllerId].buttons[button];
+	}
+	return false;
+}
+
+void InputManager::LogKeyDown(SDL_Scancode key)
+{
+	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Pressed));
+}
+
+void InputManager::LogKeyUp(SDL_Scancode key)
+{
+	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Released));
+}
+
+
+std::tuple<int, int, Uint32> InputManager::GetMouseState()
+{
+	int x, y;
+	Uint32 mouseState = SDL_GetMouseState(&x, &y);
+	return std::tuple<int, int, Uint32>(x, y, mouseState);
+}
+
+void InputManager::ClearInputs()
+{
+	m_KeyEvents.erase(std::remove_if(m_KeyEvents.begin(), m_KeyEvents.end(), [](const KeyEvent& keyEvent) { return keyEvent.processed; }), m_KeyEvents.end());
+}
