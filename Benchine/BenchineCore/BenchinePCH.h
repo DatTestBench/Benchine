@@ -18,9 +18,10 @@
 #include <windows.h>
 
 // IMGUI
-#include "imgui.h"
-#include "imgui_sdl.h"
-
+#pragma warning (push, 0)
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_sdl.h"
+#pragma warning (pop)
 // SDL
 #include <SDL.h>
 #include <SDL_ttf.h>
@@ -49,8 +50,8 @@ inline void SafeDelete(T& pObject)
 }
 
 // General Includes
-#include "ResourceManager.h"
-#include "Renderer.h"
-#include "InputManager.h"
-#include "SceneManager.h"
-#include "Logger.h"
+#include "Resources//ResourceManager.h"
+#include "Graphics/Renderer.h"
+#include "Core/InputManager.h"
+#include "Scene/SceneManager.h"
+#include "Debugging/Logger.h"

@@ -1,0 +1,564 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"viewin",
+				"matViewInverse"
+			],
+			[
+				"Tria",
+				"triStream"
+			],
+			[
+				"cont",
+				"gameContext"
+			],
+			[
+				"dis",
+				"Discord"
+			],
+			[
+				"output",
+				"outputEmbed"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Benchine/BubbleBobble/BubbleBobble.h",
+			"settings":
+			{
+				"buffer_size": 285,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Benchine/BenchineCore/Scene/SceneManager.cpp",
+			"settings":
+			{
+				"buffer_size": 695,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Benchine/BenchineCore/Scene/SceneManager.h",
+			"settings":
+			{
+				"buffer_size": 376,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"listc",
+				"Package Control: List Packages"
+			],
+			[
+				"enabel",
+				"Package Control: Enable Package"
+			],
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			],
+			[
+				"disablep",
+				"Package Control: Disable Package"
+			],
+			[
+				"packages",
+				"Package Control: Disable Package"
+			],
+			[
+				"comple",
+				"Set Syntax: C++YouCompleteMeErrorPanel"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"package ",
+				"Package Control: Disable Package"
+			],
+			[
+				"package control\t",
+				"Package Control: Install Package"
+			],
+			[
+				"pakc",
+				"Package Control: Install Package"
+			],
+			[
+				"PACKAGE",
+				"Package Control: Install Package"
+			],
+			[
+				"packag",
+				"Package Control: Add Repository"
+			],
+			[
+				"pac",
+				"Preferences: Browse Packages"
+			],
+			[
+				"packa",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine"
+	],
+	"file_history":
+	[
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/ResourceManager.cpp",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/ResourceManager.h",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/ResourceLoader.h",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/BaseGame.h",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/BaseGame.cpp",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/Loaders.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/Particle.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ParticleEmitterComponent.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/MathHelper.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/SpriteFontLoader.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/SpriteComponent.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/EffectLoader.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ContentLoader.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ContentManager.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ContentManager.h",
+		"/E/DAE/Year_2/Semester_4/GP2/Week 9/GP2_W9_1_ParticleRendererEffect_Demo/Resources/Effects/ParticleRenderer.fx",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordProject/Resources/Effects/ParticleRenderer.fx",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/BinaryReader.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/BinaryReader.cpp",
+		"/E/DAE/Year_2/Semester_4/Programming_4/Exam_Project/Benchine/Benchine/BenchineCore/ContentLoader.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/DebugRenderer.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ModelComponent.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/MeshFilter.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ShadowMapRenderer.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ShadowMapMaterial.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/ParticleEmitterComponent.h",
+		"/E/P4V/gamep_group16/BedtimeBreakout/Dev/Bedtime_Breakout/Bedtime_Breakout.uproject",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/Particle.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordProject/Resources/Effects/SpikeyShader.fx",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordProject/MainGame.cpp",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/User/C++.sublime-settings",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/SpriteRenderer.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/Singleton.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/GameScene.h",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/SublimeYouCompleteMe/SublimeYouCompleteMe.sublime-settings",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/User/C++YouCompleteMe.sublime-settings",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/.ycm_extra_conf.py",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/stdafx.h",
+		"/C/Program Files/Sublime Text 3/Packages/C++.sublime-package",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/OverlordGame.cpp",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/Libs/DX_Tex/include/DirectXTex.h",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordEngine/stdafx.cpp",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/SublimeYouCompleteMe/ycmd/ycmd/completers/cpp/flags.py",
+		"/E/DAE/Year_2/Semester_4/GP2/OverlordEngine/OverlordProject/CourseObjects/Week 9/ParticleScene.cpp",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/C++YouCompleteMe/C++YouCompleteMe.sublime-settings",
+		"/C/Users/Matthieu/AppData/Roaming/Sublime Text 3/Packages/SublimeYouCompleteMe/ycmd/README.md",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/utils.js",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/app.js",
+		"/C/Users/Matthieu/Downloads/2019-12-21_17-28-11.7z",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/generalcommands.js",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/customcom.json",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/README.md",
+		"/C/Users/Matthieu/Downloads/99MB3.file",
+		"/C/Users/Matthieu/Documents/Discord Bot/BenchBot/BenchBot/articles.js",
+		"/C/Users/Matthieu/Documents/Random CPP/TestApp/TestApp/TestApp.cpp",
+		"/C/Users/Matthieu/Desktop/daniel.cpp",
+		"/C/Users/Matthieu/Desktop/PCMR/mobo rant"
+	],
+	"find":
+	{
+		"height": 64.0
+	},
+	"find_in_files":
+	{
+		"height": 236.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Benchine/BubbleBobble/BubbleBobble.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								285,
+								285
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Benchine/BenchineCore/Scene/SceneManager.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Benchine/BenchineCore/Scene/SceneManager.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 376,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								262,
+								262
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 64.0
+	},
+	"input":
+	{
+		"height": 211.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CppYCM.2":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Benchine.sublime-project",
+	"replace":
+	{
+		"height": 124.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"scenemana",
+				"BenchineCore\\Scene\\SceneManager.h"
+			],
+			[
+				"resourcemana",
+				"BenchineCore\\ResourceManager.cpp"
+			],
+			[
+				"resourceme",
+				"BenchineCore\\ResourceManager.h"
+			],
+			[
+				"resource",
+				"BenchineCore\\ResourceManager.h"
+			],
+			[
+				"loader",
+				"BenchineCore\\Loaders.h"
+			],
+			[
+				"resourc",
+				"BenchineCore\\ResourceLoader.h"
+			],
+			[
+				"bubble",
+				"BubbleBobble\\BubbleBobble.h"
+			],
+			[
+				"base",
+				"BenchineCore\\BaseGame.h"
+			],
+			[
+				"basegame",
+				"BenchineCore\\BaseGame.cpp"
+			],
+			[
+				"mathh",
+				"OverlordEngine\\MathHelper.h"
+			],
+			[
+				"particle",
+				"OverlordEngine\\Particle.cpp"
+			],
+			[
+				"spriteloa",
+				"OverlordEngine\\SpriteFontLoader.cpp"
+			],
+			[
+				"spritecom",
+				"OverlordEngine\\SpriteComponent.cpp"
+			],
+			[
+				"particle.",
+				"OverlordEngine\\Particle.cpp"
+			],
+			[
+				"contentload",
+				"OverlordEngine\\OverlordEngine\\ContentLoader.h"
+			],
+			[
+				"resourcemanager",
+				"Benchine\\BenchineCore\\ResourceManager.h"
+			],
+			[
+				"binary",
+				"OverlordEngine\\BinaryReader.cpp"
+			],
+			[
+				".fx",
+				"OverlordProject\\Resources\\Effects\\ParticleRenderer.fx"
+			],
+			[
+				"resourceload",
+				"Benchine\\BenchineCore\\ResourceLoader.h"
+			],
+			[
+				"content",
+				"OverlordEngine\\OverlordEngine\\ContentManager.h"
+			],
+			[
+				"shadowmap",
+				"OverlordEngine\\ShadowMapMaterial.cpp"
+			],
+			[
+				"shadowm",
+				"OverlordEngine\\ShadowMapRenderer.cpp"
+			],
+			[
+				"meshfil",
+				"OverlordEngine\\MeshFilter.cpp"
+			],
+			[
+				"modelcompon",
+				"OverlordEngine\\ModelComponent.cpp"
+			],
+			[
+				"DEBU",
+				"OverlordEngine\\DebugRenderer.cpp"
+			],
+			[
+				"particleem",
+				"OverlordEngine\\ParticleEmitterComponent.h"
+			],
+			[
+				"particleemi",
+				"OverlordEngine\\ParticleEmitterComponent.cpp"
+			],
+			[
+				"maing",
+				"OverlordEngine\\OverlordProject\\MainGame.cpp"
+			],
+			[
+				"maingame",
+				"OverlordEngine\\OverlordProject\\MainGame.cpp"
+			],
+			[
+				"stdafx.h",
+				"OverlordEngine\\OverlordEngine\\stdafx.h"
+			],
+			[
+				"std",
+				"OverlordEngine\\OverlordEngine\\stdafx.cpp"
+			],
+			[
+				"player",
+				"Ecs\\Components\\PlayerControllerComponent.cpp"
+			],
+			[
+				"D3Dmana",
+				"D3DManager.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"E:\\DAE\\Year_2\\Semester_4\\GP2\\OverlordEngine\\Overlord.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 204.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

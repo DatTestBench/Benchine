@@ -1,6 +1,6 @@
 #pragma once
-#include "Scene.h"
-#include "Components.h"
+#include "Scene/Scene.h"
+#include "Components/Components.h"
 class FPSScene final : public Scene
 {
 public:

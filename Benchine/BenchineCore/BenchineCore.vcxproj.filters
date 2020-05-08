@@ -27,144 +27,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="BenchinePCH.cpp" />
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Content</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseGame.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_demo.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_draw.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_widgets.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_sdl.cpp">
-      <Filter>ImGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Benchine.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Logger.cpp">
-      <Filter>Debugging</Filter>
-    </ClCompile>
+    <ClCompile Include="Scene\GameObject.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_plot.cpp" />
+    <ClCompile Include="ImGui\imgui_sdl.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Debugging\Logger.cpp" />
+    <ClCompile Include="Core\BaseGame.cpp" />
+    <ClCompile Include="Core\Benchine.cpp" />
+    <ClCompile Include="Core\InputManager.cpp" />
+    <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\FPSComponent.cpp" />
+    <ClCompile Include="Components\TextComponent.cpp" />
+    <ClCompile Include="Components\TransformComponent.cpp" />
+    <ClCompile Include="Resources\Loaders.cpp" />
+    <ClCompile Include="Resources\ResourceLoader.cpp" />
+    <ClCompile Include="Resources\ResourceManager.cpp" />
+    <ClCompile Include="Resources\Texture2D.cpp" />
+    <ClCompile Include="Resources\Font.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="BenchinePCH.h" />
-    <ClInclude Include="Components.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Content</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture2D.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseGame.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="imconfig.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_internal.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_rectpack.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_textedit.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imstb_truetype.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui_sdl.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Logger.h">
-      <Filter>Debugging</Filter>
-    </ClInclude>
-    <ClInclude Include="Benchine.h">
-      <Filter>Core</Filter>
-    </ClInclude>
+    <ClInclude Include="Scene\GameObject.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imgui_plot.h" />
+    <ClInclude Include="ImGui\imgui_sdl.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Helpers\Singleton.h" />
+    <ClInclude Include="Helpers\Utils.h" />
+    <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Debugging\Logger.h" />
+    <ClInclude Include="Core\BaseGame.h" />
+    <ClInclude Include="Core\Benchine.h" />
+    <ClInclude Include="Core\InputManager.h" />
+    <ClInclude Include="Components\BaseComponent.h" />
+    <ClInclude Include="Components\Components.h" />
+    <ClInclude Include="Components\FPSComponent.h" />
+    <ClInclude Include="Components\TextComponent.h" />
+    <ClInclude Include="Components\TransformComponent.h" />
+    <ClInclude Include="Resources\Loaders.h" />
+    <ClInclude Include="Resources\ResourceLoader.h" />
+    <ClInclude Include="Resources\ResourceManager.h" />
+    <ClInclude Include="Resources\Texture2D.h" />
+    <ClInclude Include="Resources\Font.h" />
   </ItemGroup>
 </Project>

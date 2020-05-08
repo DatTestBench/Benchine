@@ -1,6 +1,6 @@
 #include "BubbleBobblePCH.h"
 #include "FPSScene.h"
-#include "GameObject.h"
+#include "Scene/GameObject.h"
 FPSScene::FPSScene(const std::string& sceneName)
 	: Scene{ sceneName }
 {
@@ -14,8 +14,13 @@ FPSScene::~FPSScene()
 
 void FPSScene::Initialize()
 {
+	
 
-	auto font = ResourceManager::GetInstance()->LoadFont("Lingua.otf", 36);
+
+	auto font = ResourceManager::GetInstance()->Load<Font>("Lingua.otf");
+	auto font2 = ResourceManager::GetInstance()->Load<Font>("urmom.png");
+
+	UNUSED(font2);
 
 	m_pFPSCounter = new GameObject();
 	m_pFPSComponent = new FPSComponent();
