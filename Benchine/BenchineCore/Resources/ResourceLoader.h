@@ -13,10 +13,10 @@ public:
 	DEL_ROF(BaseLoader);
 
 	static void SetDataPath(const std::string& dataPath) { m_DataPath = dataPath; }
-	static const std::string GetDataPath() { return m_DataPath; }
+	[[nodiscard]] auto GetDataPath() const noexcept-> const std::string& { return m_DataPath; }
 	virtual void ReleaseResources() = 0;
 protected:
-	static std::string m_DataPath;
+	static std::string m_DataPath; // due to the need of appending this with the specific resource path, usage of string_view is impossible
 private:
 
 };
@@ -31,10 +31,12 @@ public:
 
 	T* GetResource(const std::string(filePath))
 	{
-		for (std::pair<std::string_view, T*> resource : m_Resources)
+		for (std::pair<std::string_view, T*> pResource : m_pResources)
 		{
-			if (resource.first.compare(filePath) == 0)
-				return resource.second;
+			if (pResource.first.compare(filePath) == 0)
+			{
+				return pResource.second;
+			}
 		}
 
 		// https://stackoverflow.com/questions/12774207/fastest-way-to-check-if-a-file-exist-using-standard-c-c11-c
@@ -44,28 +46,28 @@ public:
 			return nullptr;
 		}
 
-		T* resource = Load(filePath);
-		if (resource != nullptr)
+		T* pResource = Load(filePath);
+		if (pResource != nullptr)
 		{
-			m_Resources.try_emplace(filePath, resource);
+			m_pResources.try_emplace(filePath, pResource);
 		}
-		return resource;
+		return pResource;
 	}
 
 	void ReleaseResources() override
 	{
-		for (std::pair<std::string_view, T*> resource : m_Resources)
+		for (std::pair<std::string_view, T*> pResource : m_pResources)
 		{
-			Release(resource.second);
+			Release(pResource.second);
 		}
-		m_Resources.clear();
+		m_pResources.clear();
 	}
 	
 protected:
 	virtual T* Load(const std::string& filePath) = 0;
 	virtual void Release(T* pResource) = 0;
-	static std::unordered_map<std::string_view, T*> m_Resources;
+	static std::unordered_map<std::string_view, T*> m_pResources;
 };
 
 template <class T>
-std::unordered_map<std::string_view, T*> ResourceLoader<T>::m_Resources = std::unordered_map<std::string_view, T*>();
+std::unordered_map<std::string_view, T*> ResourceLoader<T>::m_pResources = std::unordered_map<std::string_view, T*>();

@@ -2,31 +2,32 @@
 #include "Scene/SceneManager.h"
 
 class GameObject;
+class RenderComponent;
 class Scene
 {
 public:
 	
-	Scene(const std::string& sceneName);
+	Scene(const std::string_view& sceneName);
 	virtual ~Scene();
 	DEL_ROF(Scene);
 
 	void BaseInitialize();
 	void BaseUpdate(float dT);
-	void BaseDraw() const;
-
+	void Render() const;
 	void AddGameObject(GameObject* pGameObject);
+	void AddRenderComponent(RenderComponent* pRenderComponent);
+
+	[[nodiscard]] constexpr auto GetSceneName() const noexcept->std::string_view { return m_Name; }
 
 protected:
 	virtual void Initialize() = 0;
 	virtual void Update(float dT) = 0;
-	virtual void Draw() const = 0;
 
 private:
 
-	std::string m_Name;
+	std::string_view m_Name;
 	std::vector<GameObject*> m_pGameObjects;
-
-	static unsigned int m_IdCounter;
+	std::vector<RenderComponent*> m_pRenderComponents; // Caching the render components to prevent having to do GetComponent every frame;
 };
 
 

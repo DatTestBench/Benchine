@@ -17,12 +17,15 @@ public:
 	void PresentRender() const;
 	void Destroy();
 
-	void RenderTexture(const Texture2D& texture, float x, float y) const;
+	void RenderTexture(Texture2D* texture, float x, float y) const;
 	void RenderTexture(const Texture2D& texture, float x, float y, float width, float height) const;
 
-	SDL_Renderer* GetSDLRenderer() const { return m_pRenderer; }
+	void SetTexture(Texture2D* pTexture) noexcept { m_pCurrentTexture = pTexture;}
+
+	[[nodiscard]] constexpr auto GetSDLRenderer() const noexcept->SDL_Renderer* { return m_pRenderer; }
 private:
-	SDL_Renderer* m_pRenderer{};
+	SDL_Renderer* m_pRenderer;
+	Texture2D* m_pCurrentTexture;
 };
 
 

@@ -8,20 +8,14 @@ void BubbleBobble::Initialize()
 {
 	SceneManager::GetInstance()->AddScene(new FPSScene("FPSScene"));
 
-
-
+	SceneManager::GetInstance()->SetStartScene("FPSScene");
 
 	SceneManager::GetInstance()->Initialize();
 }
 
-void BubbleBobble::Update(float dT)
+void BubbleBobble::Update([[maybe_unused]] float dT)
 {
-	UNUSED(dT);
 }
 
-void BubbleBobble::Draw() const
-{
-
-}
 
 

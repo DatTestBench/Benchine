@@ -2,7 +2,7 @@
 
 #include "Resources/Texture2D.h"
 
-void Renderer::Init(SDL_Window * window)
+void Renderer::Init(SDL_Window* window)
 {
 	// TODO: pass renderer settings for ImGuiSDL
 	m_pRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -37,13 +37,13 @@ void Renderer::Destroy()
 	}
 }
 
-void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y) const
+void Renderer::RenderTexture(Texture2D* texture, const float x, const float y) const
 {
 	SDL_Rect dst;
 	dst.x = static_cast<int>(x);
 	dst.y = static_cast<int>(y);
-	SDL_QueryTexture(texture.GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
-	SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
+	SDL_QueryTexture(texture->GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
+	SDL_RenderCopy(GetSDLRenderer(), texture->GetSDLTexture(), nullptr, &dst);
 }
 
 void Renderer::RenderTexture(const Texture2D& texture, const float x, const float y, const float width, const float height) const

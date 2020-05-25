@@ -3,22 +3,22 @@
 #include "Helpers/Singleton.h"
 #include "ImGui/imgui.h"
 
-#include <string_view>
+/*#include <string_view>*/ // Due to ImGui requiring c-strings , the useof 
 #include <string>
 #include <vector>
 #include <array>
 #include <sstream>
 
-enum LogLevel : int
+enum LogLevel : uint16_t
 {
 	LEVEL_DEBUG,
 	LEVEL_INFO,
 	LEVEL_WARNING,
 	LEVEL_ERROR,
-	LEVEL_FULL
+	LEVEL_FULL // Only used to for displaying in the log window, should not be passed to logentries
 };
 
-enum LogArgument : int
+enum LogArgument : uint16_t
 {
 	LOG_IMGUI,
 	LOG_CONSOLE
@@ -44,6 +44,7 @@ struct LogEntry
 class Logger : public Singleton<Logger>
 {
 public:
+
 	template<LogLevel level, LogArgument outputLocation = LogArgument::LOG_IMGUI>
 	static Logger& Log(const std::string& header = "")
 	{

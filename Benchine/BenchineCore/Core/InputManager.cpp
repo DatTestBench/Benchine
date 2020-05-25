@@ -140,7 +140,7 @@ bool InputManager::AddInputBinding(InputBinding binding)
 	return true;
 }
 
-bool InputManager::IsBindingActive(int actionId)
+bool InputManager::IsBindingActive(std::string_view actionId)
 {
 	return m_InputBinds.at(actionId).isActive;
 }

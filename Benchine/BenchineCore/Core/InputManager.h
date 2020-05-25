@@ -6,6 +6,7 @@
 #include <tuple>
 #include <vector>
 #include <functional>
+#include <string_view>
 
 enum InputState
 {
@@ -13,7 +14,7 @@ enum InputState
 	Released
 };
 
-enum GamepadButton : int
+enum GamepadButton : uint16_t
 {
 	DPAD_UP,
 	DPAD_DOWN,
@@ -33,7 +34,7 @@ enum GamepadButton : int
 };
 struct InputBinding
 {
-	int actionId;
+	std::string_view actionId;
 	InputState inputState;
 	int keyCode; // Remapped to an SDL keycode
 	int mouseCode;
@@ -41,7 +42,7 @@ struct InputBinding
 	int controllerId;
 	bool isActive;
 
-	InputBinding(int id, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
+	InputBinding(std::string_view id, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
 		: actionId(id)
 		, inputState(state)
 		, keyCode(keyCode - 61)
@@ -86,7 +87,7 @@ public:
 	}
 
 	bool AddInputBinding(InputBinding binding);
-	bool IsBindingActive(int actionId);
+	bool IsBindingActive(std::string_view actionId);
 	void LogKeyUp(SDL_Scancode key);
 	void LogKeyDown(SDL_Scancode key);
 	bool IsKeyDown(SDL_Scancode key);
@@ -101,14 +102,11 @@ private:
 	std::vector<KeyEvent> m_KeyEvents;
 	bool m_Keys[512];
 
-
 	Controller m_Controllers[XUSER_MAX_COUNT];
 
-	std::map<int, InputBinding> m_InputBinds;
+	std::map<std::string_view, InputBinding> m_InputBinds;
 
 	void ClearInputs();
-
-	
 };
 
 

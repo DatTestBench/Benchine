@@ -11,14 +11,9 @@ public:
 	virtual ~TextComponent();
 	DEL_ROF(TextComponent);
 
-	void Update(float dT) override;
-	void Draw() const override;
+	void Update([[maybe_unused]] float dT) override;
 
-
-	void SetText(const std::string& text);
-
-	
-
+	void SetText(const std::string& text) noexcept;
 
 protected:
 	void Initialize() override;
@@ -26,7 +21,7 @@ protected:
 private:
 	bool m_NeedsUpdate;
 	std::string m_Text;
-	Font* m_Font;
-	Texture2D* m_Texture;
+	Font* m_pFont;
+	Texture2D* m_pTexture;
 };
 

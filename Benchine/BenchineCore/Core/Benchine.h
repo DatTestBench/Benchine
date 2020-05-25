@@ -46,8 +46,10 @@ public:
 			}*/
 		
 			pRenderer->SetupRender();
+
+			SceneManager::GetInstance()->RenderCurrentScene();
+
 			pLogger->OutputLog();
-			m_pGame->BaseDraw();
 			pRenderer->PresentRender();
 		}
 		Cleanup();

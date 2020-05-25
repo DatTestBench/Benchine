@@ -1,6 +1,5 @@
 #pragma once
-
-class GameObject;
+#include "Scene/GameObject.h"
 class TransformComponent;
 class BaseComponent
 {
@@ -10,12 +9,11 @@ public:
 	virtual ~BaseComponent() = default;
 	DEL_ROF(BaseComponent);
 
-	GameObject* GetGameObject() const { return m_pGameObject; }
-	TransformComponent* GetTransform() const;
+	[[nodiscard]] constexpr auto GetGameObject() const noexcept->GameObject* { return m_pGameObject; }
+	[[nodiscard]] constexpr auto GetTransform() const noexcept->TransformComponent* { return m_pGameObject->GetTransform(); };
 
 	void BaseInitialize();
-	virtual void Update(float dT) = 0;
-	virtual void Draw() const = 0;
+	virtual void Update([[maybe_unused]] float dT) = 0;
 
 protected:
 	virtual void Initialize() = 0;

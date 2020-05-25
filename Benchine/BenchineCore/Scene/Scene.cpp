@@ -1,14 +1,14 @@
 #include "BenchinePCH.h"
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
+#include "Components/RenderComponent.h"
 
 
 
-unsigned int Scene::m_IdCounter = 0;
-
-Scene::Scene(const std::string& name)
+Scene::Scene(const std::string_view& name)
 	: m_Name{ name }
-
+	, m_pGameObjects{  }
+	, m_pRenderComponents{  }
 {
 
 }
@@ -21,10 +21,7 @@ Scene::~Scene()
 	}
 }
 
-void Scene::AddGameObject(GameObject* pGameObject)
-{
-	m_pGameObjects.push_back(pGameObject);
-}
+
 
 void Scene::BaseInitialize()
 {
@@ -51,15 +48,29 @@ void Scene::BaseUpdate(float dT)
 	}
 }
 
-void Scene::BaseDraw() const
+void Scene::Render() const
 {
-	// User Defined Draw
-	Draw();
-
-	// Game Object Draw
-	for (auto pGameObject : m_pGameObjects)
+	for (auto pRenderComponent : m_pRenderComponents)
 	{
-		pGameObject->BaseDraw();
+		if (pRenderComponent != nullptr)
+		{
+			pRenderComponent->Render();
+		}
+		else
+		{
+			Logger::Log<LEVEL_WARNING>("Scene::Render") << "Trying to render deleted RenderComponent, remember to clean up render components when deleting an object that has one";
+		}
 	}
+}
+
+void Scene::AddGameObject(GameObject* pGameObject)
+{
+	pGameObject->SetParentScene(this);
+	m_pGameObjects.push_back(pGameObject);
+}
+
+void Scene::AddRenderComponent(RenderComponent* pRenderComponent)
+{
+	m_pRenderComponents.push_back(pRenderComponent);
 }
 

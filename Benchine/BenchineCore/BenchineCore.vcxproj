@@ -209,6 +209,7 @@
     </ClCompile>
     <ClCompile Include="Components\BaseComponent.cpp" />
     <ClCompile Include="Components\FPSComponent.cpp" />
+    <ClCompile Include="Components\RenderComponent.cpp" />
     <ClCompile Include="Components\TextComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Resources\Loaders.cpp" />
@@ -257,6 +258,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Scene\DefaultScene.cpp" />
     <ClCompile Include="Scene\GameObject.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
@@ -266,6 +268,7 @@
     <ClInclude Include="Components\BaseComponent.h" />
     <ClInclude Include="Components\Components.h" />
     <ClInclude Include="Components\FPSComponent.h" />
+    <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="Components\TextComponent.h" />
     <ClInclude Include="Components\TransformComponent.h" />
     <ClInclude Include="Resources\Loaders.h" />
@@ -277,6 +280,7 @@
     <ClInclude Include="Debugging\Logger.h" />
     <ClInclude Include="Resources\Font.h" />
     <ClInclude Include="Graphics\Renderer.h" />
+    <ClInclude Include="Resources\Resources.h" />
     <ClInclude Include="Resources\Texture2D.h" />
     <ClInclude Include="Helpers\Singleton.h" />
     <ClInclude Include="Helpers\Utils.h" />
@@ -288,6 +292,7 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Scene\DefaultScene.h" />
     <ClInclude Include="Scene\GameObject.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />

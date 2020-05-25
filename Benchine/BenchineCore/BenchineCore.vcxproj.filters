@@ -51,6 +51,8 @@
     <ClCompile Include="Resources\ResourceManager.cpp" />
     <ClCompile Include="Resources\Texture2D.cpp" />
     <ClCompile Include="Resources\Font.cpp" />
+    <ClCompile Include="Components\RenderComponent.cpp" />
+    <ClCompile Include="Scene\DefaultScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -82,5 +84,8 @@
     <ClInclude Include="Resources\ResourceManager.h" />
     <ClInclude Include="Resources\Texture2D.h" />
     <ClInclude Include="Resources\Font.h" />
+    <ClInclude Include="Components\RenderComponent.h" />
+    <ClInclude Include="Scene\DefaultScene.h" />
+    <ClInclude Include="Resources\Resources.h" />
   </ItemGroup>
 </Project>

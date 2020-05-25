@@ -13,10 +13,3 @@ void BaseGame::BaseUpdate(float dT)
 	// User Defined Update
 	Update(dT);
 }
-
-void BaseGame::BaseDraw() const
-{
-	SceneManager::GetInstance()->Draw();
-	// User Defined Draw
-	Draw();
-}

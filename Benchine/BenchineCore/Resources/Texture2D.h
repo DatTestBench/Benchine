@@ -7,15 +7,13 @@ struct SDL_Texture;
 class Texture2D
 {
 public:
-	SDL_Texture* GetSDLTexture() const;
-	explicit Texture2D(SDL_Texture* texture);
+	explicit Texture2D(SDL_Texture* pTexture);
 	~Texture2D();
+	DEL_ROF(Texture2D);
 
-	Texture2D(const Texture2D&) = delete;
-	Texture2D(Texture2D&&) = delete;
-	Texture2D& operator= (const Texture2D&) = delete;
-	Texture2D& operator= (const Texture2D&&) = delete;
+	[[nodiscard]] constexpr auto GetSDLTexture() const noexcept->SDL_Texture* { return m_pTexture; }
+
 private:
-	SDL_Texture* m_Texture;
+	SDL_Texture* m_pTexture;
 };
 

@@ -18,8 +18,3 @@ void BaseComponent::BaseInitialize()
 
 	m_IsInitialized = true;
 }
-
-TransformComponent* BaseComponent::GetTransform() const
-{
-	return m_pGameObject->GetTransform();
-}

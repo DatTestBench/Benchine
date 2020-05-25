@@ -6,8 +6,6 @@
 #include "Resources/Font.h"
 #include "Resources/Texture2D.h"
 
-
-
 class Font;
 class FontLoader final : public ResourceLoader<Font>
 {
@@ -16,7 +14,6 @@ public:
 	{
 		const auto fullPath = m_DataPath + filePath;
 		Font* pFont = new Font(fullPath, 16);
-		//m_Resources.try_emplace(filePath, pFont);
 		
 		return pFont;
 	}
@@ -39,7 +36,6 @@ public:
 		{
 			throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
 		}
-		//m_Resources.try_emplace(filePath, pTexture);
 
 		return pTexture;
 	}

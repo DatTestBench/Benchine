@@ -1,7 +1,13 @@
 #include "BenchinePCH.h"
 #include "Components/TransformComponent.h"
 
-void TransformComponent::SetPosition(const float x, const float y, const float z)
+TransformComponent::TransformComponent()
+	: m_Position{ 0, 0, 0 }
+{
+
+}
+
+void TransformComponent::SetPosition(const float x, const float y, const float z) noexcept
 {
 	m_Position.x = x;
 	m_Position.y = y;
@@ -12,12 +18,7 @@ void TransformComponent::Initialize()
 {
 
 }
-void TransformComponent::Update(float dT)
+void TransformComponent::Update([[maybe_unused]] float dT)
 {
-	UNUSED(dT);
-}
 
-void TransformComponent::Draw() const
-{
-	
 }

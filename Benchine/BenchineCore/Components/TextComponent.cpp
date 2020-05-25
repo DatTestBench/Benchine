@@ -5,35 +5,35 @@
 #include "Resources/Font.h"
 #include "Resources/Texture2D.h"
 #include "Components/TransformComponent.h"
+#include "Components/RenderComponent.h"
+#include "Scene/GameObject.h"
 
 TextComponent::TextComponent(const std::string& text, Font* font)
 	: m_NeedsUpdate(true)
 	, m_Text(text)
-	, m_Font(font)
-	, m_Texture(nullptr)
+	, m_pFont(font)
+	, m_pTexture(nullptr)
 {
 
 }
 
 TextComponent::~TextComponent()
 {
-	SafeDelete(m_Texture);
+	SafeDelete(m_pTexture);
 }
-
 
 void TextComponent::Initialize()
 {
 
 }
 
-void TextComponent::Update(float dT)
+void TextComponent::Update([[maybe_unused]] float dT)
 {
-	UNUSED(dT);
 	if (m_NeedsUpdate)
 	{
-		SafeDelete(m_Texture);
+		SafeDelete(m_pTexture);
 		const SDL_Color color = { 255,255,255 }; // only white text is supported now
-		const auto surf = TTF_RenderText_Blended(m_Font->GetFont(), m_Text.c_str(), color);
+		const auto surf = TTF_RenderText_Blended(m_pFont->GetFont(), m_Text.c_str(), color);
 		if (surf == nullptr) 
 		{
 			throw std::runtime_error(std::string("Render text failed: ") + SDL_GetError());
@@ -44,22 +44,15 @@ void TextComponent::Update(float dT)
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		m_Texture = texture;
+		m_pTexture = texture;
 		m_NeedsUpdate = false;
-	}
-}
 
-void TextComponent::Draw() const
-{
-	if (m_Texture != nullptr)
-	{
-		const auto pos = GetTransform()->GetPosition();
-		Renderer::GetInstance()->RenderTexture(*m_Texture, pos.x, pos.y);
+		GetGameObject()->GetRenderComponent()->SetTexture(m_pTexture);
 	}
 }
 
 // This implementation uses the "dirty flag" pattern
-void TextComponent::SetText(const std::string& text)
+void TextComponent::SetText(const std::string& text) noexcept
 {
 	m_Text = text;
 	m_NeedsUpdate = true;

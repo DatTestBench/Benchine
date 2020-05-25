@@ -12,6 +12,7 @@
 #include <chrono>
 #include <thread>
 #include <algorithm>
+#include <string_view>
 
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX

@@ -1,10 +1,13 @@
 #include "BenchinePCH.h"
 #include "Scene/SceneManager.h"
 #include "Scene/Scene.h"
+#include "Scene/DefaultScene.h"
 
 SceneManager::SceneManager()
 	: m_pScenes{  }
 	, m_IsInitialized{ false }
+	, m_pCurrentScene{ nullptr }
+	, m_pSceneToLoad{ nullptr }
 {
 
 }
@@ -13,7 +16,7 @@ SceneManager::~SceneManager()
 {
 	for (auto pScene : m_pScenes)
 	{
-		SafeDelete(pScene);
+		SafeDelete(pScene.second);
 	}
 }
 
@@ -22,9 +25,21 @@ void SceneManager::Initialize()
 	if (m_IsInitialized)
 		return;
 
+	if (m_pScenes.empty())
+	{
+
+		Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "No scenes loaded, falling back on default scene";
+
+		auto pDefaultScene = new DefaultScene;
+
+		m_pScenes.try_emplace("DefaultScene", pDefaultScene);
+
+		m_pCurrentScene = pDefaultScene;
+	}
+
 	for (auto pScene : m_pScenes)
 	{
-		pScene->BaseInitialize();
+		pScene.second->BaseInitialize();
 	}
 
 	m_IsInitialized = true;
@@ -32,21 +47,57 @@ void SceneManager::Initialize()
 
 void SceneManager::Update(float dT)
 {
-	for (auto pScene : m_pScenes)
+	if (m_pSceneToLoad != nullptr)
 	{
-		pScene->BaseUpdate(dT);
+		m_pCurrentScene = m_pSceneToLoad;
+		m_pSceneToLoad = nullptr;
 	}
-}
 
-void SceneManager::Draw() const
-{
 	for (auto pScene : m_pScenes)
 	{
-		pScene->BaseDraw();
+		pScene.second->BaseUpdate(dT);
 	}
 }
 
 void SceneManager::AddScene(Scene* pScene)
 {
-	m_pScenes.push_back(pScene);
+	m_pScenes.try_emplace(pScene->GetSceneName(), pScene);
+}
+
+void SceneManager::LoadScene(const std::string_view& sceneName)
+{
+	auto pSceneToLoad = m_pScenes.find(sceneName);
+
+	if (pSceneToLoad != m_pScenes.cend())
+	{
+		m_pSceneToLoad = (*pSceneToLoad).second;
+		return;
+	}
+
+	Logger::Log<LEVEL_ERROR>("SceneManager::LoadScene") << "Scene: " << sceneName << " not found, loading failed";
+}
+
+void SceneManager::SetStartScene(const std::string_view& sceneName)
+{
+	auto pStartScene = m_pScenes.find(sceneName);
+
+	if (pStartScene != m_pScenes.cend())
+	{
+		m_pCurrentScene = (*pStartScene).second;
+		return;
+	}
+
+	Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "Scene: " << sceneName << " not found, defaulting to first scene in the map if present";
+
+	if (m_pScenes.empty())
+	{
+		return;
+	}
+	m_pCurrentScene = (*m_pScenes.begin()).second;
+
+}
+
+void SceneManager::RenderCurrentScene()
+{
+	m_pCurrentScene->Render();
 }

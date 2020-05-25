@@ -8,7 +8,7 @@ void Logger::OutputLog()
 
 	if (ImGui::Begin("Log"))
 	{
-		static LogLevel currentLevel = LogLevel::LEVEL_FULL;
+		static LogLevel currentLevel = LEVEL_FULL;
 		if (ImGui::BeginCombo("LevelSelection", m_LevelTags[m_CurrentLevel].c_str())) // Reference to implementation https://github.com/ocornut/imgui/issues/1658
 		{
 			for (int i = 0; i < IM_ARRAYSIZE(m_LevelTags); i++)
@@ -41,7 +41,7 @@ void Logger::OutputLog()
 
 					if (m_ShowHeaders)
 					{
-						ImGui::TextColored(m_ImGuiColors[log.level], ("[" + m_LevelTags[log.level]+ "] " + log.header + " > " + log.message.str()).c_str());
+						ImGui::TextColored(m_ImGuiColors[log.level], ("[" + m_LevelTags[log.level] + "] " + log.header + " > " + log.message.str()).c_str());
 					}
 					else
 					{
@@ -53,9 +53,9 @@ void Logger::OutputLog()
 			if (log.outputLocation == LOG_CONSOLE)
 			{
 				// TODO: fix repeat console output
-				std::cout << "[" + m_LevelTags[log.level]+ "]" + log.header + " > " + log.message.str() << "\n";
+				std::cout << "[" + m_LevelTags[log.level] + "]" + log.header + " > " + log.message.str() << "\n";
 			}
 		}
-		ImGui::End();
 	}
+	ImGui::End();
 }

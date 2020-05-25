@@ -8,16 +8,13 @@ struct _TTF_Font;
 class Font
 {
 public:
-	_TTF_Font* GetFont() const;
-	explicit Font(const std::string& fullPath, unsigned int size);
+	explicit Font(const std::string& fullPath, uint32_t size);
 	~Font();
+	[[nodiscard]] constexpr auto GetFont() const noexcept->_TTF_Font* { return m_pFont; };
 
-	Font(const Font&) = delete;
-	Font(Font&&) = delete;
-	Font& operator= (const Font&) = delete;
-	Font& operator= (const Font&&) = delete;
+	DEL_ROF(Font);
 private:
-	_TTF_Font* m_Font;
-	unsigned int m_Size;
+	_TTF_Font* m_pFont;
+	uint32_t m_Size;
 };
 

@@ -1,7 +1,11 @@
 #pragma once
-#include "Components/TransformComponent.h"
+//#include "Components/TransformComponent.h"
+//#include "Components/RenderComponent.h"
 #include "Helpers/Utils.h"
+#include "Scene/Scene.h"
 
+class TransformComponent;
+class RenderComponent;
 class BaseComponent;
 class GameObject final
 {
@@ -12,10 +16,15 @@ public:
 
 	void BaseInitialize();
 	void BaseUpdate(float dT);
-	void BaseDraw() const;
 
 	void AddComponent(BaseComponent* pComponent);
-	TransformComponent* GetTransform() const { return m_pTransform;  }
+	void SetParentScene(Scene* pScene);
+	void SetParentObject(GameObject* pObject);
+	void SetRenderComponent(RenderComponent* pRenderComponent) { m_pRenderComponent = pRenderComponent; }
+	[[nodiscard]] constexpr auto GetTransform() const noexcept->TransformComponent* { return m_pTransform;  }
+	[[nodiscard]] constexpr auto GetRenderComponent() const noexcept->RenderComponent* { return m_pRenderComponent; }
+	Scene* GetScene() const;
+
 
 template <class T>
 	T* GetComponent()
@@ -35,13 +44,14 @@ template <class T>
 protected:
 	// For future use
 	virtual void Initialize() {};
-	virtual void Update(float dT) { UNUSED(dT); };
-	virtual void Draw() const {};
+	virtual void Update([[maybe_unused]] float dT) { };
 
 private:
-
+	Scene* m_pParentScene;
+	GameObject* m_pParentObject;
 	std::vector<BaseComponent*> m_pComponents;
 	bool m_IsInitialized;
 	TransformComponent* m_pTransform;
+	RenderComponent* m_pRenderComponent;
 };
 

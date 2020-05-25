@@ -9,13 +9,17 @@
 class TransformComponent final : public BaseComponent
 {
 public:
-	const glm::vec3& GetPosition() const { return m_Position; }
-	void SetPosition(float x, float y, float z);
+	TransformComponent();
+	virtual ~TransformComponent() = default;
+	DEL_ROF(TransformComponent);
+
+
+	void SetPosition(float x, float y, float z) noexcept;
+	[[nodiscard]] constexpr auto GetPosition() const noexcept->glm::vec3 { return m_Position; }
 
 protected:
 	void Initialize() override;
-	void Update(float dT) override;
-	void Draw() const override;
+	void Update([[maybe_unused]] float dT) override;
 private:
 	glm::vec3 m_Position;
 };

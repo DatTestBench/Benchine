@@ -1,16 +1,15 @@
 #pragma once
 #include "Components/BaseComponent.h"
-class FPSComponent : public BaseComponent
+class FPSComponent final : public BaseComponent
 {
 public:
 	FPSComponent();
 	virtual ~FPSComponent() = default;
 	DEL_ROF(FPSComponent);
 
-	void Update(float dT) override;
-	void Draw() const override;
+	void Update([[maybe_unused]] float dT) override;
 
-	float GetFPS() const;
+	[[nodiscard]] constexpr auto GetFPS() const noexcept->float { return m_FPS; }
 
 protected:
 	void Initialize() override;
