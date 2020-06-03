@@ -29,7 +29,7 @@ public:
 	virtual ~ResourceLoader() = default;
 	DEL_ROF(ResourceLoader);
 
-	T* GetResource(const std::string(filePath))
+	T* GetResource(const std::string& filePath)
 	{
 		for (std::pair<std::string_view, T*> pResource : m_pResources)
 		{

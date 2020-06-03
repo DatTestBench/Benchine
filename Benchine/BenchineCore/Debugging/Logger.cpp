@@ -9,13 +9,13 @@ void Logger::OutputLog()
 	if (ImGui::Begin("Log"))
 	{
 		static LogLevel currentLevel = LEVEL_FULL;
-		if (ImGui::BeginCombo("LevelSelection", m_LevelTags[m_CurrentLevel].c_str())) // Reference to implementation https://github.com/ocornut/imgui/issues/1658
+		if (ImGui::BeginCombo("LevelSelection", m_LevelTags.at(m_CurrentLevel).c_str())) // Reference to implementation https://github.com/ocornut/imgui/issues/1658
 		{
-			for (int i = 0; i < IM_ARRAYSIZE(m_LevelTags); i++)
+			for (size_t i = 0; i < m_LevelTags.size(); i++)
 			{
-				if (ImGui::Selectable(m_LevelTags[i].c_str(), m_CurrentLevel == i))
+				if (ImGui::Selectable(m_LevelTags.at(i).c_str(), m_CurrentLevel == i))
 				{
-					m_CurrentLevel = LogLevel(i);
+					m_CurrentLevel = static_cast<LogLevel>(i);
 				}
 			}
 			ImGui::EndCombo();
@@ -41,19 +41,19 @@ void Logger::OutputLog()
 
 					if (m_ShowHeaders)
 					{
-						ImGui::TextColored(m_ImGuiColors[log.level], ("[" + m_LevelTags[log.level] + "] " + log.header + " > " + log.message.str()).c_str());
+						ImGui::TextColored(m_ImGuiColors.at(log.level), ("[" + m_LevelTags.at(log.level) + "] " + log.header + " > " + log.message.str()).c_str());
 					}
 					else
 					{
 						ImGui::LogText("");
-						ImGui::TextColored(m_ImGuiColors[log.level], log.message.str().c_str());
+						ImGui::TextColored(m_ImGuiColors.at(log.level), log.message.str().c_str());
 					}
 				}
 			}
 			if (log.outputLocation == LOG_CONSOLE)
 			{
 				// TODO: fix repeat console output
-				std::cout << "[" + m_LevelTags[log.level] + "]" + log.header + " > " + log.message.str() << "\n";
+				std::cout << "[" + m_LevelTags.at(log.level) + "]" + log.header + " > " + log.message.str() << "\n";
 			}
 		}
 	}

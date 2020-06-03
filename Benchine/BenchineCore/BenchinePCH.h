@@ -8,10 +8,13 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <list>
 #include <functional>
 #include <chrono>
 #include <thread>
 #include <algorithm>
+#include <array>
+#include <string>
 #include <string_view> // Reasons for string views https://www.youtube.com/watch?v=fj_CF8xK760
 
 #define WIN32_LEAN_AND_MEAN

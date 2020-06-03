@@ -73,7 +73,7 @@ struct KeyEvent
 struct Controller
 {
 	bool isConnected;
-	bool buttons[MAX_BUTTONS];
+	std::array<bool, MAX_BUTTONS> buttons;
 };
 
 class InputManager final : public Singleton<InputManager>
@@ -102,7 +102,7 @@ private:
 	std::vector<KeyEvent> m_KeyEvents;
 	bool m_Keys[512];
 
-	Controller m_Controllers[XUSER_MAX_COUNT];
+	std::array<Controller, XUSER_MAX_COUNT> m_Controllers;
 
 	std::map<std::string_view, InputBinding> m_InputBinds;
 

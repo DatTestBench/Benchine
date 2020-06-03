@@ -26,8 +26,8 @@ protected:
 private:
 
 	std::string_view m_Name;
-	std::vector<GameObject*> m_pGameObjects;
-	std::vector<RenderComponent*> m_pRenderComponents; // Caching the render components to prevent having to do GetComponent every frame;
+	std::list<GameObject*> m_pGameObjects;
+	std::list<RenderComponent*> m_pRenderComponents; // Caching the render components to prevent having to do GetComponent every frame;
 };
 
 

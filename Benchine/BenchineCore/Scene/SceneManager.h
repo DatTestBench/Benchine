@@ -14,7 +14,6 @@ public:
 	void LoadScene(const std::string_view& sceneName);
 	
 	void SetStartScene(const std::string_view& sceneName);
-
 	void RenderCurrentScene();
 
 

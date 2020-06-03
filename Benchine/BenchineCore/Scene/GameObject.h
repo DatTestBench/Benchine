@@ -47,9 +47,10 @@ protected:
 	virtual void Update([[maybe_unused]] float dT) { };
 
 private:
+
 	Scene* m_pParentScene;
 	GameObject* m_pParentObject;
-	std::vector<BaseComponent*> m_pComponents;
+	std::list<BaseComponent*> m_pComponents;
 	bool m_IsInitialized;
 	TransformComponent* m_pTransform;
 	RenderComponent* m_pRenderComponent;

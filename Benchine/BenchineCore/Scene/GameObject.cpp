@@ -30,7 +30,7 @@ void GameObject::BaseInitialize()
 	Initialize();
 
 	// Component Initialization
-	for (auto& pComponent : m_pComponents)
+	for (auto pComponent : m_pComponents)
 	{
 		pComponent->BaseInitialize();
 	}
@@ -43,7 +43,7 @@ void GameObject::BaseUpdate(float dT)
 	Update(dT);
 
 	// Component Update
-	for (auto& pComponent : m_pComponents)
+	for (auto pComponent : m_pComponents)
 	{
 		pComponent->Update(dT);
 	}

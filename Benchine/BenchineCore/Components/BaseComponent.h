@@ -3,7 +3,7 @@
 class TransformComponent;
 class BaseComponent
 {
-	friend class GameObject;
+	//friend class GameObject;
 public:
 	BaseComponent();
 	virtual ~BaseComponent() = default;
@@ -13,9 +13,10 @@ public:
 	[[nodiscard]] constexpr auto GetTransform() const noexcept->TransformComponent* { return m_pGameObject->GetTransform(); };
 
 	void BaseInitialize();
-	virtual void Update([[maybe_unused]] float dT) = 0;
+	virtual void Update([[maybe_unused]] float dT) {};
 
 protected:
+	friend GameObject;
 	virtual void Initialize() = 0;
 
 	GameObject* m_pGameObject; // object this is attached to

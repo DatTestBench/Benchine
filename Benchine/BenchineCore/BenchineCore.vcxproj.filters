@@ -31,12 +31,6 @@
     <ClCompile Include="Scene\GameObject.cpp" />
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
-    <ClCompile Include="ImGui\imgui.cpp" />
-    <ClCompile Include="ImGui\imgui_demo.cpp" />
-    <ClCompile Include="ImGui\imgui_draw.cpp" />
-    <ClCompile Include="ImGui\imgui_plot.cpp" />
-    <ClCompile Include="ImGui\imgui_sdl.cpp" />
-    <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
     <ClCompile Include="Debugging\Logger.cpp" />
     <ClCompile Include="Core\BaseGame.cpp" />
@@ -53,20 +47,20 @@
     <ClCompile Include="Resources\Font.cpp" />
     <ClCompile Include="Components\RenderComponent.cpp" />
     <ClCompile Include="Scene\DefaultScene.cpp" />
+    <ClCompile Include="ImGui\imgui.cpp" />
+    <ClCompile Include="ImGui\imgui_demo.cpp" />
+    <ClCompile Include="ImGui\imgui_draw.cpp" />
+    <ClCompile Include="ImGui\imgui_plot.cpp" />
+    <ClCompile Include="ImGui\imgui_sdl.cpp" />
+    <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Helpers\SAT.cpp" />
+    <ClCompile Include="Components\PhysicsComponent2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
     <ClInclude Include="Scene\GameObject.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneManager.h" />
-    <ClInclude Include="ImGui\imconfig.h" />
-    <ClInclude Include="ImGui\imgui.h" />
-    <ClInclude Include="ImGui\imgui_internal.h" />
-    <ClInclude Include="ImGui\imgui_plot.h" />
-    <ClInclude Include="ImGui\imgui_sdl.h" />
-    <ClInclude Include="ImGui\imstb_rectpack.h" />
-    <ClInclude Include="ImGui\imstb_textedit.h" />
-    <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Helpers\Singleton.h" />
     <ClInclude Include="Helpers\Utils.h" />
     <ClInclude Include="Graphics\Renderer.h" />
@@ -87,5 +81,16 @@
     <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="Scene\DefaultScene.h" />
     <ClInclude Include="Resources\Resources.h" />
+    <ClInclude Include="ImGui\imconfig.h" />
+    <ClInclude Include="ImGui\imgui.h" />
+    <ClInclude Include="ImGui\imgui_internal.h" />
+    <ClInclude Include="ImGui\imgui_plot.h" />
+    <ClInclude Include="ImGui\imgui_sdl.h" />
+    <ClInclude Include="ImGui\imstb_rectpack.h" />
+    <ClInclude Include="ImGui\imstb_textedit.h" />
+    <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Helpers\SAT.h" />
+    <ClInclude Include="Components\PhysicsComponent2D.h" />
+    <ClInclude Include="Helpers\MathHelper.h" />
   </ItemGroup>
 </Project>

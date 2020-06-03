@@ -1,13 +1,9 @@
 #pragma once
 
 #include "Helpers/Singleton.h"
-#include "ImGui/imgui.h"
+//#include "imgui.h"
 
-/*#include <string_view>*/ // Due to ImGui requiring c-strings , the useof 
-#include <string>
-#include <vector>
 #include <array>
-#include <sstream>
 
 enum LogLevel : uint16_t
 {
@@ -50,7 +46,7 @@ public:
 	{
 		static_assert(level != LEVEL_FULL, "LEVEL_FULL is not a valid LogLevel");
 
-		GetInstance()->m_LogList.push_back(LogEntry(header, level, outputLocation));
+		GetInstance()->m_LogList.emplace_back(LogEntry(header, level, outputLocation));
 		return *GetInstance();
 	}
 
@@ -64,20 +60,20 @@ public:
 	void OutputLog();
 
 private:
-	std::vector<LogEntry> m_LogList;
+	std::list<LogEntry> m_LogList;
 	bool m_ShowHeaders = true;
 	LogLevel m_CurrentLevel = LEVEL_FULL;
 
-	const ImVec4 m_ImGuiColors[5]
+	const std::array<ImVec4, 5> m_ImGuiColors
 	{
-		{ 1.f, 0.f, 1.f, 1.f }, // DEBUG
-		{ 1.f, 1.f, 1.f, 1.f }, // INFO
-		{ 1.f, 1.f, 0.f, 1.f }, // WARNING
-		{ 1.f, 0.f, 0.f, 1.f },	// ERROR
-		{ 1.f, 1.f, 1.f, 1.f }	// DEFAULT
+		ImVec4{ 1.f, 0.f, 1.f, 1.f }, // DEBUG
+		ImVec4{ 1.f, 1.f, 1.f, 1.f }, // INFO
+		ImVec4{ 1.f, 1.f, 0.f, 1.f }, // WARNING
+		ImVec4{ 1.f, 0.f, 0.f, 1.f },	// ERROR
+		ImVec4{ 1.f, 1.f, 1.f, 1.f }	// DEFAULT
 	};
 
-	const std::string m_LevelTags[5]
+	const std::array<std::string, 5> m_LevelTags
 	{
 		"DEBUG",
 		"INFO",
