@@ -55,6 +55,10 @@
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Helpers\SAT.cpp" />
     <ClCompile Include="Components\PhysicsComponent2D.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="ImGui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
+    <ClCompile Include="Debugging\DebugRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -91,6 +95,10 @@
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Helpers\SAT.h" />
     <ClInclude Include="Components\PhysicsComponent2D.h" />
-    <ClInclude Include="Helpers\MathHelper.h" />
+    <ClInclude Include="ImGui\imgui_impl_opengl2.h" />
+    <ClInclude Include="ImGui\imgui_impl_sdl.h" />
+    <ClInclude Include="Graphics\GLTextureWrapper.h" />
+    <ClInclude Include="Debugging\DebugRenderer.h" />
+    <ClInclude Include="Helpers\GeneralHelpers.h" />
   </ItemGroup>
 </Project>

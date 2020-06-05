@@ -24,7 +24,7 @@ public:
 	}
 };
 
-class Texture2D;
+/*class Texture2D;
 class TextureLoader final : public ResourceLoader<Texture2D>
 {
 public:
@@ -44,4 +44,4 @@ public:
 	{
 		SafeDelete(pResource);
 	}
-};
+};*/

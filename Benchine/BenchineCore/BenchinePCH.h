@@ -21,16 +21,23 @@
 #define NOMINMAX
 #include <windows.h>
 
+
+
 // IMGUI
 #pragma warning (push, 0)
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_sdl.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_opengl2.h"
 #pragma warning (pop)
 // SDL
 #include <SDL.h>
+#include <SDL_opengl.h>
+#include <GL\GLU.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+// OpenGL
 
 
 // Macros
@@ -59,3 +66,4 @@ inline void SafeDelete(T& pObject)
 #include "Core/InputManager.h"
 #include "Scene/SceneManager.h"
 #include "Debugging/Logger.h"
+#include "Helpers/GeneralHelpers.h"

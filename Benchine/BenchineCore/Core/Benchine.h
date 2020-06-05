@@ -2,6 +2,8 @@
 
 struct SDL_Window;
 #include "Core/BaseGame.h"
+
+
 class Benchine
 {
 public:
@@ -37,6 +39,10 @@ public:
 			lag += deltaTime;
 			quit = pInput->ProcessInput();
 
+			
+			
+			
+			pRenderer->SetupRender();
 			m_pGame->BaseUpdate(deltaTime);
 
 			/*while (lag >= MsPerFrame / 1000.f)
@@ -45,10 +51,7 @@ public:
 				lag -= MsPerFrame / 1000.f;
 			}*/
 		
-			pRenderer->SetupRender();
-
 			SceneManager::GetInstance()->RenderCurrentScene();
-
 			pLogger->OutputLog();
 			pRenderer->PresentRender();
 		}
@@ -63,6 +66,6 @@ private:
 	void Cleanup();
 
 	static const int MsPerFrame = 16; //16 for 60 fps, 33 for 30 fps
-	SDL_Window* m_pWindow;
+
 	BaseGame* m_pGame;
 };

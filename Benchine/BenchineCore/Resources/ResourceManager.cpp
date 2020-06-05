@@ -38,7 +38,13 @@ void ResourceManager::Init(const std::string& dataPath)
 	}
 
 
+	// load SDL_Mixer support
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		throw std::runtime_error(std::string("Failed to load support for sound: ") + SDL_GetError());
+	}
+
 	AddLoader<Font>(new FontLoader());
-	AddLoader<Texture2D>(new TextureLoader());
+	//AddLoader<Texture2D>(new TextureLoader());
 
 }

@@ -1,14 +1,10 @@
 #pragma once
-#pragma warning(push)
-#pragma warning (disable:4201)
-#include <glm/vec2.hpp>
-#pragma warning(pop)
+#include "Helpers/GeneralHelpers.h"
 
 //Adapted from : https://www.codeproject.com/Articles/15573/2D-Polygon-Collision-Detection
 //				 http://www.dyn4j.org/2010/01/sat/
-// Structure that stores the results of the PolygonCollision function
 
-using Collider2D = std::vector<glm::vec2>;
+// Structure that stores the results of the PolygonCollision function
 class PhysicsComponent2D;
 struct PolygonCollisionResult
 {
@@ -24,7 +20,8 @@ namespace sat
 {
 	PolygonCollisionResult PolygonCollision(PhysicsComponent2D* pActorA, PhysicsComponent2D* pActorB);
 	PolygonCollisionResult PolygonCollision(PhysicsComponent2D* pActor, const Collider2D& staticPoly);
-	void ProjectPolygon(const glm::vec2& axis, const Collider2D& vertexSet, float& min, float& max);
-	float IntervalDistance(float minA, float maxA, float minB, float maxB);
+	// Maps the polygon min / max bounds onto an axis
+	Projection2D ProjectPolygon(const glm::vec2& axis, const Collider2D& vertexSet);
+	float IntervalDistance(const Projection2D& projectionA, const Projection2D& projectionB);
 	glm::vec2 MakeAxis(const glm::vec2& vertexA, const glm::vec2& vertexB);
 }

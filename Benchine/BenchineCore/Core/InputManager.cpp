@@ -44,7 +44,7 @@ bool InputManager::ProcessInput()
 	}
 
 	// XINPUT https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput
-	DWORD dwResult;
+	DWORD dwResult{};
 
 	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
 	{

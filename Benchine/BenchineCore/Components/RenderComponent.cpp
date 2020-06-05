@@ -28,7 +28,7 @@ void RenderComponent::Update([[maybe_unused]] float dT)
 
 void RenderComponent::Render() const
 {
-	auto renderPos = GetGameObject()->GetTransform()->GetPosition();
+	const auto renderPos = GetGameObject()->GetTransform()->GetPosition();
 
-	Renderer::GetInstance()->RenderTexture(m_pTexture, renderPos.x, renderPos.y);
+	Renderer::GetInstance()->RenderTexture(m_pTexture, renderPos);
 }

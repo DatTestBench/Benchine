@@ -2,7 +2,7 @@
 #include "Components/BaseComponent.h"
 
 class Font;
-class Texture2D;
+class GLTextureWrapper;
 class TextComponent final : public BaseComponent
 {
 public:
@@ -22,6 +22,6 @@ private:
 	bool m_NeedsUpdate;
 	std::string m_Text;
 	Font* m_pFont;
-	Texture2D* m_pTexture;
+	GLTextureWrapper* m_pTexture;
 };
 

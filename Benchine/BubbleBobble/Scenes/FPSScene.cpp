@@ -2,7 +2,7 @@
 #include "FPSScene.h"
 #include "Scene/GameObject.h"
 FPSScene::FPSScene(const std::string_view& sceneName)
-	: Scene{ sceneName }
+	: Scene(sceneName)
 {
 
 }
