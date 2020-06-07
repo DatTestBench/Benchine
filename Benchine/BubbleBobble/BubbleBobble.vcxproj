@@ -234,6 +234,7 @@ xcopy "$(SolutionDir)lib\SDL2_ttf\x64\*.dll" "$(OutDir)" /y /D</Command>
   <ItemGroup>
     <ClInclude Include="BubbleBobble.h" />
     <ClInclude Include="BubbleBobblePCH.h" />
+    <ClInclude Include="Factories\Factories.h" />
     <ClInclude Include="Scenes\FPSScene.h" />
     <ClInclude Include="Scenes\TestScene.h" />
   </ItemGroup>

@@ -11,7 +11,6 @@ public:
 	void Update([[maybe_unused]] float dT) override;
 	void SetTexture(GLTextureWrapper* pTexture) noexcept { m_pTexture = pTexture; }
 
-
 	void Render() const;
 
 protected:
@@ -19,4 +18,5 @@ protected:
 
 private:
 	GLTextureWrapper* m_pTexture; //The rendercomponent does not own the texture, obviously
+	glm::vec2 m_Pivot;
 };

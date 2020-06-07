@@ -74,3 +74,7 @@ void Scene::AddRenderComponent(RenderComponent* pRenderComponent)
 	m_pRenderComponents.push_back(pRenderComponent);
 }
 
+void Scene::RemoveRenderComponent(RenderComponent* pRenderComponent)
+{
+	m_pRenderComponents.remove(pRenderComponent);
+}

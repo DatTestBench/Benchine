@@ -16,34 +16,35 @@ ResourceManager::~ResourceManager()
 	}
 }
 
-void ResourceManager::Init(const std::string& dataPath)
+void ResourceManager::Initialize(const std::string& dataPath)
 {
 	BaseLoader::SetDataPath(dataPath);
 
 	// load support for png and jpg, this takes a while!
 
-	if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG) 
+	if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
-		throw std::runtime_error(std::string("Failed to load support for png's: ") + SDL_GetError());
+		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for pngs: " << IMG_GetError();
 	}
 
-	if ((IMG_Init(IMG_INIT_JPG) & IMG_INIT_JPG) != IMG_INIT_JPG) 
+	if ((IMG_Init(IMG_INIT_JPG) & IMG_INIT_JPG) != IMG_INIT_JPG)
 	{
-		throw std::runtime_error(std::string("Failed to load support for jpg's: ") + SDL_GetError());
+		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to laod support for jpgs" << IMG_GetError();
 	}
 
-	if (TTF_Init() != 0) 
+	if (TTF_Init() != 0)
 	{
-		throw std::runtime_error(std::string("Failed to load support for fonts: ") + SDL_GetError());
+		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for fonts: " << TTF_GetError();
 	}
-
 
 	// load SDL_Mixer support
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		throw std::runtime_error(std::string("Failed to load support for sound: ") + SDL_GetError());
+		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for sound: " << Mix_GetError();
 	}
 
+
+	// Initialize Loaders
 	AddLoader<Font>(new FontLoader());
 	//AddLoader<Texture2D>(new TextureLoader());
 

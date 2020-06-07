@@ -3,7 +3,7 @@
 #include "Scene/Scene.h"
 #include "Scene/DefaultScene.h"
 
-SceneManager::SceneManager()
+SceneManager::SceneManager(token)
 	: m_pScenes{  }
 	, m_IsInitialized{ false }
 	, m_pCurrentScene{ nullptr }
@@ -53,10 +53,7 @@ void SceneManager::Update(float dT)
 		m_pSceneToLoad = nullptr;
 	}
 
-	for (auto pScene : m_pScenes)
-	{
-		pScene.second->BaseUpdate(dT);
-	}
+	m_pCurrentScene->BaseUpdate(dT);
 }
 
 void SceneManager::AddScene(Scene* pScene)

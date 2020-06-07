@@ -14,6 +14,19 @@ void TransformComponent::SetPosition(const float x, const float y, const float z
 	m_Position.z = z;
 }
 
+void TransformComponent::Move(const float x, const float y, const float z) noexcept
+{
+	m_Position.x += x;
+	m_Position.y += y;
+	m_Position.z += z;
+}
+
+void TransformComponent::Move(const glm::vec2& movementVec) noexcept
+{
+	m_Position.x += movementVec.x;
+	m_Position.y += movementVec.y;
+}
+
 void TransformComponent::Initialize()
 {
 

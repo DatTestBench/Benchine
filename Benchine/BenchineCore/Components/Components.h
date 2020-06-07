@@ -3,3 +3,5 @@
 #include "Components/TextComponent.h"
 #include "Components/FPSComponent.h"
 #include "Components/RenderComponent.h"
+#include "Components/PhysicsComponent2D.h"
+#include "Components/ControllerComponent.h"

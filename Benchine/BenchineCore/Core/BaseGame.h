@@ -11,7 +11,7 @@ public:
 	void BaseInitialize();
 	void BaseUpdate(float dT);
 
-	[[nodiscard]] constexpr auto GetGameName() const noexcept->std::string_view { return m_Name; }
+	[[nodiscard]] constexpr auto GetGameName() const noexcept-> std::string_view { return m_Name; }
 
 protected:
 	virtual void Initialize() = 0;

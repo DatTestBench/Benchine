@@ -59,6 +59,7 @@
     <ClCompile Include="ImGui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
     <ClCompile Include="Debugging\DebugRenderer.cpp" />
+    <ClCompile Include="Components\ControllerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -100,5 +101,6 @@
     <ClInclude Include="Graphics\GLTextureWrapper.h" />
     <ClInclude Include="Debugging\DebugRenderer.h" />
     <ClInclude Include="Helpers\GeneralHelpers.h" />
+    <ClInclude Include="Components\ControllerComponent.h" />
   </ItemGroup>
 </Project>

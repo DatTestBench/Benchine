@@ -3,22 +3,30 @@
 #include "Resources/Texture2D.h"
 #include "glm/geometric.hpp"
 #include "Debugging/DebugRenderer.h"
-void Renderer::Init(const WindowSettings& windowSettings)
-{
 
+Renderer::~Renderer()
+{
+	Cleanup();
+}
+
+void Renderer::Initialize(const WindowSettings& windowSettings)
+{
+	// Why does this function throw errors, and not use the logger, you may ask?
+	// As the ImGui logger can't be created if the window creation fails, having the errors logged in the logger would be useless
+
+	// OpenGL versions
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-	constexpr int width = 1280;
-	constexpr int height = 720;
-
+	// Window creation
 	m_pWindow = SDL_CreateWindow(
 		windowSettings.name.c_str(),
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		width,
-		height,
+		windowSettings.width,
+		windowSettings.height,
 		SDL_WINDOW_OPENGL);
+
 	if (m_pWindow == nullptr)
 	{
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
@@ -30,7 +38,6 @@ void Renderer::Init(const WindowSettings& windowSettings)
 	{
 		throw std::runtime_error(std::string("SDL_GL_CreateContext Error: ") + SDL_GetError());
 	}
-
 
 	// Set the swap interval for the current OpenGL context,
 	// synchronize it with the vertical retrace
@@ -55,7 +62,7 @@ void Renderer::Init(const WindowSettings& windowSettings)
 
 	// Set the viewport to the client window area
 	// The viewport is the rectangular region of the window where the image is drawn.
-	glViewport(0, 0, int(m_WindowSettings.width), int(m_WindowSettings.height));
+	glViewport(0, 0, static_cast<int>(m_WindowSettings.width), static_cast<int>(m_WindowSettings.height));
 
 	// Set the Modelview matrix to the identity matrix
 	glMatrixMode(GL_MODELVIEW);
@@ -90,9 +97,13 @@ void Renderer::PresentRender() const
 	SDL_GL_SwapWindow(m_pWindow);
 }
 
-void Renderer::Destroy()
+void Renderer::Cleanup()
 {	
+	ImGui_ImplOpenGL2_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+
+	SDL_GL_DeleteContext(m_pContext);
 	SDL_DestroyWindow(m_pWindow);
 	m_pWindow = nullptr;
 }
@@ -135,18 +146,24 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const FRect& dest, cons
 	}
 
 	// Determine vertex coordinates
-	float vertexLeft = dest.x;
-	float vertexBottom = dest.y;
-	float vertexRight{}, vertexTop{};
+
+
+
+
+	float vertexLeft{}, vertexBottom{}, vertexRight{}, vertexTop{};
 	if (!(dest.width > 0.0f && dest.height > 0.0f)) // If no size specified use default size
 	{
-		vertexRight = vertexLeft + defaultDestWidth;
-		vertexTop = vertexBottom + defaultDestHeight;
+		vertexLeft = dest.x - defaultDestWidth / 2.f;
+		vertexRight = dest.x + defaultDestWidth / 2.f;
+		vertexTop = dest.y + defaultDestHeight / 2.f;
+		vertexBottom = dest.y - defaultDestHeight / 2.f;
 	}
 	else
 	{
-		vertexRight = vertexLeft + dest.width;
-		vertexTop = vertexBottom + dest.height;
+		vertexLeft = dest.x - dest.width / 2.f;
+		vertexRight = dest.x + dest.width / 2.f;
+		vertexTop = dest.y + dest.height / 2.f;
+		vertexBottom = dest.y - dest.height / 2.f;
 
 	}
 
@@ -177,26 +194,8 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const FRect& dest, cons
 
 }
 
-void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const FRect& src) const
+void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& center, const FRect& src) const
 {
-	RenderTexture(pTexture, FRect(pos.x, pos.y, src.width, src.height), src);
+	RenderTexture(pTexture, FRect(center.x, center.y, src.width, src.height), src);
 }
 
-/*void Renderer::RenderTexture(Texture2D* texture, const float x, const float y) const
-{
-	SDL_Rect dst;
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	SDL_QueryTexture(texture->GetSDLTexture(), nullptr, nullptr, &dst.w, &dst.h);
-	//SDL_RenderCopy(GetSDLRenderer(), texture->GetSDLTexture(), nullptr, &dst);
-}
-
-void Renderer::RenderTexture(const Texture2D&, const float x, const float y, const float width, const float height) const
-{
-	SDL_Rect dst;
-	dst.x = static_cast<int>(x);
-	dst.y = static_cast<int>(y);
-	dst.w = static_cast<int>(width);
-	dst.h = static_cast<int>(height);
-	//SDL_RenderCopy(GetSDLRenderer(), texture.GetSDLTexture(), nullptr, &dst);
-}*/

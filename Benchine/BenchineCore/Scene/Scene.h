@@ -15,9 +15,11 @@ public:
 	void BaseUpdate(float dT);
 	void Render() const;
 	void AddGameObject(GameObject* pGameObject);
-	void AddRenderComponent(RenderComponent* pRenderComponent);
 
-	[[nodiscard]] constexpr auto GetSceneName() const noexcept->std::string_view { return m_Name; }
+	void AddRenderComponent(RenderComponent* pRenderComponent);
+	void RemoveRenderComponent(RenderComponent* pRenderComponent);
+
+	[[nodiscard]] constexpr auto GetSceneName() const noexcept-> std::string_view { return m_Name; }
 
 protected:
 	virtual void Initialize() = 0;

@@ -214,6 +214,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\ControllerComponent.cpp" />
     <ClCompile Include="Components\FPSComponent.cpp" />
     <ClCompile Include="Components\PhysicsComponent2D.cpp" />
     <ClCompile Include="Components\RenderComponent.cpp" />
@@ -289,6 +290,7 @@
     <ClInclude Include="BenchinePCH.h" />
     <ClInclude Include="Components\BaseComponent.h" />
     <ClInclude Include="Components\Components.h" />
+    <ClInclude Include="Components\ControllerComponent.h" />
     <ClInclude Include="Components\FPSComponent.h" />
     <ClInclude Include="Components\PhysicsComponent2D.h" />
     <ClInclude Include="Components\RenderComponent.h" />

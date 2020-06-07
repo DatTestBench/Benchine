@@ -12,7 +12,7 @@ RenderComponent::RenderComponent()
 
 RenderComponent::~RenderComponent()
 {
-
+	GetGameObject()->GetScene()->RemoveRenderComponent(this);
 }
 
 void RenderComponent::Initialize()

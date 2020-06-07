@@ -13,17 +13,15 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 	result.intersect = true;
 	result.willIntersect = true;
 
-	Collider2D colliderA = pActorA->GetCollider(); 
-	Collider2D colliderB = pActorB->GetCollider();
+	const auto colliderA = pActorA->GetCollider(); 
+	const auto colliderB = pActorB->GetCollider();
 	size_t vertexCountA = colliderA.size();
 	size_t vertexCountB = colliderB.size();
 
 	float minIntervalDistance = std::numeric_limits<float>::infinity();
-	glm::vec2 translationAxis{};
-	glm::vec2 currentVertex{};
-	glm::vec2 nextVertex{};
+	glm::vec2 translationAxis{}, currentVertex{}, nextVertex{};
 
-	// Loop through all the vertecis of both polygons
+	// Loop through all the vertices of both polygons
 	for (size_t vertexIndex = 0; vertexIndex < vertexCountA + vertexCountB; ++vertexIndex)
 	{
 		if (vertexIndex < vertexCountA)
@@ -112,7 +110,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 	result.intersect = true;
 	result.willIntersect = true;
 
-	Collider2D collider = pActor->GetCollider();
+	const auto collider = pActor->GetCollider();
 
 	size_t vertexCountA = collider.size();
 	size_t vertexCountB = staticPoly.size();

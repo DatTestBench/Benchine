@@ -11,7 +11,8 @@
 enum InputState
 {
 	Pressed,
-	Released
+	Released,
+	Down
 };
 
 enum GamepadButton : uint16_t
@@ -79,7 +80,7 @@ struct Controller
 class InputManager final : public Singleton<InputManager>
 {
 public:
-	InputManager()
+	InputManager(token)
 		: m_Controllers()
 		, m_KeyEvents()
 	{
@@ -88,8 +89,9 @@ public:
 
 	bool AddInputBinding(InputBinding binding);
 	bool IsBindingActive(std::string_view actionId);
-	void LogKeyUp(SDL_Scancode key);
+	void LogKeyPressed(SDL_Scancode key);
 	void LogKeyDown(SDL_Scancode key);
+	void LogKeyReleased(SDL_Scancode key);
 	bool IsKeyDown(SDL_Scancode key);
 
 	bool ProcessInput();
@@ -100,7 +102,7 @@ public:
 private:
 
 	std::vector<KeyEvent> m_KeyEvents;
-	bool m_Keys[512];
+	//bool m_Keys[512];
 
 	std::array<Controller, XUSER_MAX_COUNT> m_Controllers;
 

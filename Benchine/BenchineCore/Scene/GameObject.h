@@ -21,8 +21,8 @@ public:
 	void SetParentScene(Scene* pScene);
 	void SetParentObject(GameObject* pObject);
 	void SetRenderComponent(RenderComponent* pRenderComponent) { m_pRenderComponent = pRenderComponent; }
-	[[nodiscard]] constexpr auto GetTransform() const noexcept->TransformComponent* { return m_pTransform;  }
-	[[nodiscard]] constexpr auto GetRenderComponent() const noexcept->RenderComponent* { return m_pRenderComponent; }
+	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pTransform;  }
+	[[nodiscard]] constexpr auto GetRenderComponent() const noexcept-> RenderComponent* { return m_pRenderComponent; }
 	Scene* GetScene() const;
 
 

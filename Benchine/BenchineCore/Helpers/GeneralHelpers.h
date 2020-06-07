@@ -14,12 +14,17 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 
-//usings
+//USINGS
 //******
 using Collider2D = std::vector<glm::vec2>;
 using Polygon2D = std::vector<glm::vec2>;
 
-//struct extentions
+
+//DEFINES
+//*******
+#define INPUT InputManager::GetInstance()
+
+//STRUCT EXTENTIONS
 //*****************
 struct Projection2D : glm::vec2
 {
@@ -29,7 +34,22 @@ struct Projection2D : glm::vec2
 	float& max = y;
 };
 
-//helper structs
+//HELPER STRUCTS
+//**************
+struct WindowSettings
+{
+	explicit WindowSettings(const std::string& name = "Window", uint32_t width = 1280, uint32_t height = 720, bool enableVSync = true)
+		: name(name)
+		, width(width)
+		, height(height)
+		, enableVSync(enableVSync)
+	{}
+	std::string name;
+	uint32_t width;
+	uint32_t height;
+	bool enableVSync;
+};
+
 struct FRect
 {
 	FRect() : FRect(0.f, 0.f, 0.f, 0.f) {}
@@ -60,15 +80,28 @@ struct FEllipse
 
 };
 
-//math helpers
+//MATH HELPERS
 //************
 namespace MathHelper
 {
-	inline glm::vec2 PolyCenter(const Collider2D& polygon) 	// this actually generates the same asm as a simple for loop, but makes it look like I know what I'm doing: https://godbolt.org/z/Z9WeSx
+	inline glm::vec2 PolyCenter(const Polygon2D& polygon) 	// this actually generates the same asm as a simple for loop, but makes it look like I know what I'm doing: https://godbolt.org/z/Z9WeSx
 															// And I know this is clang, but MSVC produces 14k lines on O2 :/ https://godbolt.org/z/wphEjY
 	{
     	auto vertexSum = std::accumulate(polygon.cbegin(), polygon.cend(), glm::vec2(), 
     		[](const glm::vec2& v1, const glm::vec2& v2) {return v1 + v2;});
     	return glm::vec2(vertexSum.x / polygon.size(), vertexSum.y / polygon.size());
+	}
+}
+
+//COLLISION HELPERS
+//*****************
+namespace CollisionHelper
+{
+	inline bool IsPointInFRect(const glm::vec2& p, const FRect& r)
+	{
+		return p.x >= r.x 
+		&& p.x <= r.x + r.width
+		&& p.y >= r.y
+		&& p.y <= r.y + r.height;
 	}
 }

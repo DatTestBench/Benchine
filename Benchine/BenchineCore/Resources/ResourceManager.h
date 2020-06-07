@@ -10,9 +10,10 @@ class ResourceManager final : public Singleton<ResourceManager>
 {
 public:
 
-	virtual ~ResourceManager();
 
-	void Init(const std::string& data);
+	ResourceManager(token) {};
+	virtual ~ResourceManager();
+	void Initialize(const std::string& data);
 
 	template <typename T>
 	static void AddLoader(BaseLoader* pLoader)
@@ -26,9 +27,9 @@ public:
 		return (static_cast<ResourceLoader<T>*>(m_Loaders.at(std::type_index(typeid(T)))))->GetResource(resourcePath);
 	}
 
+protected:
+
 private:
-	friend class Singleton<ResourceManager>;
-	ResourceManager() = default;
 
 	static std::map<std::type_index, BaseLoader*> m_Loaders;
 };

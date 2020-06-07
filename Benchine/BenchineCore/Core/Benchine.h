@@ -16,9 +16,7 @@ public:
 
 		Initialize(); // Setup SDL
 
-
-		ResourceManager* pResourceManager = ResourceManager::GetInstance();
-		pResourceManager->Init("../Resources/");
+		ResourceManager::GetInstance()->Initialize("../Resources/");
 
 		InputManager* pInput = InputManager::GetInstance();
 		Renderer* pRenderer = Renderer::GetInstance();

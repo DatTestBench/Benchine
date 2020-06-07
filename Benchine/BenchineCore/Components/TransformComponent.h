@@ -14,8 +14,10 @@ public:
 	DEL_ROF(TransformComponent);
 
 
-	void SetPosition(float x, float y, float z) noexcept;
-	[[nodiscard]] constexpr auto GetPosition() const noexcept->glm::vec3 { return m_Position; }
+	void SetPosition(const float x, const float y, const float z) noexcept;
+	void Move(const float x, const float y, const float z) noexcept;
+	void Move(const glm::vec2& movementVec) noexcept;
+	[[nodiscard]] constexpr auto GetPosition() const noexcept-> glm::vec3 { return m_Position; }
 
 protected:
 	void Initialize() override;

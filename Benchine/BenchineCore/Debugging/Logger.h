@@ -41,6 +41,8 @@ class Logger : public Singleton<Logger>
 {
 public:
 
+	Logger(token) {};
+
 	template<LogLevel level, LogArgument outputLocation = LogArgument::LOG_IMGUI>
 	static Logger& Log(const std::string& header = "")
 	{
@@ -60,6 +62,8 @@ public:
 	void OutputLog();
 
 private:
+
+
 	std::list<LogEntry> m_LogList;
 	bool m_ShowHeaders = true;
 	LogLevel m_CurrentLevel = LEVEL_FULL;

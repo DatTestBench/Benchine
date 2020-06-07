@@ -15,6 +15,7 @@ Font::Font(const std::string& fullPath, uint32_t size)
 
 Font::~Font()
 {
+	SafeDelete(m_pTexture);
 	TTF_CloseFont(m_pFont);
 }
 

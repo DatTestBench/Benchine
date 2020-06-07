@@ -9,8 +9,8 @@ public:
 	virtual ~BaseComponent() = default;
 	DEL_ROF(BaseComponent);
 
-	[[nodiscard]] constexpr auto GetGameObject() const noexcept->GameObject* { return m_pGameObject; }
-	[[nodiscard]] constexpr auto GetTransform() const noexcept->TransformComponent* { return m_pGameObject->GetTransform(); };
+	[[nodiscard]] constexpr auto GetGameObject() const noexcept-> GameObject* { return m_pGameObject; }
+	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pGameObject->GetTransform(); };
 
 	void BaseInitialize();
 	virtual void Update([[maybe_unused]] float dT) {};

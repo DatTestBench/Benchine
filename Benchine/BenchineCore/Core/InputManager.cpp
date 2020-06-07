@@ -19,11 +19,15 @@ bool InputManager::ProcessInput()
 		}
 		if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
 		{
+			LogKeyPressed(e.key.keysym.scancode);
+		}
+		if (e.type == SDL_KEYDOWN && e.key.repeat != 0)
+		{
 			LogKeyDown(e.key.keysym.scancode);
 		}
 		if (e.type == SDL_KEYUP)
 		{
-			LogKeyUp(e.key.keysym.scancode);
+			LogKeyReleased(e.key.keysym.scancode);
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN)
 		{
@@ -52,7 +56,7 @@ bool InputManager::ProcessInput()
 		ZeroMemory(&state, sizeof(XINPUT_STATE));
 
 		// Get the state of the controller
-		dwResult = XInputGetState(i, &state);
+		dwResult = XInputGetState(i, &state); // TODO: This thing is awfully slow, find a way to not have to recheck it every frame;
 		if (dwResult == ERROR_SUCCESS && !m_Controllers.at(i).isConnected)
 		{
 			// Controller Connected
@@ -101,20 +105,35 @@ bool InputManager::ProcessInput()
 	{
 		// Keyboard Checks
 		bool keyBoardActive = false;
-		for (auto& keyEvent : m_KeyEvents)
+
+		if (bind.second.inputState == InputState::Down)
 		{
-			if (keyEvent.keyCode == bind.second.keyCode && keyEvent.state == bind.second.inputState)
+			const Uint8* state = SDL_GetKeyboardState(NULL);
+			if (state[bind.second.keyCode])
 			{
 				keyBoardActive = true;
-				keyEvent.processed = true;
+			}
+		}
+		else
+		{
+			for (auto& keyEvent : m_KeyEvents)
+			{
+				if (keyEvent.keyCode == bind.second.keyCode && keyEvent.state == bind.second.inputState)
+				{
+					keyBoardActive = true;
+					keyEvent.processed = true;
+				}
 			}
 		}
 
 		// XINPUT Checks
 		bool controllerActive = false;
-		if (m_Controllers.at(bind.second.controllerId).buttons.at(bind.second.button))
+		if (bind.second.button != GamepadButton::MAX_BUTTONS)
 		{
-			controllerActive = true;
+			if (m_Controllers.at(bind.second.controllerId).buttons.at(bind.second.button))
+			{
+				controllerActive = true;
+			}
 		}
 
 		bind.second.isActive = keyBoardActive || controllerActive;
@@ -122,6 +141,8 @@ bool InputManager::ProcessInput()
 
 	return false;
 }
+
+
 
 
 bool InputManager::AddInputBinding(InputBinding binding)
@@ -153,12 +174,17 @@ bool InputManager::IsPressed(GamepadButton button, int controllerId)
 	return false;
 }
 
-void InputManager::LogKeyDown(SDL_Scancode key)
+void InputManager::LogKeyPressed(SDL_Scancode key)
 {
 	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Pressed));
 }
 
-void InputManager::LogKeyUp(SDL_Scancode key)
+void InputManager::LogKeyDown(SDL_Scancode key)
+{
+	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Down));
+}
+
+void InputManager::LogKeyReleased(SDL_Scancode key)
 {
 	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Released));
 }

@@ -9,5 +9,5 @@ public:
 
 protected:
 	void Initialize() override;
-	void Update(float dT) override;
+	void Update([[maybe_unused]] float dT) override;
 };

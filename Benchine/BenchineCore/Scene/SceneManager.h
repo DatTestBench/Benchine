@@ -6,6 +6,7 @@ class SceneManager final : public Singleton<SceneManager>
 {
 public:
 	
+	SceneManager(token);
 	virtual ~SceneManager();
 	void Initialize();
 	void Update(float dT);
@@ -19,8 +20,6 @@ public:
 
 
 private:
-	friend class Singleton<SceneManager>;
-	SceneManager();
 	std::map<std::string_view, Scene*> m_pScenes;
 	Scene* m_pCurrentScene;
 	Scene* m_pSceneToLoad;

@@ -2,7 +2,8 @@
 #include "Debugging/DebugRenderer.h"
 
 //POINTS
-void DebugRenderer::DrawPoint(float x, float y, float pointSize)
+#pragma region Points
+void DebugRenderer::DrawPoint(const float x, const float y, const float pointSize)
 {
 	glPointSize(pointSize);
 	glBegin(GL_POINTS);
@@ -12,12 +13,12 @@ void DebugRenderer::DrawPoint(float x, float y, float pointSize)
 	glEnd();
 }
 
-void DebugRenderer::DrawPoint(const glm::vec2& p, float pointSize)
+void DebugRenderer::DrawPoint(const glm::vec2& p, const float pointSize)
 {
 	DrawPoint(p.x, p.y, pointSize);
 }
 
-void DebugRenderer::DrawPoints(const std::vector<glm::vec2>& vertices, float pointSize)
+void DebugRenderer::DrawPoints(const std::vector<glm::vec2>& vertices, const float pointSize)
 {
 	glPointSize(pointSize);
 	glBegin(GL_POINTS);
@@ -29,14 +30,16 @@ void DebugRenderer::DrawPoints(const std::vector<glm::vec2>& vertices, float poi
 	}
 	glEnd();
 }
+#pragma endregion Points
 
 //LINES
-void DebugRenderer::DrawLine(const glm::vec2& start, const glm::vec2& end, float lineWidth)
+#pragma region Lines
+void DebugRenderer::DrawLine(const glm::vec2& start, const glm::vec2& end, const float lineWidth)
 {
 	DrawLine(start.x, start.y, end.x, end.y, lineWidth);
 }
 
-void DebugRenderer::DrawLine(float x1, float y1, float x2, float y2, float lineWidth)
+void DebugRenderer::DrawLine(const float x1, const float y1, const float x2, const float y2, const float lineWidth)
 {
 	glLineWidth(lineWidth);
 	glBegin(GL_LINES);
@@ -46,19 +49,21 @@ void DebugRenderer::DrawLine(float x1, float y1, float x2, float y2, float lineW
 	}
 	glEnd();
 }
+#pragma endregion Lines
 
 //RECTS
-void DebugRenderer::DrawRect(const FRect& rect, float lineWidth)
+#pragma region Rects
+void DebugRenderer::DrawRect(const FRect& rect, const float lineWidth)
 {
 	DrawRect(rect.x, rect.y, rect.width, rect.height, lineWidth);
 }
 
-void DebugRenderer::DrawRect(const glm::vec2& bottomLeft, float width, float height, float lineWidth)
+void DebugRenderer::DrawRect(const glm::vec2& bottomLeft, const float width, const float height, const float lineWidth)
 {
 	DrawRect(bottomLeft.x, bottomLeft.y, width, height, lineWidth);
 }
 
-void DebugRenderer::DrawRect(float left, float bottom, float width, float height, float lineWidth)
+void DebugRenderer::DrawRect(const float left, const float bottom, const float width, const float height, const float lineWidth)
 {
 	glLineWidth(lineWidth);
 	glBegin(GL_LINE_LOOP);
@@ -76,12 +81,12 @@ void DebugRenderer::FillRect(const FRect& rect)
 	FillRect(rect.x, rect.y, rect.width, rect.height);
 }
 
-void DebugRenderer::FillRect(const glm::vec2& bottomLeft, float width, float height)
+void DebugRenderer::FillRect(const glm::vec2& bottomLeft, const float width, const float height)
 {
 	FillRect(bottomLeft.x, bottomLeft.y, width, height);
 }
 
-void DebugRenderer::FillRect(float left, float bottom, float width, float height)
+void DebugRenderer::FillRect(const float left, const float bottom, const float width, const float height)
 {
 	glBegin(GL_POLYGON);
 	{
@@ -93,18 +98,66 @@ void DebugRenderer::FillRect(float left, float bottom, float width, float height
 	glEnd();
 }
 
+/*Centered*/
+void DebugRenderer::DrawRectC(const FRect& rect, const float lineWidth)
+{
+	DrawRect(rect.x, rect.y, rect.width, rect.height, lineWidth);
+}
+
+void DebugRenderer::DrawRectC(const glm::vec2& center, const float width, const float height, const float lineWidth)
+{
+	DrawRect(center.x, center.y, width, height, lineWidth);
+}
+
+void DebugRenderer::DrawRectC(const float x, const float y, const float width, const float height, const float lineWidth)
+{
+	glLineWidth(lineWidth);
+	glBegin(GL_LINE_LOOP);
+	{
+		glVertex2f(x - width / 2.f, y - height / 2.f);
+		glVertex2f(x + width / 2.f, y - height / 2.f);
+		glVertex2f(x + width / 2.f, y + height / 2.f);
+		glVertex2f(x - width / 2.f, y + height / 2.f);
+	}
+	glEnd();
+}
+
+void DebugRenderer::FillRectC(const FRect& rect)
+{
+	FillRect(rect.x, rect.y, rect.width, rect.height);
+}
+
+void DebugRenderer::FillRectC(const glm::vec2& center, const float width, const float height)
+{
+	FillRect(center.x, center.y, width, height);
+}
+
+void DebugRenderer::FillRectC(const float x, const float y, const float width, const float height)
+{
+	glBegin(GL_POLYGON);
+	{
+		glVertex2f(x - width / 2.f, y - height / 2.f);
+		glVertex2f(x + width / 2.f, y - height / 2.f);
+		glVertex2f(x + width / 2.f, y + height / 2.f);
+		glVertex2f(x - width / 2.f, y + height / 2.f);
+	}
+	glEnd();
+}
+#pragma endregion Rects
+
 //CIRCLES
-void DebugRenderer::DrawEllipse(const FEllipse& ellipse, float lineWidth)
+#pragma region Circles
+void DebugRenderer::DrawEllipse(const FEllipse& ellipse, const float lineWidth)
 {
 	DrawEllipse(ellipse.center.x, ellipse.center.y, ellipse.radX, ellipse.radY, lineWidth);
 }
 
-void DebugRenderer::DrawEllipse(const glm::vec2& center, float radX, float radY, float lineWidth)
+void DebugRenderer::DrawEllipse(const glm::vec2& center, const float radX, const float radY, const float lineWidth)
 {
 	DrawEllipse(center.x, center.y, radX, radY, lineWidth);
 }
 
-void DebugRenderer::DrawEllipse(float centerX, float centerY, float radX, float radY, float lineWidth)
+void DebugRenderer::DrawEllipse(const float centerX, const float centerY, const float radX, const float radY, const float lineWidth)
 {
 	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
@@ -124,12 +177,12 @@ void DebugRenderer::FillEllipse(const FEllipse& ellipse)
 	FillEllipse(ellipse.center.x, ellipse.center.y, ellipse.radX, ellipse.radY);
 }
 
-void DebugRenderer::FillEllipse(const glm::vec2& center, float radX, float radY)
+void DebugRenderer::FillEllipse(const glm::vec2& center, const float radX, const float radY)
 {
 	FillEllipse(center.x, center.y, radX, radY);
 }
 
-void DebugRenderer::FillEllipse(float centerX, float centerY, float radX, float radY)
+void DebugRenderer::FillEllipse(const float centerX, const float centerY, const float radX, const float radY)
 {
 	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
@@ -142,14 +195,16 @@ void DebugRenderer::FillEllipse(float centerX, float centerY, float radX, float 
 	}
 	glEnd();
 }
+#pragma endregion Circles
 
 //ARCS
-void DebugRenderer::DrawArc(const glm::vec2& center, float radX, float radY, float fromAngle, float tillAngle, float lineWidth)
+#pragma region Arcs
+void DebugRenderer::DrawArc(const glm::vec2& center, const float radX, const float radY, const float fromAngle, const float tillAngle, const float lineWidth)
 {
 	DrawArc(center.x, center.y, radX, radY, fromAngle, tillAngle, lineWidth);
 }
 
-void DebugRenderer::DrawArc(float centerX, float centerY, float radX, float radY, float fromAngle, float tillAngle, float lineWidth)
+void DebugRenderer::DrawArc(const float centerX, const float centerY, const float radX, const float radY, const float fromAngle, const float tillAngle, const float lineWidth)
 {
 	if (fromAngle > tillAngle)
 	{
@@ -171,12 +226,12 @@ void DebugRenderer::DrawArc(float centerX, float centerY, float radX, float radY
 	glEnd();
 }
 
-void DebugRenderer::FillArc(const glm::vec2& center, float radX, float radY, float fromAngle, float tillAngle)
+void DebugRenderer::FillArc(const glm::vec2& center, const float radX, const float radY, const float fromAngle, const float tillAngle)
 {
 	FillArc(center.x, center.y, radX, radY, fromAngle, tillAngle);
 }
 
-void DebugRenderer::FillArc(float centerX, float centerY, float radX, float radY, float fromAngle, float tillAngle)
+void DebugRenderer::FillArc(const float centerX, const float centerY, const float radX, const float radY, const float fromAngle, const float tillAngle)
 {
 	if (fromAngle > tillAngle)
 	{
@@ -196,9 +251,11 @@ void DebugRenderer::FillArc(float centerX, float centerY, float radX, float radY
 	}
 	glEnd();
 }
+#pragma endregion Arcs
 
 //POLYGONS
-void DebugRenderer::DrawPolygon(const Polygon2D& vertices, bool closed, float lineWidth)
+#pragma region Polygons
+void DebugRenderer::DrawPolygon(const Polygon2D& vertices, const bool closed, const float lineWidth)
 {
 	glLineWidth(lineWidth);
 	closed ? glBegin(GL_LINE_LOOP) : glBegin(GL_LINE_STRIP);
@@ -222,3 +279,4 @@ void DebugRenderer::FillPolygon(const Polygon2D& vertices)
 	}
 	glEnd();
 }
+#pragma endregion Polygons
