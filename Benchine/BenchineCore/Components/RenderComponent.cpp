@@ -5,7 +5,6 @@
 #include "Components/TransformComponent.h"
 
 RenderComponent::RenderComponent()
-	: m_pTexture{ nullptr }
 {
 
 }
@@ -30,5 +29,13 @@ void RenderComponent::Render() const
 {
 	const auto renderPos = GetGameObject()->GetTransform()->GetPosition();
 
-	Renderer::GetInstance()->RenderTexture(m_pTexture, renderPos);
+	for (auto texture : m_RenderBuffer)
+	{
+		Renderer::GetInstance()->RenderTexture(texture.second, renderPos);
+	}
+}
+
+void RenderComponent::ClearBuffer()
+{
+	m_RenderBuffer.clear();
 }

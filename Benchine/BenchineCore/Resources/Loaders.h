@@ -24,18 +24,14 @@ public:
 	}
 };
 
-/*class Texture2D;
+class Texture2D;
 class TextureLoader final : public ResourceLoader<Texture2D>
 {
 public:
 	Texture2D* Load(const std::string& filePath) override
 	{
 		const auto fullPath = m_DataPath + filePath;
-		Texture2D* pTexture = new Texture2D(IMG_LoadTexture(Renderer::GetInstance()->GetSDLRenderer(), fullPath.c_str()));
-		if (pTexture == nullptr)
-		{
-			throw std::runtime_error(std::string("Failed to load texture: ") + SDL_GetError());
-		}
+		Texture2D* pTexture = new Texture2D(fullPath);
 
 		return pTexture;
 	}
@@ -44,4 +40,4 @@ public:
 	{
 		SafeDelete(pResource);
 	}
-};*/
+};

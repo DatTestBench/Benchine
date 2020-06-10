@@ -3,10 +3,11 @@
 #include "Helpers/GeneralHelpers.h"
 
 struct SDL_Window;
+class GLTextureWrapper;
 class Renderer final : public Singleton<Renderer>
 {
 public:
-	Renderer(token) {};
+	Renderer(token) {}
 	virtual ~Renderer();
 
 	void Initialize(const WindowSettings& windowSettings);
@@ -14,8 +15,8 @@ public:
 	void PresentRender() const;
 
 
-	void RenderTexture(GLTextureWrapper* pTexture, const FRect& dest, const FRect& src = {}) const;
-	void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const FRect& src = {}) const;
+	void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos) const;
+	//void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const FRect& src = {}) const;
 
 private:
 
@@ -24,6 +25,9 @@ private:
 	WindowSettings m_WindowSettings;
 	SDL_GLContext m_pContext;
 	SDL_Window* m_pWindow;
-};
 
+
+
+	const std::array<std::pair<glm::vec2, glm::vec2>, 4> CreateRenderParams(GLTextureWrapper* pTexture, const glm::vec2& pos) const;
+};
 

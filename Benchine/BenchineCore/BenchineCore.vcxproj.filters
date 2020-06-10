@@ -60,6 +60,8 @@
     <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
     <ClCompile Include="Debugging\DebugRenderer.cpp" />
     <ClCompile Include="Components\ControllerComponent.cpp" />
+    <ClCompile Include="Components\SpriteComponent.cpp" />
+    <ClCompile Include="Components\TextureComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -102,5 +104,7 @@
     <ClInclude Include="Debugging\DebugRenderer.h" />
     <ClInclude Include="Helpers\GeneralHelpers.h" />
     <ClInclude Include="Components\ControllerComponent.h" />
+    <ClInclude Include="Components\SpriteComponent.h" />
+    <ClInclude Include="Components\TextureComponent.h" />
   </ItemGroup>
 </Project>

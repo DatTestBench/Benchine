@@ -1,7 +1,6 @@
 #include "BenchinePCH.h"
 #include "Debugging/Logger.h"
 
-
 void Logger::OutputLog()
 {
 	m_LogList.erase(std::remove_if(m_LogList.begin(), m_LogList.end(), [](const LogEntry& entry) { return entry.markedForClear; }), m_LogList.end());

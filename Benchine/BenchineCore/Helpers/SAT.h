@@ -4,8 +4,8 @@
 //Adapted from : https://www.codeproject.com/Articles/15573/2D-Polygon-Collision-Detection
 //				 http://www.dyn4j.org/2010/01/sat/
 
-// Structure that stores the results of the PolygonCollision function
 class PhysicsComponent2D;
+// Structure that stores the results of the PolygonCollision function
 struct PolygonCollisionResult
 {
 	// Are the polygons going to intersect forward in time?

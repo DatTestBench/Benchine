@@ -3,14 +3,13 @@
 #include <string_view>
 
 #include <filesystem>
-#include "Debugging/Logger.h"
 #include "Resources/ResourceManager.h"
 class BaseLoader
 {
 public:
 	BaseLoader() = default;
 	virtual ~BaseLoader() = default;
-	DEL_ROF(BaseLoader);
+	DEL_ROF(BaseLoader)
 
 	static void SetDataPath(const std::string& dataPath) { m_DataPath = dataPath; }
 	[[nodiscard]] auto GetDataPath() const noexcept-> const std::string& { return m_DataPath; }
@@ -26,8 +25,8 @@ class ResourceLoader : public BaseLoader
 {
 public:
 	ResourceLoader() = default;
-	virtual ~ResourceLoader() = default;
-	DEL_ROF(ResourceLoader);
+	virtual ~ResourceLoader() override = default;
+	DEL_ROF(ResourceLoader)
 
 	T* GetResource(const std::string& filePath)
 	{

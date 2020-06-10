@@ -7,8 +7,6 @@
 #include "BubbleBobble.h"
 #include "Core/Benchine.h"
 
-
-
 int main(int, char* [])
 {
 	Benchine engine;

@@ -2,7 +2,7 @@
 #include "Components/TransformComponent.h"
 
 TransformComponent::TransformComponent()
-	: m_Position{ 0, 0, 0 }
+	: m_Position{ 0, 0, 1 }
 {
 
 }

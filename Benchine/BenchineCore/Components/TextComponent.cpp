@@ -34,9 +34,9 @@ void TextComponent::Update([[maybe_unused]] float dT)
 
 		m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
 
-		GetGameObject()->GetRenderComponent()->SetTexture(m_pTexture);
 		m_NeedsUpdate = false;
 	}
+	GetGameObject()->GetRenderComponent()->AddTexture(m_pTexture);
 }
 
 // This implementation uses the "dirty flag" pattern

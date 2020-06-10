@@ -8,7 +8,7 @@ void DebugRenderer::DrawPoint(const float x, const float y, const float pointSiz
 	glPointSize(pointSize);
 	glBegin(GL_POINTS);
 	{
-		glVertex2f(x, y);
+		glVertex3f(x, y, 1.f);
 	}
 	glEnd();
 }
@@ -25,7 +25,7 @@ void DebugRenderer::DrawPoints(const std::vector<glm::vec2>& vertices, const flo
 	{
 		for (auto& vertex : vertices)
 		{
-			glVertex2f(vertex.x, vertex.y);
+			glVertex3f(vertex.x, vertex.y, 1.f);
 		}
 	}
 	glEnd();
@@ -44,8 +44,8 @@ void DebugRenderer::DrawLine(const float x1, const float y1, const float x2, con
 	glLineWidth(lineWidth);
 	glBegin(GL_LINES);
 	{
-		glVertex2f(x1, y1);
-		glVertex2f(x2, y2);
+		glVertex3f(x1, y1, 1.f);
+		glVertex3f(x2, y2, 1.f);
 	}
 	glEnd();
 }
@@ -68,10 +68,10 @@ void DebugRenderer::DrawRect(const float left, const float bottom, const float w
 	glLineWidth(lineWidth);
 	glBegin(GL_LINE_LOOP);
 	{
-		glVertex2f(left, bottom);
-		glVertex2f(left + width, bottom);
-		glVertex2f(left + width, bottom + height);
-		glVertex2f(left, bottom + height);
+		glVertex3f(left, bottom, 1.f);
+		glVertex3f(left + width, bottom, 1.f);
+		glVertex3f(left + width, bottom + height, 1.f);
+		glVertex3f(left, bottom + height, 1.f);
 	}
 	glEnd();
 }
@@ -90,10 +90,10 @@ void DebugRenderer::FillRect(const float left, const float bottom, const float w
 {
 	glBegin(GL_POLYGON);
 	{
-		glVertex2f(left, bottom);
-		glVertex2f(left + width, bottom);
-		glVertex2f(left + width, bottom + height);
-		glVertex2f(left, bottom + height);
+		glVertex3f(left, bottom, 1.f);
+		glVertex3f(left + width, bottom, 1.f);
+		glVertex3f(left + width, bottom + height, 1.f);
+		glVertex3f(left, bottom + height, 1.f);
 	}
 	glEnd();
 }
@@ -114,10 +114,10 @@ void DebugRenderer::DrawRectC(const float x, const float y, const float width, c
 	glLineWidth(lineWidth);
 	glBegin(GL_LINE_LOOP);
 	{
-		glVertex2f(x - width / 2.f, y - height / 2.f);
-		glVertex2f(x + width / 2.f, y - height / 2.f);
-		glVertex2f(x + width / 2.f, y + height / 2.f);
-		glVertex2f(x - width / 2.f, y + height / 2.f);
+		glVertex3f(x - width / 2.f, y - height / 2.f, 1.f);
+		glVertex3f(x + width / 2.f, y - height / 2.f, 1.f);
+		glVertex3f(x + width / 2.f, y + height / 2.f, 1.f);
+		glVertex3f(x - width / 2.f, y + height / 2.f, 1.f);
 	}
 	glEnd();
 }
@@ -136,10 +136,10 @@ void DebugRenderer::FillRectC(const float x, const float y, const float width, c
 {
 	glBegin(GL_POLYGON);
 	{
-		glVertex2f(x - width / 2.f, y - height / 2.f);
-		glVertex2f(x + width / 2.f, y - height / 2.f);
-		glVertex2f(x + width / 2.f, y + height / 2.f);
-		glVertex2f(x - width / 2.f, y + height / 2.f);
+		glVertex3f(x - width / 2.f, y - height / 2.f, 1.f);
+		glVertex3f(x + width / 2.f, y - height / 2.f, 1.f);
+		glVertex3f(x + width / 2.f, y + height / 2.f, 1.f);
+		glVertex3f(x - width / 2.f, y + height / 2.f, 1.f);
 	}
 	glEnd();
 }
@@ -166,7 +166,7 @@ void DebugRenderer::DrawEllipse(const float centerX, const float centerY, const 
 	{
 		for (float angle = 0.f; angle < 2.f * glm::pi<float>(); angle += dAngle)
 		{
-			glVertex2f(centerX + radX * cos(angle), centerY + radY * sin(angle));
+			glVertex3f(centerX + radX * cos(angle), centerY + radY * sin(angle), 1.f);
 		}
 	}
 	glEnd();
@@ -190,7 +190,7 @@ void DebugRenderer::FillEllipse(const float centerX, const float centerY, const 
 	{
 		for (float angle = 0.f; angle < 2.f * glm::pi<float>(); angle += dAngle)
 		{
-			glVertex2f(centerX + radX * cos(angle), centerY + radY * sin(angle));
+			glVertex3f(centerX + radX * cos(angle), centerY + radY * sin(angle), 1.f);
 		}
 	}
 	glEnd();
@@ -219,9 +219,9 @@ void DebugRenderer::DrawArc(const float centerX, const float centerY, const floa
 	{
 		for (float angle = fromAngle; angle < tillAngle; angle += dAngle)
 		{
-			glVertex2f(centerX + radX * cos(angle), centerY + radY * sin(angle));
+			glVertex3f(centerX + radX * cos(angle), centerY + radY * sin(angle), 1.f);
 		}
-		glVertex2f(centerX + radX * cos(tillAngle), centerY + radY * sin(tillAngle));
+		glVertex3f(centerX + radX * cos(tillAngle), centerY + radY * sin(tillAngle), 1.f);
 	}
 	glEnd();
 }
@@ -242,12 +242,12 @@ void DebugRenderer::FillArc(const float centerX, const float centerY, const floa
 
 	glBegin(GL_POLYGON);
 	{
-		glVertex2f(centerX, centerY);
+		glVertex3f(centerX, centerY, 1.f);
 		for (float angle = fromAngle; angle < tillAngle; angle += dAngle)
 		{
-			glVertex2f(centerX + radX * cos(angle), centerY + radY * sin(angle));
+			glVertex3f(centerX + radX * cos(angle), centerY + radY * sin(angle), 1.f);
 		}
-		glVertex2f(centerX + radX * cos(tillAngle), centerY + radY * sin(tillAngle));
+		glVertex3f(centerX + radX * cos(tillAngle), centerY + radY * sin(tillAngle), 1.f);
 	}
 	glEnd();
 }
@@ -262,7 +262,7 @@ void DebugRenderer::DrawPolygon(const Polygon2D& vertices, const bool closed, co
 	{
 		for (auto& vertex : vertices)
 		{
-			glVertex2f(vertex.x, vertex.y);
+			glVertex3f(vertex.x, vertex.y, 1.f);
 		}
 	}
 	glEnd();
@@ -274,7 +274,7 @@ void DebugRenderer::FillPolygon(const Polygon2D& vertices)
 	{
 		for (auto& vertex : vertices)
 		{
-			glVertex2f(vertex.x, vertex.y);
+			glVertex3f(vertex.x, vertex.y, 1.f);
 		}
 	}
 	glEnd();

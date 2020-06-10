@@ -17,16 +17,32 @@ public:
 	void BaseInitialize();
 	void BaseUpdate(float dT);
 
-	void AddComponent(BaseComponent* pComponent);
+	/**
+	 * Adds a component to the current gameobject
+	 * @param pComponent The component that will be added to the scene
+	 * @return The component passed, returned for further use
+	 * */
+	template <
+		class T,
+		class = std::enable_if_t<std::is_base_of_v<BaseComponent, T>> // SFINAE doesn't look horrible at all :/
+	>
+		T* AddComponent(T* pComponent)
+	{
+		m_pComponents.push_back(pComponent);
+		pComponent->m_pGameObject = this;
+		return pComponent;
+	}
+
+
 	void SetParentScene(Scene* pScene);
 	void SetParentObject(GameObject* pObject);
 	void SetRenderComponent(RenderComponent* pRenderComponent) { m_pRenderComponent = pRenderComponent; }
-	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pTransform;  }
+	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pTransform; }
 	[[nodiscard]] constexpr auto GetRenderComponent() const noexcept-> RenderComponent* { return m_pRenderComponent; }
 	Scene* GetScene() const;
 
 
-template <class T>
+	template <class T>
 	T* GetComponent()
 	{
 		const type_info& ti = typeid(T);
@@ -43,8 +59,8 @@ template <class T>
 
 protected:
 	// For future use
-	virtual void Initialize() {};
-	virtual void Update([[maybe_unused]] float dT) { };
+	virtual void Initialize() {}
+	virtual void Update([[maybe_unused]] float dT) {}
 
 private:
 

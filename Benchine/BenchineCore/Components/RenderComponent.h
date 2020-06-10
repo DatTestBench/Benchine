@@ -5,18 +5,18 @@ class RenderComponent final : public BaseComponent
 {
 public:
 	RenderComponent();
-	virtual ~RenderComponent();
+	virtual ~RenderComponent() override;
 	DEL_ROF(RenderComponent);
 
 	void Update([[maybe_unused]] float dT) override;
-	void SetTexture(GLTextureWrapper* pTexture) noexcept { m_pTexture = pTexture; }
+	void AddTexture(GLTextureWrapper* pTexture) noexcept { m_RenderBuffer.emplace(std::make_pair(pTexture->GetRenderPriority(), pTexture)); }
+
 
 	void Render() const;
-
+	void ClearBuffer();
 protected:
 	void Initialize() override;
 
 private:
-	GLTextureWrapper* m_pTexture; //The rendercomponent does not own the texture, obviously
-	glm::vec2 m_Pivot;
+	std::multimap<uint32_t, GLTextureWrapper*> m_RenderBuffer;
 };

@@ -5,7 +5,7 @@ class ControllerComponent final : public BaseComponent
 {
 public:
 	ControllerComponent();
-	virtual ~ControllerComponent() = default;
+	virtual ~ControllerComponent() override = default;
 	DEL_ROF(ControllerComponent);
 
 	void Update(float dT) override;

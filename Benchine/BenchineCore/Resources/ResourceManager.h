@@ -11,7 +11,7 @@ class ResourceManager final : public Singleton<ResourceManager>
 public:
 
 
-	ResourceManager(token) {};
+	ResourceManager(token) {}
 	virtual ~ResourceManager();
 	void Initialize(const std::string& data);
 

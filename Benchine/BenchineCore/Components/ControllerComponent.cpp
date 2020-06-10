@@ -19,7 +19,7 @@ void ControllerComponent::Initialize()
 void ControllerComponent::Update(float dT)
 {
 
-	constexpr float velocity = 10;
+	constexpr float velocity = 100;
 	glm::vec2 movement{};
 	if (INPUT->IsBindingActive("MoveLeft"))
 	{
@@ -40,7 +40,7 @@ void ControllerComponent::Update(float dT)
 
 	GetTransform()->Move(movement * velocity * dT);
 
-	DebugRenderer::DrawRectC(GetTransform()->GetPosition(), 10, 10);
+	DEBUGRENDER(DrawRectC(GetTransform()->GetPosition(), 10, 10));
 
 
 }

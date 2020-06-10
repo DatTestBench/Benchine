@@ -21,10 +21,6 @@ bool InputManager::ProcessInput()
 		{
 			LogKeyPressed(e.key.keysym.scancode);
 		}
-		if (e.type == SDL_KEYDOWN && e.key.repeat != 0)
-		{
-			LogKeyDown(e.key.keysym.scancode);
-		}
 		if (e.type == SDL_KEYUP)
 		{
 			LogKeyReleased(e.key.keysym.scancode);
@@ -135,7 +131,6 @@ bool InputManager::ProcessInput()
 				controllerActive = true;
 			}
 		}
-
 		bind.second.isActive = keyBoardActive || controllerActive;
 	}
 
@@ -178,12 +173,6 @@ void InputManager::LogKeyPressed(SDL_Scancode key)
 {
 	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Pressed));
 }
-
-void InputManager::LogKeyDown(SDL_Scancode key)
-{
-	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Down));
-}
-
 void InputManager::LogKeyReleased(SDL_Scancode key)
 {
 	m_KeyEvents.emplace_back(KeyEvent(key, InputState::Released));

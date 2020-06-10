@@ -21,6 +21,8 @@
 #define NOMINMAX
 #include <windows.h>
 
+
+
 // IMGUI
 #pragma warning (push, 0)
 #include "ImGui/imgui.h"
@@ -59,8 +61,9 @@ inline void SafeDelete(T& pObject)
 }
 
 // General Includes
-#include "Resources//ResourceManager.h"
+#include "Resources/ResourceManager.h"
 #include "Graphics/Renderer.h"
 #include "Core/InputManager.h"
 #include "Scene/SceneManager.h"
 #include "Debugging/Logger.h"
+#include "Helpers/GeneralHelpers.h"

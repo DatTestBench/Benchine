@@ -21,11 +21,11 @@ void Benchine::Cleanup()
 {
 
 	delete m_pGame;
+	SceneManager::Destroy();
 	ResourceManager::Destroy();
 	InputManager::Destroy();
 	Logger::Destroy();
 	Renderer::Destroy();
-	SceneManager::Destroy();
 
 	// SDL
 	Mix_Quit();

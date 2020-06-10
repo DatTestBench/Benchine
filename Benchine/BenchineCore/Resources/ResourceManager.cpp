@@ -46,6 +46,6 @@ void ResourceManager::Initialize(const std::string& dataPath)
 
 	// Initialize Loaders
 	AddLoader<Font>(new FontLoader());
-	//AddLoader<Texture2D>(new TextureLoader());
+	AddLoader<Texture2D>(new TextureLoader());
 
 }

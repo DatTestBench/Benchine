@@ -1,5 +1,12 @@
 #pragma once
 #include "Helpers/GeneralHelpers.h"
+
+#ifdef _DEBUG
+#define DEBUGRENDER(func) DebugRenderer::func;
+#else
+#define DEBUGRENDER(func) do{}while(0)
+#endif
+
 namespace DebugRenderer
 {
 	//POINTS

@@ -218,7 +218,9 @@
     <ClCompile Include="Components\FPSComponent.cpp" />
     <ClCompile Include="Components\PhysicsComponent2D.cpp" />
     <ClCompile Include="Components\RenderComponent.cpp" />
+    <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Components\TextComponent.cpp" />
+    <ClCompile Include="Components\TextureComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
     <ClCompile Include="Debugging\DebugRenderer.cpp" />
     <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
@@ -294,7 +296,9 @@
     <ClInclude Include="Components\FPSComponent.h" />
     <ClInclude Include="Components\PhysicsComponent2D.h" />
     <ClInclude Include="Components\RenderComponent.h" />
+    <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Components\TextComponent.h" />
+    <ClInclude Include="Components\TextureComponent.h" />
     <ClInclude Include="Components\TransformComponent.h" />
     <ClInclude Include="Debugging\DebugRenderer.h" />
     <ClInclude Include="Graphics\GLTextureWrapper.h" />

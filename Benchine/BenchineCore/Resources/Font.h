@@ -8,7 +8,7 @@ class Font
 public:
 	explicit Font(const std::string& fullPath, uint32_t size);
 	~Font();
-	DEL_ROF(Font);
+	DEL_ROF(Font)
 	[[nodiscard]] constexpr auto GetFont() const noexcept-> _TTF_Font* { return m_pFont; }
 	[[nodiscard]] constexpr auto GetTexture() const noexcept-> GLTextureWrapper* { return m_pTexture; }
 	GLTextureWrapper* GenerateFontTexture(const std::string& text, const SDL_Color& color);

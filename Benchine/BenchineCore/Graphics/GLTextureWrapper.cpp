@@ -1,10 +1,16 @@
 #include "BenchinePCH.h"
 #include "GLTextureWrapper.h"
 
-GLTextureWrapper::GLTextureWrapper(SDL_Surface* pSurface)
+GLTextureWrapper::GLTextureWrapper(SDL_Surface* pSurface, TextureOffsetMode offsetMode, uint32_t renderPriority)
 	: m_Id()
 	, m_Width()
 	, m_Height()
+	, m_TargetWidth()
+	, m_TargetHeight()
+	, m_Source()
+	, m_RenderPriority(renderPriority)
+	, m_PositionOffset()
+	, m_OffsetMode(offsetMode)
 	, m_CreationOk(false)
 {
 	CreateTextureFromSurface(pSurface);

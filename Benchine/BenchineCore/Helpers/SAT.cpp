@@ -13,8 +13,8 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 	result.intersect = true;
 	result.willIntersect = true;
 
-	const auto colliderA = pActorA->GetCollider(); 
-	const auto colliderB = pActorB->GetCollider();
+	const auto colliderA = pActorA->GetColliderTransformed(); 
+	const auto colliderB = pActorB->GetColliderTransformed();
 	size_t vertexCountA = colliderA.size();
 	size_t vertexCountB = colliderB.size();
 
@@ -41,7 +41,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 		const auto axis = MakeAxis(currentVertex, nextVertex);
 
 		// Find the projection of the polygon on the current axis
-		const auto projectionA = ProjectPolygon(axis, colliderB);
+		const auto projectionA = ProjectPolygon(axis, colliderA);
 		const auto projectionB = ProjectPolygon(axis, colliderB);
 
 		// Check if the polygon projections are currentlty intersecting
@@ -110,7 +110,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 	result.intersect = true;
 	result.willIntersect = true;
 
-	const auto collider = pActor->GetCollider();
+	const auto collider = pActor->GetColliderTransformed();
 
 	size_t vertexCountA = collider.size();
 	size_t vertexCountB = staticPoly.size();
@@ -180,20 +180,20 @@ Projection2D sat::ProjectPolygon(const glm::vec2& axis, const Collider2D& polygo
 	for (size_t i = 0; i < polygon.size(); ++i)
 	{
 		dotProduct = glm::dot(axis, polygon.at(i));
-		if (dotProduct < projectionBounds.min)
-			projectionBounds.min = dotProduct;
-		else if (dotProduct > projectionBounds.max)
-			projectionBounds.max = dotProduct;
+		if (dotProduct < projectionBounds.Min)
+			projectionBounds.Min = dotProduct;
+		else if (dotProduct > projectionBounds.Max)
+			projectionBounds.Max = dotProduct;
 	}
 	return projectionBounds;
 }
 
 float sat::IntervalDistance(const Projection2D& projectionA, const Projection2D& projectionB)
 {
-	if (projectionA.min < projectionB.min)
-		return projectionB.min - projectionA.max;
+	if (projectionA.Min < projectionB.Min)
+		return projectionB.Min - projectionA.Min;
 	else
-		return projectionA.min - projectionB.max;
+		return projectionA.Min - projectionB.Min;
 }
 
 glm::vec2 sat::MakeAxis(const glm::vec2& vertexA, const glm::vec2& vertexB)

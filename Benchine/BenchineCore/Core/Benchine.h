@@ -20,7 +20,7 @@ public:
 
 		InputManager* pInput = InputManager::GetInstance();
 		Renderer* pRenderer = Renderer::GetInstance();
-		Logger* pLogger = Logger::GetInstance();
+		DEBUGONLY(Logger* pLogger = Logger::GetInstance());
 
 		LoadGame();
 
@@ -41,7 +41,10 @@ public:
 			
 			
 			pRenderer->SetupRender();
+			SceneManager::GetInstance()->RenderCurrentScene();
+			DEBUGONLY(pLogger->OutputLog());
 			m_pGame->BaseUpdate(deltaTime);
+			pRenderer->PresentRender();
 
 			/*while (lag >= MsPerFrame / 1000.f)
 			{
@@ -49,9 +52,6 @@ public:
 				lag -= MsPerFrame / 1000.f;
 			}*/
 		
-			SceneManager::GetInstance()->RenderCurrentScene();
-			pLogger->OutputLog();
-			pRenderer->PresentRender();
 		}
 		Cleanup();
 

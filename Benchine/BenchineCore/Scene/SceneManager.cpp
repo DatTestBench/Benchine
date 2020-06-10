@@ -27,7 +27,6 @@ void SceneManager::Initialize()
 
 	if (m_pScenes.empty())
 	{
-
 		Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "No scenes loaded, falling back on default scene";
 
 		auto pDefaultScene = new DefaultScene;
@@ -58,7 +57,13 @@ void SceneManager::Update(float dT)
 
 void SceneManager::AddScene(Scene* pScene)
 {
+	const auto currentSize = m_pScenes.size();
 	m_pScenes.try_emplace(pScene->GetSceneName(), pScene);
+
+	if (currentSize == m_pScenes.size())
+	{
+		Logger::Log<LEVEL_WARNING>("SceneManager::AddScene()") << "A Scene with name: " << pScene->GetSceneName() << " already exists, the scene was not added.";
+	}
 }
 
 void SceneManager::LoadScene(const std::string_view& sceneName)

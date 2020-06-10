@@ -6,13 +6,13 @@ class TestScene final : public Scene
 {
 public:
 	TestScene(const std::string_view& sceneName);
-	virtual ~TestScene();
-	DEL_ROF(TestScene);
+	virtual ~TestScene() override;
+	DEL_ROF(TestScene)
 
 protected:
 	void Initialize() override;
 	void Update([[maybe_unused]] float dT) override;
 
 private:
-
+	GameObject* m_pCharacter;
 };

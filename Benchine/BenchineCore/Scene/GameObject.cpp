@@ -26,7 +26,7 @@ void GameObject::BaseInitialize()
 	if (m_IsInitialized)
 		return;
 
-	// User Defined Initialization (for prefabs in the future)
+	// User Defined Initialization
 	Initialize();
 
 	// Component Initialization
@@ -47,14 +47,6 @@ void GameObject::BaseUpdate(float dT)
 	{
 		pComponent->Update(dT);
 	}
-}
-
-void GameObject::AddComponent(BaseComponent* pComponent)
-{
-	// TODO: check for duplicate components
-
-	m_pComponents.push_back(pComponent);
-	pComponent->m_pGameObject = this;
 }
 
 void GameObject::SetParentScene(Scene* pScene)

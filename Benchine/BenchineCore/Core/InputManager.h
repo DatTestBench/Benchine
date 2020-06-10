@@ -35,22 +35,22 @@ enum GamepadButton : uint16_t
 };
 struct InputBinding
 {
-	std::string_view actionId;
-	InputState inputState;
-	int keyCode; // Remapped to an SDL keycode
-	int mouseCode;
-	GamepadButton button;
-	int controllerId;
-	bool isActive;
+	std::string_view ActionId;
+	InputState State;
+	int KeyCode; // Remapped to an SDL keycode
+	int MouseCode;
+	GamepadButton Button;
+	int ControllerId;
+	bool IsActive;
 
 	InputBinding(std::string_view id, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
-		: actionId(id)
-		, inputState(state)
-		, keyCode(keyCode - 61)
-		, mouseCode(mouseCode)
-		, button(button)
-		, controllerId(controllerId)
-		, isActive(false)
+		: ActionId(id)
+		, State(state)
+		, KeyCode(keyCode - 61)
+		, MouseCode(mouseCode)
+		, Button(button)
+		, ControllerId(controllerId)
+		, IsActive(false)
 	{
 
 	}
@@ -59,13 +59,13 @@ struct InputBinding
 
 struct KeyEvent
 {
-	int keyCode;
-	InputState state;
-	bool processed;
+	int KeyCode;
+	InputState State;
+	bool Processed;
 	KeyEvent(int keyCode, InputState state)
-		: keyCode(keyCode)
-		, state(state)
-		, processed(false)
+		: KeyCode(keyCode)
+		, State(state)
+		, Processed(false)
 	{
 
 	}
@@ -81,17 +81,15 @@ class InputManager final : public Singleton<InputManager>
 {
 public:
 	InputManager(token)
-		: m_Controllers()
-		, m_KeyEvents()
+		: m_KeyEvents()
+		, m_Controllers()
+		, m_InputBinds()
 	{
 
 	}
 
 	bool AddInputBinding(InputBinding binding);
 	bool IsBindingActive(std::string_view actionId);
-	void LogKeyPressed(SDL_Scancode key);
-	void LogKeyDown(SDL_Scancode key);
-	void LogKeyReleased(SDL_Scancode key);
 	bool IsKeyDown(SDL_Scancode key);
 
 	bool ProcessInput();
@@ -101,6 +99,8 @@ public:
 
 private:
 
+	void LogKeyPressed(SDL_Scancode key);
+	void LogKeyReleased(SDL_Scancode key);
 	std::vector<KeyEvent> m_KeyEvents;
 	//bool m_Keys[512];
 

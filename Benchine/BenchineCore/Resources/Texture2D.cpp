@@ -13,7 +13,6 @@ Texture2D::Texture2D(const std::string& fullPath)
 
 	m_pTexture = new GLTextureWrapper(pSurface);
 	SDL_FreeSurface(pSurface);
-
 }
 
 Texture2D::~Texture2D()

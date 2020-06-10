@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Helpers/Singleton.h"
-//#include "imgui.h"
 
 #include <array>
 
@@ -22,16 +21,17 @@ enum LogArgument : uint16_t
 
 struct LogEntry
 {
-	std::string header;
-	std::stringstream message;
-	LogLevel level;
-	LogArgument outputLocation;
-	bool markedForClear;
+	std::string Header;
+	std::stringstream Message;
+	LogLevel Level;
+	LogArgument OutputLocation;
+	bool MarkedForClear;
 	LogEntry(const std::string& log, LogLevel level, LogArgument outputLocation)
-		: header(log)
-		, level(level)
-		, outputLocation(outputLocation)
-		, markedForClear(false)
+		: Header(log)
+		, Message()
+		, Level(level)
+		, OutputLocation(outputLocation)
+		, MarkedForClear(false)
 
 	{
 	}
@@ -41,8 +41,13 @@ class Logger : public Singleton<Logger>
 {
 public:
 
-	Logger(token) {};
+	Logger(token) {}
 
+	/**
+	 * Log Function 
+	 * @param level <T> LogLevel
+	 * @param header Name of the scope this log was called in
+	 * */
 	template<LogLevel level, LogArgument outputLocation = LogArgument::LOG_IMGUI>
 	static Logger& Log(const std::string& header = "")
 	{
@@ -52,6 +57,10 @@ public:
 		return *GetInstance();
 	}
 
+	/**
+	 * Ostream for extra log messages
+	 * @param log Log message
+	 * */
 	template<class T>
 	Logger& operator<<(const T& log)
 	{
