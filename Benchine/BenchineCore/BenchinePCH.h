@@ -30,6 +30,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
 #pragma warning (pop)
+
 // SDL
 #include <SDL.h>
 #include <SDL_opengl.h>

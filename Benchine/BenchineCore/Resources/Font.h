@@ -17,6 +17,5 @@ public:
 private:
 	_TTF_Font* m_pFont;
 	GLTextureWrapper* m_pTexture;
-	uint32_t m_Size;
 };
 

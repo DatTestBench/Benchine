@@ -9,7 +9,7 @@ public:
 	
 	Scene(const std::string_view& sceneName);
 	virtual ~Scene();
-	DEL_ROF(Scene);
+	DEL_ROF(Scene)
 
 	void BaseInitialize();
 	void BaseUpdate(float dT);

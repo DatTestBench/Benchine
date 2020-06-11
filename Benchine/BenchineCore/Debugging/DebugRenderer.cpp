@@ -55,7 +55,7 @@ void DebugRenderer::DrawLine(const float x1, const float y1, const float x2, con
 #pragma region Rects
 void DebugRenderer::DrawRect(const FRect& rect, const float lineWidth)
 {
-	DrawRect(rect.x, rect.y, rect.width, rect.height, lineWidth);
+	DrawRect(rect.Pos.x, rect.Pos.y, rect.Width, rect.Height, lineWidth);
 }
 
 void DebugRenderer::DrawRect(const glm::vec2& bottomLeft, const float width, const float height, const float lineWidth)
@@ -78,7 +78,7 @@ void DebugRenderer::DrawRect(const float left, const float bottom, const float w
 
 void DebugRenderer::FillRect(const FRect& rect)
 {
-	FillRect(rect.x, rect.y, rect.width, rect.height);
+	FillRect(rect.Pos.x, rect.Pos.y, rect.Width, rect.Height);
 }
 
 void DebugRenderer::FillRect(const glm::vec2& bottomLeft, const float width, const float height)
@@ -101,7 +101,7 @@ void DebugRenderer::FillRect(const float left, const float bottom, const float w
 /*Centered*/
 void DebugRenderer::DrawRectC(const FRect& rect, const float lineWidth)
 {
-	DrawRect(rect.x, rect.y, rect.width, rect.height, lineWidth);
+	DrawRect(rect.Pos.x, rect.Pos.y, rect.Width, rect.Height, lineWidth);
 }
 
 void DebugRenderer::DrawRectC(const glm::vec2& center, const float width, const float height, const float lineWidth)
@@ -124,7 +124,7 @@ void DebugRenderer::DrawRectC(const float x, const float y, const float width, c
 
 void DebugRenderer::FillRectC(const FRect& rect)
 {
-	FillRect(rect.x, rect.y, rect.width, rect.height);
+	FillRect(rect.Pos.x, rect.Pos.y, rect.Width, rect.Height);
 }
 
 void DebugRenderer::FillRectC(const glm::vec2& center, const float width, const float height)
@@ -149,7 +149,7 @@ void DebugRenderer::FillRectC(const float x, const float y, const float width, c
 #pragma region Circles
 void DebugRenderer::DrawEllipse(const FEllipse& ellipse, const float lineWidth)
 {
-	DrawEllipse(ellipse.center.x, ellipse.center.y, ellipse.radX, ellipse.radY, lineWidth);
+	DrawEllipse(ellipse.Center.x, ellipse.Center.y, ellipse.RadX, ellipse.RadY, lineWidth);
 }
 
 void DebugRenderer::DrawEllipse(const glm::vec2& center, const float radX, const float radY, const float lineWidth)
@@ -174,7 +174,7 @@ void DebugRenderer::DrawEllipse(const float centerX, const float centerY, const 
 
 void DebugRenderer::FillEllipse(const FEllipse& ellipse)
 {
-	FillEllipse(ellipse.center.x, ellipse.center.y, ellipse.radX, ellipse.radY);
+	FillEllipse(ellipse.Center.x, ellipse.Center.y, ellipse.RadX, ellipse.RadY);
 }
 
 void DebugRenderer::FillEllipse(const glm::vec2& center, const float radX, const float radY)

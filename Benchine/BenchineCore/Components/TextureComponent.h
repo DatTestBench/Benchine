@@ -6,7 +6,7 @@ class TextureComponent final : public BaseComponent
 public:
     explicit TextureComponent(Texture2D* pTexture);
     virtual ~TextureComponent() override = default;
-    DEL_ROF(TextureComponent);
+    DEL_ROF(TextureComponent)
 
     void Update(float dT) override;
 

@@ -4,7 +4,7 @@
 #ifdef _DEBUG
 #define DEBUGRENDER(func) DebugRenderer::func;
 #else
-#define DEBUGRENDER(func) do{}while(0)
+#define DEBUGRENDER(func) do{}while(0);
 #endif
 
 namespace DebugRenderer

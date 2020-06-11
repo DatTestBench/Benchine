@@ -5,7 +5,7 @@ class BaseGame
 public:
 	BaseGame() = default;
 	virtual ~BaseGame() = default;
-	DEL_ROF(BaseGame);
+	DEL_ROF(BaseGame)
 
 
 	void BaseInitialize();

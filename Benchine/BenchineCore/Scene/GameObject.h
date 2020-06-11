@@ -12,7 +12,7 @@ class GameObject final
 public:
 	GameObject();
 	virtual ~GameObject();
-	DEL_ROF(GameObject);
+	DEL_ROF(GameObject)
 
 	void BaseInitialize();
 	void BaseUpdate(float dT);

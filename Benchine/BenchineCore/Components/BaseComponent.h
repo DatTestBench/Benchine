@@ -7,7 +7,7 @@ class BaseComponent
 public:
 	BaseComponent();
 	virtual ~BaseComponent() = default;
-	DEL_ROF(BaseComponent);
+	DEL_ROF(BaseComponent)
 
 	[[nodiscard]] constexpr auto GetGameObject() const noexcept-> GameObject* { return m_pGameObject; }
 	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pGameObject->GetTransform(); }

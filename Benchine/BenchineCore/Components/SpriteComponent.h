@@ -22,12 +22,12 @@ public:
      * Getter
      * @return Width of an individual frame
      * */
-    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetWidth() / m_Cols; }
+    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetWidth() / static_cast<float>(m_Cols); }
     /**
      * Getter
      * @return Height of an individual frame
      * */
-    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetHeight() / m_Rows; }
+    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetHeight() / static_cast<float>(m_Rows); }
     /**
      * Getter
      * @return SpritesheetTexture

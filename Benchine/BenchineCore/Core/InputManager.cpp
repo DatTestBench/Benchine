@@ -53,42 +53,42 @@ bool InputManager::ProcessInput()
 
 		// Get the state of the controller
 		dwResult = XInputGetState(i, &state); // TODO: This thing is awfully slow, find a way to not have to recheck it every frame;
-		if (dwResult == ERROR_SUCCESS && !m_Controllers.at(i).isConnected)
+		if (dwResult == ERROR_SUCCESS && !m_Controllers.at(i).IsConnected)
 		{
 			// Controller Connected
-			m_Controllers.at(i).isConnected = true;
+			m_Controllers.at(i).IsConnected = true;
 			Logger::Log<LEVEL_DEBUG>("InputManager::ProcessInput()") << "Controller Connected";
 
 
 		}
-		else if (dwResult != ERROR_SUCCESS && m_Controllers[i].isConnected)
+		else if (dwResult != ERROR_SUCCESS && m_Controllers[i].IsConnected)
 		{
 			// Controller Disconnected
-			m_Controllers.at(i).isConnected = false;
+			m_Controllers.at(i).IsConnected = false;
 			Logger::Log<LEVEL_DEBUG>("InputManager::ProcessInput()") << "Controller Disconnected";
 
 		}
 
 		// Bind all inputs to each controller
-		m_Controllers.at(i).buttons.at(GamepadButton::DPAD_UP) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
-		m_Controllers.at(i).buttons.at(GamepadButton::DPAD_DOWN) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
-		m_Controllers.at(i).buttons.at(GamepadButton::DPAD_LEFT) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT;
-		m_Controllers.at(i).buttons.at(GamepadButton::DPAD_RIGHT) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
-		m_Controllers.at(i).buttons.at(GamepadButton::START) = state.Gamepad.wButtons & XINPUT_GAMEPAD_START;
-		m_Controllers.at(i).buttons.at(GamepadButton::BACK) = state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK;
-		m_Controllers.at(i).buttons.at(GamepadButton::LEFT_THUMB) = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB;
-		m_Controllers.at(i).buttons.at(GamepadButton::RIGHT_THUMB) = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB;
-		m_Controllers.at(i).buttons.at(GamepadButton::LEFT_SHOULDER) = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER;
-		m_Controllers.at(i).buttons.at(GamepadButton::RIGHT_SHOULDER) = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER;
-		m_Controllers.at(i).buttons.at(GamepadButton::A) = state.Gamepad.wButtons & XINPUT_GAMEPAD_A;
-		m_Controllers.at(i).buttons.at(GamepadButton::B) = state.Gamepad.wButtons & XINPUT_GAMEPAD_B;
-		m_Controllers.at(i).buttons.at(GamepadButton::X) = state.Gamepad.wButtons & XINPUT_GAMEPAD_X;
-		m_Controllers.at(i).buttons.at(GamepadButton::Y) = state.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
+		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_UP) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
+		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_DOWN) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
+		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_LEFT) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT;
+		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_RIGHT) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT;
+		m_Controllers.at(i).Buttons.at(GamepadButton::START) = state.Gamepad.wButtons & XINPUT_GAMEPAD_START;
+		m_Controllers.at(i).Buttons.at(GamepadButton::BACK) = state.Gamepad.wButtons & XINPUT_GAMEPAD_BACK;
+		m_Controllers.at(i).Buttons.at(GamepadButton::LEFT_THUMB) = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_THUMB;
+		m_Controllers.at(i).Buttons.at(GamepadButton::RIGHT_THUMB) = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_THUMB;
+		m_Controllers.at(i).Buttons.at(GamepadButton::LEFT_SHOULDER) = state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER;
+		m_Controllers.at(i).Buttons.at(GamepadButton::RIGHT_SHOULDER) = state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER;
+		m_Controllers.at(i).Buttons.at(GamepadButton::A) = state.Gamepad.wButtons & XINPUT_GAMEPAD_A;
+		m_Controllers.at(i).Buttons.at(GamepadButton::B) = state.Gamepad.wButtons & XINPUT_GAMEPAD_B;
+		m_Controllers.at(i).Buttons.at(GamepadButton::X) = state.Gamepad.wButtons & XINPUT_GAMEPAD_X;
+		m_Controllers.at(i).Buttons.at(GamepadButton::Y) = state.Gamepad.wButtons & XINPUT_GAMEPAD_Y;
 
 	}
 
 	int mouseX, mouseY;
-	const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	const auto buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
 	io.MousePos = ImVec2(static_cast<float>(mouseX), static_cast<float>(mouseY));
 	io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
@@ -102,10 +102,10 @@ bool InputManager::ProcessInput()
 		// Keyboard Checks
 		bool keyBoardActive = false;
 
-		if (bind.second.inputState == InputState::Down)
+		if (bind.second.State == InputState::Down)
 		{
 			const Uint8* state = SDL_GetKeyboardState(NULL);
-			if (state[bind.second.keyCode])
+			if (state[bind.second.KeyCode])
 			{
 				keyBoardActive = true;
 			}
@@ -114,24 +114,24 @@ bool InputManager::ProcessInput()
 		{
 			for (auto& keyEvent : m_KeyEvents)
 			{
-				if (keyEvent.keyCode == bind.second.keyCode && keyEvent.state == bind.second.inputState)
+				if (keyEvent.KeyCode == bind.second.KeyCode && keyEvent.State == bind.second.State)
 				{
 					keyBoardActive = true;
-					keyEvent.processed = true;
+					keyEvent.Processed = true;
 				}
 			}
 		}
 
 		// XINPUT Checks
 		bool controllerActive = false;
-		if (bind.second.button != GamepadButton::MAX_BUTTONS)
+		if (bind.second.Button != GamepadButton::MAX_BUTTONS)
 		{
-			if (m_Controllers.at(bind.second.controllerId).buttons.at(bind.second.button))
+			if (m_Controllers.at(static_cast<uint32_t>(bind.second.ControllerId)).Buttons.at(bind.second.Button))
 			{
 				controllerActive = true;
 			}
 		}
-		bind.second.isActive = keyBoardActive || controllerActive;
+		bind.second.IsActive = keyBoardActive || controllerActive;
 	}
 
 	return false;
@@ -143,12 +143,12 @@ bool InputManager::ProcessInput()
 bool InputManager::AddInputBinding(InputBinding binding)
 {
 	size_t oldSize = m_InputBinds.size();
-	m_InputBinds.try_emplace(binding.actionId, binding);
+	m_InputBinds.try_emplace(binding.ActionId, binding);
 	size_t newSize = m_InputBinds.size();
 
 	if (oldSize == newSize)
 	{
-		Logger::Log<LEVEL_WARNING>("InputManager::AddInputBinding()") << "Input with ID " << binding.actionId << " already exists";
+		Logger::Log<LEVEL_WARNING>("InputManager::AddInputBinding()") << "Input with ID " << binding.ActionId << " already exists";
 		return false;
 	}
 	return true;
@@ -156,15 +156,15 @@ bool InputManager::AddInputBinding(InputBinding binding)
 
 bool InputManager::IsBindingActive(std::string_view actionId)
 {
-	return m_InputBinds.at(actionId).isActive;
+	return m_InputBinds.at(actionId).IsActive;
 }
 
 bool InputManager::IsPressed(GamepadButton button, int controllerId)
 {
 
-	if (m_Controllers.at(controllerId).isConnected)
+	if (m_Controllers.at(static_cast<uint32_t>(controllerId)).IsConnected)
 	{
-		return m_Controllers.at(controllerId).buttons[button];
+		return m_Controllers.at(controllerId).Buttons[button];
 	}
 	return false;
 }
@@ -188,5 +188,5 @@ std::tuple<int, int, Uint32> InputManager::GetMouseState()
 
 void InputManager::ClearInputs()
 {
-	m_KeyEvents.erase(std::remove_if(m_KeyEvents.begin(), m_KeyEvents.end(), [](const KeyEvent& keyEvent) { return keyEvent.processed; }), m_KeyEvents.end());
+	m_KeyEvents.erase(std::remove_if(m_KeyEvents.begin(), m_KeyEvents.end(), [](const KeyEvent& keyEvent) { return keyEvent.Processed; }), m_KeyEvents.end());
 }

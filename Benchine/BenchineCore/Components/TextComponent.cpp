@@ -30,7 +30,7 @@ void TextComponent::Update([[maybe_unused]] float dT)
 {
 	if (m_NeedsUpdate)
 	{
-		const SDL_Color color = { 255, 255, 255 };
+		const SDL_Color color = { 255, 255, 255 , 255};
 
 		m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
 

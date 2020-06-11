@@ -73,8 +73,8 @@ struct KeyEvent
 
 struct Controller
 {
-	bool isConnected;
-	std::array<bool, MAX_BUTTONS> buttons;
+	bool IsConnected;
+	std::array<bool, MAX_BUTTONS> Buttons;
 };
 
 class InputManager final : public Singleton<InputManager>

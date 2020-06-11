@@ -3,11 +3,10 @@
 
 void Logger::OutputLog()
 {
-	m_LogList.erase(std::remove_if(m_LogList.begin(), m_LogList.end(), [](const LogEntry& entry) { return entry.markedForClear; }), m_LogList.end());
+	m_LogList.erase(std::remove_if(m_LogList.begin(), m_LogList.end(), [](const LogEntry& entry) { return entry.MarkedForClear; }), m_LogList.end());
 
 	if (ImGui::Begin("Log"))
 	{
-		static LogLevel currentLevel = LEVEL_FULL;
 		if (ImGui::BeginCombo("LevelSelection", m_LevelTags.at(m_CurrentLevel).c_str())) // Reference to implementation https://github.com/ocornut/imgui/issues/1658
 		{
 			for (size_t i = 0; i < m_LevelTags.size(); i++)
@@ -27,32 +26,32 @@ void Logger::OutputLog()
 		int logLine = 1;
 		for (auto& log : m_LogList)
 		{
-			if (log.outputLocation == LOG_IMGUI)
+			if (log.OutputLocation == LOG_IMGUI)
 			{
-				if (log.level == m_CurrentLevel || m_CurrentLevel == LEVEL_FULL)
+				if (log.Level == m_CurrentLevel || m_CurrentLevel == LEVEL_FULL)
 				{
 					if (ImGui::SmallButton((std::to_string(logLine++) + "::").c_str()))
 					{
-						log.markedForClear = true;
+						log.MarkedForClear = true;
 					}
 
 					ImGui::SameLine();
 
 					if (m_ShowHeaders)
 					{
-						ImGui::TextColored(m_ImGuiColors.at(log.level), ("[" + m_LevelTags.at(log.level) + "] " + log.header + " > " + log.message.str()).c_str());
+						ImGui::TextColored(m_ImGuiColors.at(log.Level), ("[" + m_LevelTags.at(log.Level) + "] " + log.Header + " > " + log.Message.str()).c_str(), 0);
 					}
 					else
 					{
 						ImGui::LogText("");
-						ImGui::TextColored(m_ImGuiColors.at(log.level), log.message.str().c_str());
+						ImGui::TextColored(m_ImGuiColors.at(log.Level), log.Message.str().c_str(), 0);
 					}
 				}
 			}
-			if (log.outputLocation == LOG_CONSOLE)
+			if (log.OutputLocation == LOG_CONSOLE)
 			{
 				// TODO: fix repeat console output
-				std::cout << "[" + m_LevelTags.at(log.level) + "]" + log.header + " > " + log.message.str() << "\n";
+				std::cout << "[" + m_LevelTags.at(log.Level) + "]" + log.Header + " > " + log.Message.str() << "\n";
 			}
 		}
 	}

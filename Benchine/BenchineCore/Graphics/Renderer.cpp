@@ -173,10 +173,10 @@ const std::array<std::pair<glm::vec2, glm::vec2>, 4> Renderer::CreateRenderParam
 	else // src specified
 	{
 		// Convert to the range [0.0, 1.0]
-		uvLeft = source.X / textureWidth;
-		uvRight = (source.X + source.Width) / textureWidth;
-		uvTop = (source.Y - source.Height) / textureHeight;
-		uvBottom = source.Y / textureHeight;
+		uvLeft = source.Pos.x / textureWidth;
+		uvRight = (source.Pos.x + source.Width) / textureWidth;
+		uvTop = (source.Pos.y - source.Height) / textureHeight;
+		uvBottom = source.Pos.y / textureHeight;
 	}
 
 

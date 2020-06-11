@@ -64,7 +64,7 @@ public:
 	template<class T>
 	Logger& operator<<(const T& log)
 	{
-		m_LogList.back().message << log;
+		m_LogList.back().Message << log;
 		return *GetInstance();
 	}
 

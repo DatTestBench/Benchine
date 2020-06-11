@@ -3,7 +3,7 @@
 #include <string_view>
 
 #include <filesystem>
-#include "Resources/ResourceManager.h"
+#include "Debugging/Logger.h"
 class BaseLoader
 {
 public:

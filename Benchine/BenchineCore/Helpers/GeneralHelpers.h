@@ -3,7 +3,7 @@
 //************
 #include <vector>
 #include <numeric>
-
+#include <string>
 //GLM INCLUDES
 //************
 #pragma warning(push)
@@ -76,14 +76,17 @@ struct FRect
 {
 	FRect() : FRect(0.f, 0.f, 0.f, 0.f) {}
 	explicit FRect(float x, float y, float width, float height)
-		: X(x)
-		, Y(y)
+		: Pos(x, y)
+		, Width(width)
+		, Height(height)
+	{}
+	explicit FRect(glm::vec2 pos, float width, float height)
+		: Pos(pos)
 		, Width(width)
 		, Height(height)
 	{}
 
-	float X;
-	float Y;
+	glm::vec2 Pos;
 	float Width;
 	float Height;
 };
@@ -121,9 +124,9 @@ namespace CollisionHelper
 {
 	inline bool IsPointInFRect(const glm::vec2& p, const FRect& r)
 	{
-		return p.x >= r.X 
-		&& p.x <= r.X + r.Width
-		&& p.y >= r.Y
-		&& p.y <= r.Y + r.Height;
+		return p.x >= r.Pos.x 
+		&& p.x <= r.Pos.x + r.Width
+		&& p.y >= r.Pos.y
+		&& p.y <= r.Pos.y + r.Height;
 	}
 }

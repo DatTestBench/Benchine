@@ -15,7 +15,7 @@ public:
 	{
 		delete GetInstance();
 	}
-	DEL_ROF(Singleton);
+	DEL_ROF(Singleton)
 
 protected:
 	static T* m_pInstance;

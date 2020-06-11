@@ -191,9 +191,9 @@ Projection2D sat::ProjectPolygon(const glm::vec2& axis, const Collider2D& polygo
 float sat::IntervalDistance(const Projection2D& projectionA, const Projection2D& projectionB)
 {
 	if (projectionA.Min < projectionB.Min)
-		return projectionB.Min - projectionA.Min;
+		return projectionB.Min - projectionA.Max;
 	else
-		return projectionA.Min - projectionB.Min;
+		return projectionA.Min - projectionB.Max;
 }
 
 glm::vec2 sat::MakeAxis(const glm::vec2& vertexA, const glm::vec2& vertexB)

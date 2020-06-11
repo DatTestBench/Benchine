@@ -5,7 +5,7 @@ class FPSComponent final : public BaseComponent
 public:
 	FPSComponent();
 	virtual ~FPSComponent() override = default;
-	DEL_ROF(FPSComponent);
+	DEL_ROF(FPSComponent)
 
 	void Update([[maybe_unused]] float dT) override;
 

@@ -40,7 +40,7 @@ void ControllerComponent::Update(float dT)
 
 	GetTransform()->Move(movement * velocity * dT);
 
-	DEBUGRENDER(DrawRectC(GetTransform()->GetPosition(), 10, 10));
+	DEBUGRENDER(DrawRectC(GetTransform()->GetPosition(), 10, 10))
 
 
 }

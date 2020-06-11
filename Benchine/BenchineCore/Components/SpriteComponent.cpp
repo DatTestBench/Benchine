@@ -19,8 +19,8 @@ void SpriteComponent::Initialize()
     src.Width = GetFrameWidth();
     src.Height = GetFrameHeight();
 
-    src.X = 0; 
-    src.Y = src.Height * (m_pSpriteSheet->GetTexture()->GetHeight() / GetFrameHeight()/*Nr of cells in the sheet*/) / m_Zones ;
+    src.Pos.x = 0; 
+    src.Pos.y = src.Height * (m_pSpriteSheet->GetTexture()->GetHeight() / GetFrameHeight()/*Nr of cells in the sheet*/) / static_cast<float>(m_Zones);
 
     m_pSpriteSheet->GetTexture()->SetSource(src);
     GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTexture());
@@ -39,8 +39,8 @@ void SpriteComponent::Update(float dT)
         src.Width = GetFrameWidth();
         src.Height = GetFrameHeight();
 
-        src.X = src.Width * (m_CurrentFrame % m_Cols);
-        src.Y = src.Height * ((m_CurrentFrame / m_Cols) - 1.f);
+        src.Pos.x = src.Width * static_cast<float>(m_CurrentFrame % m_Cols);
+        src.Pos.y = src.Height * (static_cast<float>(m_CurrentFrame / m_Cols) - 1.f);
 
         m_pSpriteSheet->GetTexture()->SetSource(src);
         
