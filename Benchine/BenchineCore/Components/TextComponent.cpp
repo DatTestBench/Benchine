@@ -14,7 +14,8 @@ TextComponent::TextComponent(const std::string& text, Font* font)
 	, m_pFont(font)
 	, m_pTexture(nullptr)
 {
-
+	const SDL_Color color = { 255, 255, 255 };
+	m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
 }
 
 TextComponent::~TextComponent()
@@ -30,9 +31,19 @@ void TextComponent::Update([[maybe_unused]] float dT)
 {
 	if (m_NeedsUpdate)
 	{
-		const SDL_Color color = { 255, 255, 255 , 255};
+
+		auto offsetMode = m_pTexture->GetOffsetMode();
+		auto positionOffset = m_pTexture->GetPositionOffset();
+		auto renderPriority = m_pTexture->GetRenderPriority();
+
+
+		const SDL_Color color = { 255, 255, 255};
 
 		m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
+
+		m_pTexture->SetOffsetMode(offsetMode);
+		m_pTexture->SetPositionOffset(positionOffset);
+		m_pTexture->SetRenderPriority(renderPriority);
 
 		m_NeedsUpdate = false;
 	}

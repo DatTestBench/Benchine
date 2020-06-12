@@ -1,9 +1,6 @@
 #include "BenchinePCH.h"
 #include "Resources/ResourceManager.h"
-#include "Resources/Texture2D.h"
-#include "Resources/Font.h"
 #include "Resources/Loaders.h"
-
 //std::string ResourceManager::m_DataPath = std::string{};
 std::map<std::type_index, BaseLoader*> ResourceManager::m_Loaders = std::map<std::type_index, BaseLoader*>();
 
@@ -18,8 +15,10 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::Initialize(const std::string& dataPath)
 {
+	// Set datapath for all the resource loaders
 	BaseLoader::SetDataPath(dataPath);
-
+	// Set datapath for external use
+	m_DataPath = dataPath;
 	// load support for png and jpg, this takes a while!
 
 	if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG)

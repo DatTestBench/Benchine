@@ -5,8 +5,8 @@ class FPSScene final : public Scene
 {
 public:
 	FPSScene(const std::string_view& sceneName);
-	virtual ~FPSScene();
-	DEL_ROF(FPSScene);
+	virtual ~FPSScene() override;
+	DEL_ROF(FPSScene)
 
 protected:
 

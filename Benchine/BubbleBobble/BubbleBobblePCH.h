@@ -30,6 +30,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl2.h"
 #pragma warning (pop)
+
 // SDL
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -37,8 +38,6 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-// OpenGL
-
 
 // Macros
 #define DEL_ROF(className) \
@@ -60,10 +59,12 @@ inline void SafeDelete(T& pObject)
 	}
 }
 
-// General Includes
+//Singletons
 #include "Resources/ResourceManager.h"
-#include "Graphics/Renderer.h"
 #include "Core/InputManager.h"
 #include "Scene/SceneManager.h"
 #include "Debugging/Logger.h"
+#include "Graphics/Renderer.h"
+
+//The Big Helper File
 #include "Helpers/GeneralHelpers.h"

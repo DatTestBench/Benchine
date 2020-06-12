@@ -8,8 +8,6 @@ class PhysicsComponent2D;
 // Structure that stores the results of the PolygonCollision function
 struct PolygonCollisionResult
 {
-	// Are the polygons going to intersect forward in time?
-	bool willIntersect;
 	// Are the polygons currently intersecting?
 	bool intersect;
 	// The translation to apply to the first polygon to push the polygons apart.

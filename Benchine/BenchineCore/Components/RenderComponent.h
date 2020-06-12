@@ -1,6 +1,6 @@
 #pragma once
 #include "Components/BaseComponent.h"
-
+#include "Graphics/GLTextureWrapper.h"
 class RenderComponent final : public BaseComponent
 {
 public:

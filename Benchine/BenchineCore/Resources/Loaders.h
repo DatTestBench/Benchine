@@ -13,7 +13,7 @@ public:
 	Font* Load(const std::string& filePath) override
 	{
 		const auto fullPath = m_DataPath + filePath;
-		Font* pFont = new Font(fullPath, 16);
+		Font* pFont = new Font(fullPath, 32);
 		
 		return pFont;
 	}

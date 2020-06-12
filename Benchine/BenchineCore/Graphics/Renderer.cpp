@@ -3,7 +3,7 @@
 #include "Resources/Texture2D.h"
 #include "glm/geometric.hpp"
 #include "Debugging/DebugRenderer.h"
-
+#include "Graphics/GLTextureWrapper.h"
 Renderer::~Renderer()
 {
 	Cleanup();
@@ -115,7 +115,7 @@ void Renderer::Cleanup()
 }
 
 
-void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos) const
+void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const glm::vec2& scale) const
 {
 	if (!pTexture->IsCreationOk())
 	{
@@ -123,6 +123,10 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos) c
 	}
 	
 	const auto vertexBuffer = CreateRenderParams(pTexture, pos);
+
+	glPushMatrix();
+	glScalef(scale.x, scale.y, 1.f);
+
 
 	// Tell opengl which texture we will use
 	glBindTexture(GL_TEXTURE_2D, pTexture->GetId());
@@ -142,6 +146,7 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos) c
 		}
 		glEnd();
 	}
+	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
 }
@@ -203,7 +208,12 @@ const std::array<std::pair<glm::vec2, glm::vec2>, 4> Renderer::CreateRenderParam
 		vertexTop = targetPos.y;
 		vertexBottom = targetPos.y - targetHeight;
 		break;
-	
+	case TextureOffsetMode::TOPLEFT:
+		vertexLeft = targetPos.x;
+		vertexRight = targetPos.x + targetWidth;
+		vertexTop = targetPos.y;
+		vertexBottom = targetPos.y - targetHeight;
+		break;
 	case TextureOffsetMode::BOTTOMLEFT:
 		vertexLeft = targetPos.x;
 		vertexRight = targetPos.x + targetWidth;

@@ -15,4 +15,7 @@ protected:
 
 private:
 	GameObject* m_pCharacter;
+	GameObject* m_pFPSCounter;
+	FPSComponent* m_pFPSComponent;
+	TextComponent* m_pFPSText;
 };

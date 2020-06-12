@@ -4,8 +4,8 @@ class BubbleBobble final : public BaseGame
 {
 public:
 	BubbleBobble() = default;
-	virtual ~BubbleBobble() = default;
-	DEL_ROF(BubbleBobble);
+	virtual ~BubbleBobble() override = default;
+	DEL_ROF(BubbleBobble)
 
 protected:
 	void Initialize() override;

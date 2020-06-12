@@ -1,7 +1,7 @@
 #pragma once
 
 // Wrapper around the GLTextureWrapper
-
+class GLTextureWrapper;
 class Texture2D
 {
 public:
@@ -9,7 +9,7 @@ public:
 	~Texture2D();
 	DEL_ROF(Texture2D)
 
-	[[nodiscard]] constexpr auto GetTexture() const noexcept-> GLTextureWrapper* { return m_pTexture; }
+	[[nodiscard]] constexpr auto GetTextureWrapper() const noexcept-> GLTextureWrapper* { return m_pTexture; }
 
 
 private:

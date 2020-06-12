@@ -4,10 +4,10 @@
 #include "Scene/DefaultScene.h"
 
 SceneManager::SceneManager(token)
-	: m_pScenes{  }
-	, m_IsInitialized{ false }
-	, m_pCurrentScene{ nullptr }
-	, m_pSceneToLoad{ nullptr }
+	: m_pScenes()
+	, m_pCurrentScene(nullptr)
+	, m_pSceneToLoad(nullptr)
+	, m_IsInitialized(false)
 {
 
 }

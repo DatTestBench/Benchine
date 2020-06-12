@@ -1,12 +1,13 @@
 #pragma once
 #include <XInput.h>
 #include <bitset>
-#include "Helpers/Singleton.h"
 #include <map>
 #include <tuple>
 #include <vector>
 #include <functional>
 #include <string_view>
+#include <functional>
+#include "Helpers/Singleton.h"
 
 enum InputState
 {
@@ -36,6 +37,7 @@ enum GamepadButton : uint16_t
 struct InputBinding
 {
 	std::string_view ActionId;
+	std::function<void()> CallBack;
 	InputState State;
 	int KeyCode; // Remapped to an SDL keycode
 	int MouseCode;
@@ -43,8 +45,9 @@ struct InputBinding
 	int ControllerId;
 	bool IsActive;
 
-	InputBinding(std::string_view id, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
+	explicit InputBinding(std::string_view id, std::function<void()> callBack, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
 		: ActionId(id)
+		, CallBack(callBack)
 		, State(state)
 		, KeyCode(keyCode - 61)
 		, MouseCode(mouseCode)

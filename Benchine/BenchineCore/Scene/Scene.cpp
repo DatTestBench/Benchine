@@ -5,6 +5,8 @@
 #include "Helpers/SAT.h"
 #include "Components/PhysicsComponent2D.h"
 #include "Debugging/DebugRenderer.h"
+#include <future>
+#include <deque>
 Scene::Scene(const std::string_view& name)
 	: m_Name{ name }
 	, m_pGameObjects{  }
@@ -54,17 +56,6 @@ void Scene::Render() const
 		if (pRenderComponent != nullptr)
 		{
 			pRenderComponent->Render();
-		}
-		else
-		{
-			Logger::Log<LEVEL_WARNING>("Scene::Render") << "Trying to render deleted RenderComponent, remember to clean up render components when deleting an object that has one";
-		}
-	}
-
-	for (auto pRenderComponent : m_pRenderComponents)
-	{
-		if (pRenderComponent != nullptr)
-		{
 			pRenderComponent->ClearBuffer();
 		}
 		else
@@ -74,18 +65,63 @@ void Scene::Render() const
 	}
 }
 
-void Scene::DoPhysics() const
+void Scene::DoPhysics()
 {
-	for (auto it = m_pPhysicsComponents.cbegin(); it != m_pPhysicsComponents.cend(); ++it)
+	uint32_t maxThreads = std::thread::hardware_concurrency();
+	std::deque<std::future<void>> futures;
+	uint32_t threadCounter = 0;	
+
+
+	
+
+	for (auto dynamicObject : m_pDynamicObjects)
 	{
-		if ((std::next(it)) == m_pPhysicsComponents.cend())
-			continue;
-		for (auto it2 = std::next(it); it2 != m_pPhysicsComponents.cend(); ++it2)
+		if (threadCounter >= maxThreads)
 		{
-			(*it)->HandleCollision(*it2);
-			DEBUGRENDER(DrawPolygon((*it)->GetColliderTransformed()))
-			DEBUGRENDER(DrawPolygon((*it2)->GetColliderTransformed()))
+			futures.front().get();
+			futures.pop_front();
+			threadCounter--;
 		}
+
+		futures.emplace_back(std::async(std::launch::async, [=](){
+			for (auto staticObject : m_pStaticObjects)
+			{
+				dynamicObject->HandleCollision(staticObject);
+			}
+		}));
+		threadCounter++;
+
+		if (threadCounter >= maxThreads)
+		{
+			futures.front().get();
+			futures.pop_front();
+			threadCounter--;
+		}
+
+		futures.emplace_back(std::async(std::launch::async, [=](){
+			for (auto otherObject : m_pDynamicObjects)
+			{
+				if (dynamicObject != otherObject)
+					dynamicObject->HandleCollision(otherObject);
+			}
+		}));
+	}
+
+	for (auto trigger : m_pTriggers)
+	{
+		if (threadCounter >= maxThreads)
+		{
+			futures.front().get();
+			futures.pop_front();
+			threadCounter--;
+		}
+
+		futures.emplace_back(std::async(std::launch::async, [=](){
+			for (auto dynamicObject : m_pDynamicObjects)
+			{
+				trigger->HandleCollision(dynamicObject);
+			}
+		}));
 	}
 }
 GameObject* Scene::AddGameObject(GameObject* pGameObject) noexcept
@@ -105,7 +141,16 @@ void Scene::RemoveRenderComponent(RenderComponent* pRenderComponent) noexcept
 	m_pRenderComponents.remove(pRenderComponent);
 }
 
-void Scene::AddPhysicsObject(PhysicsComponent2D* pPhysicsComponent) noexcept
+void Scene::AddStaticObject(PhysicsComponent2D* pPhysicsComponent) noexcept
 {
-	m_pPhysicsComponents.push_back(pPhysicsComponent);
+	m_pStaticObjects.push_back(pPhysicsComponent);
+}
+
+void Scene::AddDynamicObject(PhysicsComponent2D* pPhysicsComponent) noexcept
+{
+	m_pDynamicObjects.push_back(pPhysicsComponent);
+}
+void Scene::AddTrigger(PhysicsComponent2D* pPhysicsComponent) noexcept
+{
+	m_pTriggers.push_back(pPhysicsComponent);
 }

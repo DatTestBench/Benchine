@@ -1,5 +1,4 @@
 #pragma once
-
 struct SDL_Window;
 #include "Core/BaseGame.h"
 
@@ -16,10 +15,7 @@ public:
 
 		Initialize(); // Setup SDL
 
-		ResourceManager::GetInstance()->Initialize("../Resources/");
-
-		InputManager* pInput = InputManager::GetInstance();
-		Renderer* pRenderer = Renderer::GetInstance();
+		RESOURCES->Initialize("../Resources/");
 		DEBUGONLY(Logger* pLogger = Logger::GetInstance());
 
 		LoadGame();
@@ -35,21 +31,24 @@ public:
 			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 			lastTime = currentTime;
 			lag += deltaTime;
-			quit = pInput->ProcessInput();
+			quit = INPUT->ProcessInput();
 
 			
 			
-			
-			pRenderer->SetupRender();
+			RENDERER->SetupRender();
 			SceneManager::GetInstance()->RenderCurrentScene();
 			DEBUGONLY(pLogger->OutputLog());
 			m_pGame->BaseUpdate(deltaTime);
-			pRenderer->PresentRender();
+			RENDERER->PresentRender();
 
 			/*while (lag >= MsPerFrame / 1000.f)
 			{
+				RENDERER->SetupRender();
+				SceneManager::GetInstance()->RenderCurrentScene();
+				DEBUGONLY(pLogger->OutputLog());
 				m_pGame->BaseUpdate(MsPerFrame / 1000.f);
 				lag -= MsPerFrame / 1000.f;
+				RENDERER->PresentRender();
 			}*/
 		
 		}

@@ -1,8 +1,8 @@
 #pragma once
 #include "Components/BaseComponent.h"
 
-class Font;
 class GLTextureWrapper;
+class Font;
 class TextComponent final : public BaseComponent
 {
 public:
@@ -14,6 +14,9 @@ public:
 	void Update([[maybe_unused]] float dT) override;
 
 	void SetText(const std::string& text) noexcept;
+
+	[[nodiscard]] constexpr auto GetTexture() const noexcept-> GLTextureWrapper* { return m_pTexture; }
+
 
 protected:
 	void Initialize() override;

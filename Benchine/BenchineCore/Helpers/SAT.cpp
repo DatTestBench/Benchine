@@ -7,14 +7,11 @@
 // Collision for GameObjects
 PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, PhysicsComponent2D* pActorB)
 {
-	//glm::vec2 velocityDelta = pActorA->GetVelocity() - pActorB->GetVelocity();
-
 	PolygonCollisionResult result{};
 	result.intersect = true;
-	result.willIntersect = true;
 
-	const auto colliderA = pActorA->GetColliderTransformed(); 
-	const auto colliderB = pActorB->GetColliderTransformed();
+	const auto& colliderA = pActorA->GetCollider(); 
+	const auto& colliderB = pActorB->GetCollider();
 	size_t vertexCountA = colliderA.size();
 	size_t vertexCountB = colliderB.size();
 
@@ -32,7 +29,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 		else
 		{
 			currentVertex = colliderB.at(vertexIndex - vertexCountA);
-			nextVertex = colliderB.at(vertexIndex - vertexCountA + 1 == vertexCountA ? 0 : vertexIndex - vertexCountA + 1);
+			nextVertex = colliderB.at(vertexIndex - vertexCountA + 1 == vertexCountB ? 0 : vertexIndex - vertexCountA + 1);
 		}
 
 		// ===== 1. Find if the polygons are currently intersecting =====
@@ -50,29 +47,6 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 			result.intersect = false;
 		}
 
-		/***DEPRECATED**
-		// ===== 2. Now find if the polygons *will* intersect =====
-		// Project the velocity on the current axis
-		float velocityProjection{ axis.DotProduct(dVelocity) };
-		// Get the projection of polygon A during the movement
-		if (velocityProjection < 0)
-		{
-			minA += velocityProjection;
-		}
-		else
-		{
-			maxA += velocityProjection;
-		}
-		// Do the same test as above for the new projection
-
-		if (IntervalDistance(minA, maxA, minB, maxB) > 0)
-			result.willIntersect = false;
-		// If the polygons are not intersecting and won't intersect, exit the loop
-		if (!result.intersect && !result.willIntersect)
-			break;
-		**DEPRECATED***/
-
-
 		// If the polygon does not intersect, exit the loop
 		if (!result.intersect)
 			break;
@@ -86,7 +60,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 			minIntervalDistance = intervalDistance;
 			translationAxis = axis;
 
-			glm::vec2 delta = pActorA->GetTransform()->GetPosition() - pActorB->GetTransform()->GetPosition();
+			glm::vec2 delta = MathHelper::PolyCenter(colliderA) - MathHelper::PolyCenter(colliderB);
 			if (glm::dot(delta, translationAxis) < 0)
 				translationAxis = -translationAxis;
 		}
@@ -94,7 +68,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 
 	// The minimum translation vector
 	// can be used to push the polygons appart.
-	if (result.willIntersect)
+	if (result.intersect)
 		result.minimumTranslationVector = translationAxis * minIntervalDistance;
 
 	return result;
@@ -108,9 +82,8 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 
 	PolygonCollisionResult result{};
 	result.intersect = true;
-	result.willIntersect = true;
 
-	const auto collider = pActor->GetColliderTransformed();
+	const auto& collider = pActor->GetCollider();
 
 	size_t vertexCountA = collider.size();
 	size_t vertexCountB = staticPoly.size();
@@ -157,7 +130,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 			minIntervalDistance = intervalDistance;
 			translationAxis = axis;
 			
-			glm::vec2 delta = glm::vec2(pActor->GetTransform()->GetPosition()) - MathHelper::PolyCenter(staticPoly);
+			glm::vec2 delta = MathHelper::PolyCenter(collider) - MathHelper::PolyCenter(staticPoly);
 			if (glm::dot(delta, translationAxis) < 0)
 				translationAxis = -translationAxis;
 		}
@@ -165,7 +138,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 
 	// The minimum translation vector
 	// can be used to push the polygons appart.
-	if (result.willIntersect)
+	if (result.intersect)
 		result.minimumTranslationVector = translationAxis * minIntervalDistance;
 
 	return result;

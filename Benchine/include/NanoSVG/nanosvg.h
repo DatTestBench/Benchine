@@ -1,3 +1,4 @@
+#pragma warning(push, 0)
 /*
  * Copyright (c) 2013-14 Mikko Mononen memon@inside.org
  *
@@ -802,7 +803,7 @@ static float nsvg__convertToPixels(NSVGparser* p, NSVGcoordinate c, float orig, 
 		case NSVG_UNITS_PERCENT:	return orig + c.value / 100.0f * length;
 		default:					return c.value;
 	}
-	return c.value;
+	//return c.value;
 }
 
 static NSVGgradientData* nsvg__findGradientData(NSVGparser* p, const char* id)
@@ -2973,3 +2974,4 @@ void nsvgDelete(NSVGimage* image)
 }
 
 #endif
+#pragma warning(pop)

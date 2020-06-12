@@ -14,9 +14,10 @@ public:
 	void SetupRender() const;
 	void PresentRender() const;
 
+	[[nodiscard]] constexpr auto GetWindowSettings() const noexcept-> const WindowSettings& { return m_WindowSettings; }
 
-	void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos) const;
-	//void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const FRect& src = {}) const;
+
+	void RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, const glm::vec2& scale) const;
 
 private:
 
@@ -25,8 +26,6 @@ private:
 	WindowSettings m_WindowSettings;
 	SDL_GLContext m_pContext;
 	SDL_Window* m_pWindow;
-
-
 
 	const std::array<std::pair<glm::vec2, glm::vec2>, 4> CreateRenderParams(GLTextureWrapper* pTexture, const glm::vec2& pos) const;
 };

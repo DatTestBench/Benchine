@@ -222,8 +222,10 @@
     <ClCompile Include="Components\TextComponent.cpp" />
     <ClCompile Include="Components\TextureComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
+    <ClCompile Include="Core\Editor.cpp" />
     <ClCompile Include="Debugging\DebugRenderer.cpp" />
     <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
+    <ClCompile Include="Helpers\GeneralHelpers.cpp" />
     <ClCompile Include="Helpers\SAT.cpp" />
     <ClCompile Include="ImGui\imgui.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -300,9 +302,11 @@
     <ClInclude Include="Components\TextComponent.h" />
     <ClInclude Include="Components\TextureComponent.h" />
     <ClInclude Include="Components\TransformComponent.h" />
+    <ClInclude Include="Core\Editor.h" />
     <ClInclude Include="Debugging\DebugRenderer.h" />
     <ClInclude Include="Graphics\GLTextureWrapper.h" />
     <ClInclude Include="Helpers\GeneralHelpers.h" />
+    <ClInclude Include="Helpers\json.hpp" />
     <ClInclude Include="Helpers\SAT.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />

@@ -1,8 +1,7 @@
 #pragma once
-#include "Graphics/GLTextureWrapper.h"
 
 struct _TTF_Font;
-
+class GLTextureWrapper;
 class Font
 {
 public:
@@ -10,7 +9,7 @@ public:
 	~Font();
 	DEL_ROF(Font)
 	[[nodiscard]] constexpr auto GetFont() const noexcept-> _TTF_Font* { return m_pFont; }
-	[[nodiscard]] constexpr auto GetTexture() const noexcept-> GLTextureWrapper* { return m_pTexture; }
+	[[nodiscard]] constexpr auto GetTextureWrapper() const noexcept-> GLTextureWrapper* { return m_pTexture; }
 	GLTextureWrapper* GenerateFontTexture(const std::string& text, const SDL_Color& color);
 
 

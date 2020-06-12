@@ -1,6 +1,7 @@
 #include "BenchinePCH.h"
 #include "Components/SpriteComponent.h"
 #include "Components/RenderComponent.h"
+#include "Graphics/GLTextureWrapper.h"
 SpriteComponent::SpriteComponent(Texture2D* pSpriteSheet, uint32_t nrCols, uint32_t nrRows, uint32_t nrZones, float fps)
     : m_pSpriteSheet(pSpriteSheet)
     , m_Cols(nrCols)
@@ -20,10 +21,10 @@ void SpriteComponent::Initialize()
     src.Height = GetFrameHeight();
 
     src.Pos.x = 0; 
-    src.Pos.y = src.Height * (m_pSpriteSheet->GetTexture()->GetHeight() / GetFrameHeight()/*Nr of cells in the sheet*/) / static_cast<float>(m_Zones);
+    src.Pos.y = src.Height * (m_pSpriteSheet->GetTextureWrapper()->GetHeight() / GetFrameHeight()/*Nr of cells in the sheet*/) / static_cast<float>(m_Zones);
 
-    m_pSpriteSheet->GetTexture()->SetSource(src);
-    GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTexture());
+    m_pSpriteSheet->GetTextureWrapper()->SetSource(src);
+    GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTextureWrapper());
 }
 
 void SpriteComponent::Update(float dT)
@@ -42,9 +43,9 @@ void SpriteComponent::Update(float dT)
         src.Pos.x = src.Width * static_cast<float>(m_CurrentFrame % m_Cols);
         src.Pos.y = src.Height * (static_cast<float>(m_CurrentFrame / m_Cols) - 1.f);
 
-        m_pSpriteSheet->GetTexture()->SetSource(src);
+        m_pSpriteSheet->GetTextureWrapper()->SetSource(src);
         
 
     }
-    GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTexture());
+    GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTextureWrapper());
 }

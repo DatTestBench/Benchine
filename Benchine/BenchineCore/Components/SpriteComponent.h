@@ -1,6 +1,7 @@
 #pragma once
 #include "Components/BaseComponent.h"
 #include "Resources/Texture2D.h"
+#include "Graphics/GLTextureWrapper.h"
 class SpriteComponent final : public BaseComponent
 {
 public:
@@ -18,21 +19,12 @@ public:
 
     void Update(float dT) override;
 
-    /**
-     * Getter
-     * @return Width of an individual frame
-     * */
-    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetWidth() / static_cast<float>(m_Cols); }
-    /**
-     * Getter
-     * @return Height of an individual frame
-     * */
-    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> float { return m_pSpriteSheet->GetTexture()->GetHeight() / static_cast<float>(m_Rows); }
-    /**
-     * Getter
-     * @return SpritesheetTexture
-     * */
-    [[nodiscard]] constexpr auto GetTexture() const noexcept-> GLTextureWrapper* { return m_pSpriteSheet->GetTexture(); }
+
+    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> float { return m_pSpriteSheet->GetTextureWrapper()->GetWidth() / static_cast<float>(m_Cols); }
+
+    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> float { return m_pSpriteSheet->GetTextureWrapper()->GetHeight() / static_cast<float>(m_Rows); }
+
+    [[nodiscard]] constexpr auto GetTextureWrapper() const noexcept-> GLTextureWrapper* { return m_pSpriteSheet->GetTextureWrapper(); }
 
 protected:
     void Initialize() override;

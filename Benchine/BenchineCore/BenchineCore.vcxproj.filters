@@ -62,6 +62,8 @@
     <ClCompile Include="Components\ControllerComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Components\TextureComponent.cpp" />
+    <ClCompile Include="Core\Editor.cpp" />
+    <ClCompile Include="Helpers\GeneralHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -106,5 +108,7 @@
     <ClInclude Include="Components\ControllerComponent.h" />
     <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Components\TextureComponent.h" />
+    <ClInclude Include="Helpers\json.hpp" />
+    <ClInclude Include="Core\Editor.h" />
   </ItemGroup>
 </Project>

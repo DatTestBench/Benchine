@@ -1,6 +1,6 @@
 #include "BenchinePCH.h"
 #include "Resources/Font.h"
-
+#include "Graphics/GLTextureWrapper.h"
 Font::Font(const std::string& fullPath, uint32_t size)
 	: m_pFont(nullptr)
 	, m_pTexture(nullptr)

@@ -1,7 +1,10 @@
 #include "BenchinePCH.h"
 #include "Components/PhysicsComponent2D.h"
 #include "Components/TransformComponent.h"
-PhysicsComponent2D::PhysicsComponent2D()
+#include <future>
+PhysicsComponent2D::PhysicsComponent2D(CollisionMode collisionMode)
+    : m_CollisionMode(collisionMode)
+
 {
     
 }
@@ -13,29 +16,54 @@ PhysicsComponent2D::~PhysicsComponent2D()
 
 void PhysicsComponent2D::Initialize()
 {
-	GetGameObject()->GetScene()->AddPhysicsObject(this);
+    switch (m_CollisionMode)
+    {
+    case CollisionMode::STATIC:
+        GetGameObject()->GetScene()->AddStaticObject(this);
+        break;
+    case CollisionMode::DYNAMIC:
+        GetGameObject()->GetScene()->AddDynamicObject(this);
+        break;
+    case CollisionMode::TRIGGER:
+        GetGameObject()->GetScene()->AddTrigger(this);
+        break;
+    }
 }
 
-Collider2D PhysicsComponent2D::GetColliderTransformed()
+void PhysicsComponent2D::Update([[maybe_unused]] float dT)
 {
-    auto transformedCollider = m_Collider;
     auto tMat = glm::translate(glm::mat3(1.f), static_cast<glm::vec2>(GetTransform()->GetPosition()));
+    auto sMat = glm::scale(glm::mat3(1.f), GetTransform()->GetScale());
 
-    for (auto& vertex : transformedCollider)
+    const auto transformMat = tMat * sMat;
+
+    for (size_t v = 0; v < m_BaseCollider.size(); ++v)
     {
-        vertex =  tMat * glm::vec3(vertex, 1.f);
+        m_Collider.at(v) = transformMat * glm::vec3(m_BaseCollider.at(v), 1.f);
     }
-    return transformedCollider;
+    
+    DebugRenderer::DrawPolygon(m_Collider);
 }
 
 void PhysicsComponent2D::HandleCollision(PhysicsComponent2D* pOtherComponent)
 {
-    auto collisionResult = sat::PolygonCollision(this, pOtherComponent);
+    const auto collisionResult = sat::PolygonCollision(this, pOtherComponent);
 
-    if (collisionResult.intersect && collisionResult.minimumTranslationVector.y >= 0)
+    if (collisionResult.intersect)
     {
-        GetTransform()->Move(collisionResult.minimumTranslationVector);
-        //pOtherComponent->GetTransform()->Move(collisionResult.minimumTranslationVector / 2.f);
+        switch (m_CollisionMode)
+        {
+        case CollisionMode::STATIC:
+            break;
+        case CollisionMode::DYNAMIC:
+            if (pOtherComponent->GetCollisionMode() == CollisionMode::DYNAMIC)
+                GetTransform()->Move(collisionResult.minimumTranslationVector / 2.f);
+            else
+                GetTransform()->Move(collisionResult.minimumTranslationVector);
+            break;
+        case CollisionMode::TRIGGER:
+            m_PhysicsCallback();
+            break;
+        }
     }
-
 }

@@ -4,6 +4,8 @@
 #include <vector>
 #include <numeric>
 #include <string>
+#include <fstream>
+#include <filesystem>
 //GLM INCLUDES
 //************
 #pragma warning(push)
@@ -17,16 +19,18 @@
 
 //MISC INCLUDES
 //*************
-
+#include "Helpers/json.hpp"
 //USINGS
 //******
 using Collider2D = std::vector<glm::vec2>;
 using Polygon2D = std::vector<glm::vec2>;
+using json  = nlohmann::json;
 
 //DEFINES
 //*******
 #define INPUT InputManager::GetInstance()
 #define RESOURCES ResourceManager::GetInstance()
+#define RENDERER Renderer::GetInstance()
 
 //MACROS
 //******
@@ -109,24 +113,26 @@ struct FEllipse
 //************
 namespace MathHelper
 {
-	inline glm::vec2 PolyCenter(const Polygon2D& polygon) 	// this actually generates the same asm as a simple for loop, but makes it look like I know what I'm doing: https://godbolt.org/z/Z9WeSx
-															// And I know this is clang, but MSVC produces 14k lines on O2 :/ https://godbolt.org/z/wphEjY
-	{
-    	auto vertexSum = std::accumulate(polygon.cbegin(), polygon.cend(), glm::vec2(), 
-    		[](const glm::vec2& v1, const glm::vec2& v2) {return v1 + v2;});
-    	return glm::vec2(vertexSum.x / static_cast<float>(polygon.size()), vertexSum.y / static_cast<float>(polygon.size()));
-	}
+	[[nodiscard]] auto PolyCenter(const Polygon2D& polygon) noexcept-> const glm::vec2;
 }
 
 //COLLISION HELPERS
 //*****************
 namespace CollisionHelper
 {
-	inline bool IsPointInFRect(const glm::vec2& p, const FRect& r)
-	{
-		return p.x >= r.Pos.x 
-		&& p.x <= r.Pos.x + r.Width
-		&& p.y >= r.Pos.y
-		&& p.y <= r.Pos.y + r.Height;
-	}
+	[[nodiscard]] constexpr auto IsPointInFRect(const glm::vec2& p, const FRect& r) noexcept-> bool;
+}
+
+//JSON HELPER
+//***********
+namespace JsonHelper
+{
+	[[nodiscard]] auto ReadJson(const std::string& filePath) noexcept-> json;
+	void WriteJson(const json& j, const std::string& filePath) noexcept;
+}
+
+//SVG HELPER
+namespace SvgHelper
+{
+	[[nodiscard]] auto ReadSvg(const std::string& filePath) noexcept-> std::vector<Polygon2D>;
 }

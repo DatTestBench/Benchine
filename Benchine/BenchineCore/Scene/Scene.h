@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene/SceneManager.h"
+#include <future>
 class GameObject;
 class RenderComponent;
 class PhysicsComponent2D;
@@ -14,7 +15,7 @@ public:
 	void BaseInitialize();
 	void BaseUpdate(float dT);
 	void Render() const;
-	void DoPhysics() const;
+	void DoPhysics();
 
 
 	/**
@@ -28,6 +29,9 @@ public:
 	void RemoveRenderComponent(RenderComponent* pRenderComponent) noexcept;
 
 	void AddPhysicsObject(PhysicsComponent2D* pPhysicsComponent) noexcept;
+	void AddStaticObject(PhysicsComponent2D* pPhysicsComponent) noexcept;
+	void AddDynamicObject(PhysicsComponent2D* pPhysicsComponent) noexcept;
+	void AddTrigger(PhysicsComponent2D* pPhysicsComponent) noexcept;
 
 	[[nodiscard]] constexpr auto GetSceneName() const noexcept-> std::string_view { return m_Name; }
 
@@ -36,11 +40,13 @@ protected:
 	virtual void Update(float dT) = 0;
 
 private:
-
 	std::string_view m_Name;
 	std::list<GameObject*> m_pGameObjects;
 	std::list<RenderComponent*> m_pRenderComponents; // Caching the render components to prevent having to do GetComponent every frame;
-	std::list<PhysicsComponent2D*> m_pPhysicsComponents;
+
+	std::list<PhysicsComponent2D*> m_pDynamicObjects;
+	std::list<PhysicsComponent2D*> m_pStaticObjects;
+	std::list<PhysicsComponent2D*> m_pTriggers;
 };
 
 

@@ -16,4 +16,10 @@ protected:
 	void Initialize() override;
 
 private:
+	void MoveLeft();
+	void MoveRight();
+	void MoveUp();
+	void MoveDown();
+	glm::vec2 m_Movement;
+
 };

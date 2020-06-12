@@ -1,5 +1,6 @@
 #include "BenchinePCH.h"
 #include "Core/InputManager.h"
+#include <future>
 
 bool InputManager::ProcessInput()
 {
@@ -68,7 +69,6 @@ bool InputManager::ProcessInput()
 			Logger::Log<LEVEL_DEBUG>("InputManager::ProcessInput()") << "Controller Disconnected";
 
 		}
-
 		// Bind all inputs to each controller
 		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_UP) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP;
 		m_Controllers.at(i).Buttons.at(GamepadButton::DPAD_DOWN) = state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN;
@@ -107,6 +107,8 @@ bool InputManager::ProcessInput()
 			const Uint8* state = SDL_GetKeyboardState(NULL);
 			if (state[bind.second.KeyCode])
 			{
+				auto a = std::async(bind.second.CallBack);
+				//bind.second.CallBack();
 				keyBoardActive = true;
 			}
 		}
@@ -116,6 +118,8 @@ bool InputManager::ProcessInput()
 			{
 				if (keyEvent.KeyCode == bind.second.KeyCode && keyEvent.State == bind.second.State)
 				{
+					auto a = std::async(bind.second.CallBack);
+					//bind.second.CallBack();
 					keyBoardActive = true;
 					keyEvent.Processed = true;
 				}
@@ -128,6 +132,8 @@ bool InputManager::ProcessInput()
 		{
 			if (m_Controllers.at(static_cast<uint32_t>(bind.second.ControllerId)).Buttons.at(bind.second.Button))
 			{
+				auto a = std::async(bind.second.CallBack);
+				//bind.second.CallBack();
 				controllerActive = true;
 			}
 		}
@@ -164,7 +170,7 @@ bool InputManager::IsPressed(GamepadButton button, int controllerId)
 
 	if (m_Controllers.at(static_cast<uint32_t>(controllerId)).IsConnected)
 	{
-		return m_Controllers.at(controllerId).Buttons[button];
+		return m_Controllers.at(static_cast<uint32_t>(controllerId)).Buttons[button];
 	}
 	return false;
 }

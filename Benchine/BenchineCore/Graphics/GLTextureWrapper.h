@@ -7,6 +7,7 @@ enum class TextureOffsetMode
 	CENTER,
 	BASE,
 	TOP,
+	TOPLEFT,
 	BOTTOMLEFT
 };
 
@@ -31,13 +32,13 @@ public:
 
 	void SetSource(const FRect& source) noexcept { m_Source = source; }
 	void SetTarget(const float width, const float height) noexcept { m_TargetWidth = width; m_TargetHeight = height; }
+	void SetTarget(const uint32_t width, const uint32_t height) noexcept { m_TargetWidth = static_cast<float>(width); m_TargetHeight = static_cast<float>(height); }
 	void SetRenderPriority(uint32_t renderPriority) noexcept { m_RenderPriority = renderPriority; }
 	void SetOffsetMode(TextureOffsetMode offsetMode) noexcept { m_OffsetMode = offsetMode; }
 	void SetPositionOffset(const glm::vec2& posOffset) noexcept { m_PositionOffset = posOffset; }
 
 
 private:
-
 	GLuint m_Id;
 
 	float m_Width;

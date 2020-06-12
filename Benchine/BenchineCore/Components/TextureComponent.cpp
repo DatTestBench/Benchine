@@ -16,5 +16,5 @@ void TextureComponent::Initialize()
 
 void TextureComponent::Update(float)
 {
-    GetGameObject()->GetRenderComponent()->AddTexture(m_pTexture->GetTexture());
+    GetGameObject()->GetRenderComponent()->AddTexture(m_pTexture->GetTextureWrapper());
 }

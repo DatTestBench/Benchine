@@ -21,6 +21,12 @@
 #define NOMINMAX
 #include <windows.h>
 
+#pragma warning (push, 0)
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#define NANOSVG_IMPLEMENTATION	// Expands implementation
+#pragma warning (pop)
 
 
 // IMGUI
@@ -38,7 +44,9 @@
 #include <SDL_ttf.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
-// OpenGL
+
+/*#include <Helpers/json.hpp>
+using json = nlohmann::json;*/
 
 
 // Macros
@@ -61,10 +69,12 @@ inline void SafeDelete(T& pObject)
 	}
 }
 
-// General Includes
+//Singletons
 #include "Resources/ResourceManager.h"
-#include "Graphics/Renderer.h"
 #include "Core/InputManager.h"
 #include "Scene/SceneManager.h"
 #include "Debugging/Logger.h"
+#include "Graphics/Renderer.h"
+
+//The Big Helper File
 #include "Helpers/GeneralHelpers.h"
