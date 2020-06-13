@@ -22,9 +22,10 @@ public:
 	[[nodiscard]] constexpr auto GetBaseCollider() const noexcept-> const Collider2D& { return m_BaseCollider; }
 	[[nodiscard]] constexpr auto GetCollider() const noexcept-> const Collider2D& { return m_Collider; }
 	[[nodiscard]] constexpr auto GetCollisionMode() const noexcept-> CollisionMode { return m_CollisionMode; }
-	
+	[[nodiscard]] constexpr auto IsOnGround() const noexcept-> bool { return m_IsOnGround; }
 	void SetCollider(const Collider2D& collider) noexcept { m_BaseCollider = collider; m_Collider = collider; }
-	void SetCallback(std::function<void()> callback) noexcept { m_PhysicsCallback = callback; }
+	void SetVelocity(const glm::vec2& velocity) noexcept { m_Velocity = velocity; }
+	void SetCallback(std::function<void(PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*)> callback, bool callbackOverride = false) noexcept { m_PhysicsCallback = callback; m_CallBackOverriden = callbackOverride; }
 	void HandleCollision(PhysicsComponent2D* pOtherActor);
 
 protected:
@@ -34,10 +35,12 @@ protected:
 private:
 
 	CollisionMode m_CollisionMode;
-	std::function<void()> m_PhysicsCallback;
+	std::function<void(PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*)> m_PhysicsCallback;
+	bool m_CallBackOverriden;
 	glm::vec2 m_Velocity;
 	Collider2D m_Collider;
 	Collider2D m_BaseCollider;
+	bool m_IsOnGround;
 
 
 };

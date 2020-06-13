@@ -18,8 +18,9 @@ protected:
 private:
 	void MoveLeft();
 	void MoveRight();
-	void MoveUp();
-	void MoveDown();
+	void Jump();
+	glm::vec2 m_Velocity;
 	glm::vec2 m_Movement;
+	PhysicsComponent2D* m_pPhysicsComponent;
 
 };

@@ -123,11 +123,57 @@ void Scene::DoPhysics()
 			}
 		}));
 	}
+
+	// Make sure that, at the end of this, every single collsion calculation is done
+	for (auto& future : futures)
+	{
+		future.get();
+	}
 }
 GameObject* Scene::AddGameObject(GameObject* pGameObject) noexcept
 {
 	pGameObject->SetParentScene(this);
 	m_pGameObjects.push_back(pGameObject);
+	return pGameObject;
+}
+
+// For safety, return the deleted gameobject (now nullptr) to replace any reference in the caller
+GameObject* Scene::RemoveGameObject(GameObject* pGameObject) noexcept
+{
+	if (pGameObject == nullptr)
+	{
+		Logger::Log<LEVEL_WARNING>("Scene::RemoveGameObject") << "You just tried to remove a gameobject that was already nullptr";
+		return pGameObject;
+	}
+
+	m_pGameObjects.remove(pGameObject);
+
+	auto pRenderComponent = pGameObject->GetRenderComponent();
+	if (pRenderComponent != nullptr)
+	{
+		m_pRenderComponents.remove(pRenderComponent);
+	}
+
+	auto pPhysicsComponents = pGameObject->GetComponents<PhysicsComponent2D>();
+	if (!pPhysicsComponents.empty())
+	{
+		for (auto pPhysicsComponent : pPhysicsComponents)
+		{
+			switch (pPhysicsComponent->GetCollisionMode())
+			{
+			case CollisionMode::DYNAMIC:
+				m_pDynamicObjects.remove(pPhysicsComponent);
+				break;
+			case CollisionMode::STATIC:
+				m_pStaticObjects.remove(pPhysicsComponent);
+				break;
+			case CollisionMode::TRIGGER:
+				m_pTriggers.remove(pPhysicsComponent);
+				break;
+			}
+		}
+	}
+	SafeDelete(pGameObject);
 	return pGameObject;
 }
 

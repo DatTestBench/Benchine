@@ -19,18 +19,18 @@ public:
 	DEL_ROF(GLTextureWrapper)
 
 	[[nodiscard]] constexpr auto GetId() const noexcept-> GLuint { return m_Id; }
-	[[nodiscard]] constexpr auto GetWidth() const noexcept-> float { return m_Width; }
-	[[nodiscard]] constexpr auto GetHeight() const noexcept-> float { return m_Height; }
+	[[nodiscard]] constexpr auto GetWidth() const noexcept-> uint32_t { return m_Width; }
+	[[nodiscard]] constexpr auto GetHeight() const noexcept-> uint32_t { return m_Height; }
 	[[nodiscard]] constexpr auto GetTargetWidth() const noexcept-> float { return m_TargetWidth; }
 	[[nodiscard]] constexpr auto GetTargetHeight() const noexcept-> float { return m_TargetHeight; }
 	[[nodiscard]] constexpr auto IsCreationOk() const noexcept-> bool { return m_CreationOk; }
 
-	[[nodiscard]] constexpr auto GetSource() const noexcept-> const FRect& { return m_Source; }
+	[[nodiscard]] constexpr auto GetSource() const noexcept-> const IRect& { return m_Source; }
 	[[nodiscard]] constexpr auto GetRenderPriority() const noexcept-> uint32_t { return m_RenderPriority; }
 	[[nodiscard]] constexpr auto GetOffsetMode() const noexcept-> TextureOffsetMode { return m_OffsetMode; }
 	[[nodiscard]] constexpr auto GetPositionOffset() const noexcept-> glm::vec2 { return m_PositionOffset; }
 
-	void SetSource(const FRect& source) noexcept { m_Source = source; }
+	void SetSource(const IRect& source) noexcept { m_Source = source; }
 	void SetTarget(const float width, const float height) noexcept { m_TargetWidth = width; m_TargetHeight = height; }
 	void SetTarget(const uint32_t width, const uint32_t height) noexcept { m_TargetWidth = static_cast<float>(width); m_TargetHeight = static_cast<float>(height); }
 	void SetRenderPriority(uint32_t renderPriority) noexcept { m_RenderPriority = renderPriority; }
@@ -41,11 +41,11 @@ public:
 private:
 	GLuint m_Id;
 
-	float m_Width;
-	float m_Height;
+	uint32_t m_Width;
+	uint32_t m_Height;
 	float m_TargetWidth;
 	float m_TargetHeight;
-	FRect m_Source;
+	IRect m_Source;
 
 	uint32_t m_RenderPriority;
 	glm::vec2 m_PositionOffset;

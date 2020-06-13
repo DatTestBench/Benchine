@@ -24,7 +24,8 @@
 //******
 using Collider2D = std::vector<glm::vec2>;
 using Polygon2D = std::vector<glm::vec2>;
-using json  = nlohmann::json;
+using VertexUV = std::pair<glm::vec2, glm::vec2>;
+using json = nlohmann::json;
 
 //DEFINES
 //*******
@@ -42,7 +43,19 @@ using json  = nlohmann::json;
 
 //ENUMS
 //*****
-
+enum class RenderDepth : uint32_t
+{
+	//Layer furthest back, use for something like distant landscale, walls, ect
+	BACKGROUND = 1U,
+	//Second Layer, use for something like level geometry you want the player to move in front of
+	MIDGROUNDLAYER1 = 2U,
+	//Third layer, use for something like objects that should be in front of level geometry, but behind the player
+	MIDGROUNDLAYER2 = 3U,
+	//Fourth layer, use for stuff like players
+	PLAYERLAYER = 4U,
+	//Fifth layer, use for foreground objects or level geometry you want to be in front of the player
+	FOREGROUNDLAYER = 5U
+};
 
 //STRUCT EXTENTIONS
 //*****************
@@ -95,6 +108,25 @@ struct FRect
 	float Height;
 };
 
+struct IRect
+{
+	IRect() : IRect(0, 0, 0, 0) {}
+	explicit IRect(int32_t x, int32_t y, uint32_t width, uint32_t height)
+		: Pos(x, y)
+		, Width(width)
+		, Height(height)
+	{}
+	explicit IRect(glm::ivec2 pos, uint32_t width, uint32_t height)
+		: Pos(pos)
+		, Width(width)
+		, Height(height)
+	{}
+
+	glm::ivec2 Pos;
+	uint32_t Width;
+	uint32_t Height;
+};
+
 struct FEllipse
 {
 	explicit FEllipse(const glm::vec2& center, float radX, float radY)
@@ -106,7 +138,6 @@ struct FEllipse
 	glm::vec2 Center;
 	float RadX;
 	float RadY;
-
 };
 
 //MATH HELPERS

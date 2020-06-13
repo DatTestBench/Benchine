@@ -1,0 +1,10 @@
+{
+    "Level" : {
+        "Texture" : "Level1.png",
+        "Collider" : "Level1.svg",
+        "Scale" : [3, 3]
+    },
+    "Enemies" : {
+
+    }
+}

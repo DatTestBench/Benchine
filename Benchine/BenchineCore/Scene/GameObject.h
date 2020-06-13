@@ -3,7 +3,6 @@
 //#include "Components/RenderComponent.h"
 #include "Helpers/Utils.h"
 #include "Scene/Scene.h"
-
 class TransformComponent;
 class RenderComponent;
 class BaseComponent;
@@ -33,7 +32,6 @@ public:
 		return pComponent;
 	}
 
-
 	void SetParentScene(Scene* pScene);
 	void SetParentObject(GameObject* pObject);
 	void SetRenderComponent(RenderComponent* pRenderComponent) { m_pRenderComponent = pRenderComponent; }
@@ -53,6 +51,22 @@ public:
 		}
 
 		return nullptr;
+	}
+
+	template <class T>
+	std::vector<T*> GetComponents()
+	{
+		const type_info& ti = typeid(T);
+		std::vector<T*> pComponents;
+		for (auto pComponent : m_pComponents)
+		{
+			if (pComponent && typeid(*pComponent) == ti)
+			{
+				pComponents.push_back(static_cast<T*>(pComponent));
+			}
+		}
+
+		return pComponents;
 	}
 
 

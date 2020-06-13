@@ -12,10 +12,10 @@ TextComponent::TextComponent(const std::string& text, Font* font)
 	: m_NeedsUpdate(true)
 	, m_Text(text)
 	, m_pFont(font)
+	, m_Color(SDL_Color{ 255, 255, 255 , 255 })
 	, m_pTexture(nullptr)
 {
-	const SDL_Color color = { 255, 255, 255 };
-	m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
+	m_pTexture = m_pFont->GenerateFontTexture(m_Text, m_Color);
 }
 
 TextComponent::~TextComponent()
@@ -36,10 +36,7 @@ void TextComponent::Update([[maybe_unused]] float dT)
 		auto positionOffset = m_pTexture->GetPositionOffset();
 		auto renderPriority = m_pTexture->GetRenderPriority();
 
-
-		const SDL_Color color = { 255, 255, 255};
-
-		m_pTexture = m_pFont->GenerateFontTexture(m_Text, color);
+		m_pTexture = m_pFont->GenerateFontTexture(m_Text, m_Color);
 
 		m_pTexture->SetOffsetMode(offsetMode);
 		m_pTexture->SetPositionOffset(positionOffset);

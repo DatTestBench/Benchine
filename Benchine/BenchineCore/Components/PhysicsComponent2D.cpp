@@ -4,7 +4,10 @@
 #include <future>
 PhysicsComponent2D::PhysicsComponent2D(CollisionMode collisionMode)
     : m_CollisionMode(collisionMode)
-
+    , m_CallBackOverriden(false)
+    , m_Velocity()
+    , m_PhysicsCallback([](PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*){})
+    , m_IsOnGround(false)
 {
     
 }
@@ -32,6 +35,7 @@ void PhysicsComponent2D::Initialize()
 
 void PhysicsComponent2D::Update([[maybe_unused]] float dT)
 {
+    m_IsOnGround = false;
     auto tMat = glm::translate(glm::mat3(1.f), static_cast<glm::vec2>(GetTransform()->GetPosition()));
     auto sMat = glm::scale(glm::mat3(1.f), GetTransform()->GetScale());
 
@@ -42,27 +46,35 @@ void PhysicsComponent2D::Update([[maybe_unused]] float dT)
         m_Collider.at(v) = transformMat * glm::vec3(m_BaseCollider.at(v), 1.f);
     }
     
-    DebugRenderer::DrawPolygon(m_Collider);
+    DEBUGONLY(DebugRenderer::DrawPolygon(m_Collider));
 }
 
 void PhysicsComponent2D::HandleCollision(PhysicsComponent2D* pOtherComponent)
 {
     const auto collisionResult = sat::PolygonCollision(this, pOtherComponent);
-
     if (collisionResult.intersect)
     {
         switch (m_CollisionMode)
         {
         case CollisionMode::STATIC:
+            m_PhysicsCallback(collisionResult, this, pOtherComponent);
             break;
         case CollisionMode::DYNAMIC:
-            if (pOtherComponent->GetCollisionMode() == CollisionMode::DYNAMIC)
-                GetTransform()->Move(collisionResult.minimumTranslationVector / 2.f);
-            else
-                GetTransform()->Move(collisionResult.minimumTranslationVector);
+            if (!m_CallBackOverriden)
+            {
+                if (pOtherComponent->GetCollisionMode() == CollisionMode::DYNAMIC)
+                {
+                    GetTransform()->Move(collisionResult.minimumTranslationVector / 2.f);
+                }
+                else if (pOtherComponent->GetCollisionMode() == CollisionMode::STATIC)
+                {
+                    GetTransform()->Move(collisionResult.minimumTranslationVector);
+                }
+            }
+            m_PhysicsCallback(collisionResult, this, pOtherComponent);
             break;
         case CollisionMode::TRIGGER:
-            m_PhysicsCallback();
+            m_PhysicsCallback(collisionResult, this, pOtherComponent);
             break;
         }
     }

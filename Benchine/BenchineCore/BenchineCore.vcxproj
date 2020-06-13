@@ -222,7 +222,6 @@
     <ClCompile Include="Components\TextComponent.cpp" />
     <ClCompile Include="Components\TextureComponent.cpp" />
     <ClCompile Include="Components\TransformComponent.cpp" />
-    <ClCompile Include="Core\Editor.cpp" />
     <ClCompile Include="Debugging\DebugRenderer.cpp" />
     <ClCompile Include="Graphics\GLTextureWrapper.cpp" />
     <ClCompile Include="Helpers\GeneralHelpers.cpp" />
@@ -302,7 +301,6 @@
     <ClInclude Include="Components\TextComponent.h" />
     <ClInclude Include="Components\TextureComponent.h" />
     <ClInclude Include="Components\TransformComponent.h" />
-    <ClInclude Include="Core\Editor.h" />
     <ClInclude Include="Debugging\DebugRenderer.h" />
     <ClInclude Include="Graphics\GLTextureWrapper.h" />
     <ClInclude Include="Helpers\GeneralHelpers.h" />

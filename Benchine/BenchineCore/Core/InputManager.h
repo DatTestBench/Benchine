@@ -49,7 +49,7 @@ struct InputBinding
 		: ActionId(id)
 		, CallBack(callBack)
 		, State(state)
-		, KeyCode(keyCode - 61)
+		, KeyCode(SDL_GetScancodeFromKey(keyCode))
 		, MouseCode(mouseCode)
 		, Button(button)
 		, ControllerId(controllerId)
@@ -57,7 +57,6 @@ struct InputBinding
 	{
 
 	}
-
 };
 
 struct KeyEvent

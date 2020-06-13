@@ -70,11 +70,8 @@ void Renderer::Initialize(const WindowSettings& windowSettings)
 	// Enable color blending and use alpha blending
 	glAlphaFunc(GL_GREATER, 0.5f);
 	glEnable(GL_ALPHA_TEST);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_DEPTH_TEST);
-	//glDepthFunc(GL_LESS);
-	//glDepthMask(GL_FALSE);
 	SDL_GL_MakeCurrent(m_pWindow, m_pContext);
 
 	ImGui::CreateContext();
@@ -98,9 +95,6 @@ void Renderer::PresentRender() const
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	SDL_GL_SwapWindow(m_pWindow);
-
-	
-
 }
 
 void Renderer::Cleanup()
@@ -122,9 +116,10 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, c
 		return;
 	}
 	
-	const auto vertexBuffer = CreateRenderParams(pTexture, pos);
+	const auto vertexBuffer = CreateRenderParams(pTexture);
 
 	glPushMatrix();
+	glTranslatef(pos.x, pos.y, 0.f);
 	glScalef(scale.x, scale.y, 1.f);
 
 
@@ -152,22 +147,22 @@ void Renderer::RenderTexture(GLTextureWrapper* pTexture, const glm::vec2& pos, c
 }
 
 
-const std::array<std::pair<glm::vec2, glm::vec2>, 4> Renderer::CreateRenderParams(GLTextureWrapper* pTexture, const glm::vec2& pos) const 
+const std::array<VertexUV, 4> Renderer::CreateRenderParams(GLTextureWrapper* pTexture) const 
 {
 	const auto source = pTexture->GetSource();
 	const auto textureWidth = pTexture->GetWidth();
 	const auto textureHeight = pTexture->GetHeight();
 
-	const auto targetWidth = (pTexture->GetTargetWidth() > 0.f) ? pTexture->GetTargetWidth() : ((source.Width > 0.f) ? source.Width : pTexture->GetWidth());
-	const auto targetHeight = (pTexture->GetTargetHeight() > 0.f) ? pTexture->GetTargetHeight() : ((source.Height > 0.f) ? source.Height : pTexture->GetHeight());
+	const auto targetWidth = (pTexture->GetTargetWidth() > 0.f) ? pTexture->GetTargetWidth() : ((source.Width > 0U) ? static_cast<float>(source.Width) : static_cast<float>(pTexture->GetWidth()));
+	const auto targetHeight = (pTexture->GetTargetHeight() > 0.f) ? pTexture->GetTargetHeight() : ((source.Height > 0U) ? static_cast<float>(source.Height) : static_cast<float>(pTexture->GetHeight()));
 
-	const auto targetPos = pos + pTexture->GetPositionOffset();
+	const auto targetPos = pTexture->GetPositionOffset();
 
 
 	// Determine the texturecoordinates that should be rendered;
 	float uvLeft{}, uvRight{}, uvTop{}, uvBottom{};
 
-	if (!(source.Width > 0.0f && source.Height > 0.0f)) // No src specified
+	if (!(source.Width > 0U && source.Height > 0U)) // No source specified
 	{
 		// Use complete texture
 		uvLeft = 0.0f;
@@ -175,13 +170,13 @@ const std::array<std::pair<glm::vec2, glm::vec2>, 4> Renderer::CreateRenderParam
 		uvTop = 0.0f;
 		uvBottom = 1.0f;
 	}
-	else // src specified
+	else // source specified
 	{
 		// Convert to the range [0.0, 1.0]
-		uvLeft = source.Pos.x / textureWidth;
-		uvRight = (source.Pos.x + source.Width) / textureWidth;
-		uvTop = (source.Pos.y - source.Height) / textureHeight;
-		uvBottom = source.Pos.y / textureHeight;
+		uvLeft = static_cast<float>(source.Pos.x) / static_cast<float>(textureWidth);
+		uvRight = static_cast<float>(source.Pos.x + static_cast<int32_t>(source.Width)) / static_cast<float>(textureWidth);
+		uvTop = static_cast<float>(source.Pos.y) / static_cast<float>(textureHeight);
+		uvBottom = static_cast<float>(source.Pos.y + static_cast<int32_t>(source.Height)) / static_cast<float>(textureHeight);
 	}
 
 
@@ -222,24 +217,11 @@ const std::array<std::pair<glm::vec2, glm::vec2>, 4> Renderer::CreateRenderParam
 		break;
 	}
 
-	return std::array<std::pair<glm::vec2, glm::vec2>, 4>
+	return std::array<VertexUV, 4>
 	{
-		std::make_pair(glm::vec2(uvLeft, uvBottom), glm::vec2(vertexLeft, vertexBottom)),
-		std::make_pair(glm::vec2(uvLeft, uvTop), glm::vec2(vertexLeft, vertexTop)),
-		std::make_pair(glm::vec2(uvRight, uvTop), glm::vec2(vertexRight, vertexTop)),
-		std::make_pair(glm::vec2(uvRight, uvBottom), glm::vec2(vertexRight, vertexBottom))
+		VertexUV(glm::vec2(uvLeft, uvBottom), glm::vec2(vertexLeft, vertexBottom)),
+		VertexUV(glm::vec2(uvLeft, uvTop), glm::vec2(vertexLeft, vertexTop)),
+		VertexUV(glm::vec2(uvRight, uvTop), glm::vec2(vertexRight, vertexTop)),
+		VertexUV(glm::vec2(uvRight, uvBottom), glm::vec2(vertexRight, vertexBottom))
 	};
-
 }
-
-		/*	glTexCoord2f(uvLeft, uvBottom);
-			glVertex2f(vertexLeft, vertexBottom);
-
-			glTexCoord2f(uvLeft, uvTop);
-			glVertex2f(vertexLeft, vertexTop);
-
-			glTexCoord2f(uvRight, uvTop);
-			glVertex2f(vertexRight, vertexTop);
-
-			glTexCoord2f(uvRight, uvBottom);
-			glVertex2f(vertexRight, vertexBottom);*/

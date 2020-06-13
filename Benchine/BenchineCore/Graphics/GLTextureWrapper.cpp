@@ -27,8 +27,8 @@ void GLTextureWrapper::CreateTextureFromSurface(SDL_Surface* pSurface)
 	m_CreationOk = true;
 
 	//Get image dimensions
-	m_Width = static_cast<float>(pSurface->w);
-	m_Height = static_cast<float>(pSurface->h);
+	m_Width = static_cast<uint32_t>(pSurface->w);
+	m_Height = static_cast<uint32_t>(pSurface->h);
 
 	// Get pixel format information and translate to OpenGl format
 	GLenum pixelFormat = GL_RGB;

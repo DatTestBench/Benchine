@@ -23,33 +23,32 @@ public:
 		bool quit = false;
 
 		auto lastTime = std::chrono::high_resolution_clock::now();
-		float lag = 0.f;
+		//float lag = 0.f;
 
 		while (!quit)
 		{
 			auto currentTime = std::chrono::high_resolution_clock::now();
-			float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+			float deltaTime = std::min(std::chrono::duration<float>(currentTime - lastTime).count(), 0.1f);
 			lastTime = currentTime;
-			lag += deltaTime;
+			//lag += deltaTime;
 			quit = INPUT->ProcessInput();
 
-			
 			
 			RENDERER->SetupRender();
 			SceneManager::GetInstance()->RenderCurrentScene();
 			DEBUGONLY(pLogger->OutputLog());
 			m_pGame->BaseUpdate(deltaTime);
 			RENDERER->PresentRender();
-
-			/*while (lag >= MsPerFrame / 1000.f)
+			std::this_thread::sleep_until(currentTime + std::chrono::milliseconds(MsPerFrame));
+			/*RENDERER->SetupRender();
+			SceneManager::GetInstance()->RenderCurrentScene();
+			while (lag >= MsPerFrame / 1000.f)
 			{
-				RENDERER->SetupRender();
-				SceneManager::GetInstance()->RenderCurrentScene();
 				DEBUGONLY(pLogger->OutputLog());
 				m_pGame->BaseUpdate(MsPerFrame / 1000.f);
 				lag -= MsPerFrame / 1000.f;
-				RENDERER->PresentRender();
-			}*/
+			}
+			RENDERER->PresentRender();*/
 		
 		}
 		Cleanup();

@@ -16,6 +16,9 @@ protected:
 private:
 	GameObject* m_pCharacter;
 	GameObject* m_pFPSCounter;
+	GameObject* m_pObject;
 	FPSComponent* m_pFPSComponent;
 	TextComponent* m_pFPSText;
+
+	void DeleteTing();
 };

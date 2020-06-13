@@ -20,12 +20,12 @@ public:
     void Update(float dT) override;
 
 
-    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> float { return m_pSpriteSheet->GetTextureWrapper()->GetWidth() / static_cast<float>(m_Cols); }
-
-    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> float { return m_pSpriteSheet->GetTextureWrapper()->GetHeight() / static_cast<float>(m_Rows); }
-
+    [[nodiscard]] constexpr auto GetFrameWidth() const noexcept-> uint32_t { return m_pSpriteSheet->GetTextureWrapper()->GetWidth() / m_Cols; }
+    [[nodiscard]] constexpr auto GetFrameHeight() const noexcept-> uint32_t { return m_pSpriteSheet->GetTextureWrapper()->GetHeight() / m_Rows; }
     [[nodiscard]] constexpr auto GetTextureWrapper() const noexcept-> GLTextureWrapper* { return m_pSpriteSheet->GetTextureWrapper(); }
 
+    void SetCurrentZone(uint32_t zone) noexcept;
+    
 protected:
     void Initialize() override;
 
@@ -34,6 +34,9 @@ private:
     uint32_t m_Cols;
     uint32_t m_Rows;
     uint32_t m_Zones;
+    uint32_t m_CurrentZone;
+
+
     float m_Fps;
     float m_CurrentElapsed;
     uint32_t m_CurrentFrame;

@@ -10,18 +10,20 @@ SpriteComponent::SpriteComponent(Texture2D* pSpriteSheet, uint32_t nrCols, uint3
     , m_Fps(fps)
     , m_CurrentElapsed()
     , m_CurrentFrame()
+    , m_CurrentZone(5)
 {
 
 }
 
 void SpriteComponent::Initialize()
 {
-    FRect src{};
+    IRect src{};
     src.Width = GetFrameWidth();
     src.Height = GetFrameHeight();
 
     src.Pos.x = 0; 
-    src.Pos.y = src.Height * (m_pSpriteSheet->GetTextureWrapper()->GetHeight() / GetFrameHeight()/*Nr of cells in the sheet*/) / static_cast<float>(m_Zones);
+    const uint32_t zoneSize = m_Rows / m_Zones;
+    src.Pos.y = static_cast<int32_t>(src.Height * ((m_CurrentFrame / m_Cols) + (m_CurrentZone * zoneSize)));
 
     m_pSpriteSheet->GetTextureWrapper()->SetSource(src);
     GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTextureWrapper());
@@ -32,20 +34,33 @@ void SpriteComponent::Update(float dT)
     m_CurrentElapsed += dT;
     if (m_CurrentElapsed >= 1.f / m_Fps)
     {
-        ++m_CurrentFrame %= (m_Cols * m_Rows);
+        ++m_CurrentFrame %= (m_Cols * (m_Rows / m_Zones));
         m_CurrentElapsed -= 1.f / m_Fps;
 
-
-        FRect src{};
+        IRect src{};
         src.Width = GetFrameWidth();
         src.Height = GetFrameHeight();
 
-        src.Pos.x = src.Width * static_cast<float>(m_CurrentFrame % m_Cols);
-        src.Pos.y = src.Height * (static_cast<float>(m_CurrentFrame / m_Cols) - 1.f);
+        src.Pos.x = static_cast<int32_t>(src.Width * (m_CurrentFrame % m_Cols));
+
+        const uint32_t zoneSize = m_Rows / m_Zones;
+
+        src.Pos.y = static_cast<int32_t>(src.Height * ((m_CurrentFrame / m_Cols) + (m_CurrentZone * zoneSize)));
 
         m_pSpriteSheet->GetTextureWrapper()->SetSource(src);
-        
-
     }
     GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTextureWrapper());
+}
+
+void SpriteComponent::SetCurrentZone(uint32_t zone) noexcept
+{
+    if (zone > m_Zones)
+    {
+        Logger::Log<LEVEL_WARNING>("SpriteComponent::SetCurrentZone()") << "Trying to use zone \"" << zone << "\", but the spritesheet only has \"" << m_Zones << "\nzones (defaulting to using last zone on sheet)"; 
+        m_CurrentZone = m_Zones;
+    }
+    else
+    {
+        m_CurrentZone = zone;
+    }
 }

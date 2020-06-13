@@ -27,6 +27,6 @@ private:
 	SDL_GLContext m_pContext;
 	SDL_Window* m_pWindow;
 
-	const std::array<std::pair<glm::vec2, glm::vec2>, 4> CreateRenderParams(GLTextureWrapper* pTexture, const glm::vec2& pos) const;
+	const std::array<VertexUV, 4> CreateRenderParams(GLTextureWrapper* pTexture) const;
 };
 

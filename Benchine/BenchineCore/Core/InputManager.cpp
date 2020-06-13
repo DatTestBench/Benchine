@@ -6,7 +6,6 @@ bool InputManager::ProcessInput()
 {
 
 	ImGuiIO& io = ImGui::GetIO();
-
 	int wheel = 0;
 	ClearInputs();
 
