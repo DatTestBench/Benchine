@@ -14,11 +14,23 @@ protected:
 	void Update([[maybe_unused]] float dT) override;
 
 private:
-	GameObject* m_pCharacter;
+
+	GameObject* m_pScoreBoard;
+	TextComponent* m_pScoreText;
+	ScoreComponent* m_pScoreComponent1;
+	ScoreComponent* m_pScoreComponent2;
+
+
+	GameObject* m_pCharacter1;
+	GameObject* m_pCharacter2;
 	GameObject* m_pFPSCounter;
-	GameObject* m_pObject;
 	FPSComponent* m_pFPSComponent;
 	TextComponent* m_pFPSText;
 
-	void DeleteTing();
+
+
+	GameObject* m_pCurrentlevel;
+	int m_CurrentLevel;
+
+	void ChangeLevel();
 };

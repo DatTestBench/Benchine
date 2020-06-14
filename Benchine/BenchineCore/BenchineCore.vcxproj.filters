@@ -65,6 +65,10 @@
     <ClCompile Include="Helpers\GeneralHelpers.cpp" />
     <ClCompile Include="Resources\SoundByte.cpp" />
     <ClCompile Include="Resources\SoundStream.cpp" />
+    <ClCompile Include="Components\LifetimeComponent.cpp" />
+    <ClCompile Include="Components\ScoreComponent.cpp" />
+    <ClCompile Include="Components\AIControllerComponent.cpp" />
+    <ClCompile Include="Components\BubbleComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -113,5 +117,9 @@
     <ClInclude Include="Helpers\Observer.h" />
     <ClInclude Include="Resources\SoundByte.h" />
     <ClInclude Include="Resources\SoundStream.h" />
+    <ClInclude Include="Components\LifetimeComponent.h" />
+    <ClInclude Include="Components\ScoreComponent.h" />
+    <ClInclude Include="Components\AIControllerComponent.h" />
+    <ClInclude Include="Components\BubbleComponent.h" />
   </ItemGroup>
 </Project>

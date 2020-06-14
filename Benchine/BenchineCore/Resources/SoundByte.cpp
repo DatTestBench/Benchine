@@ -6,7 +6,7 @@ SoundByte::SoundByte(const std::string& fullPath)
 {
     if (m_pMixChunk == nullptr)
     {
-        Logger::Log<LEVEL_ERROR>("SoundByte::SoundByte()") << "Failed to load soundbyte " << Mix_GetError;
+        DEBUGONLY(Logger::Log<LEVEL_ERROR>("SoundByte::SoundByte()") << "Failed to load soundbyte " << Mix_GetError());
     }
 }
 
@@ -22,12 +22,12 @@ void SoundByte::Play(uint32_t repeats) const
     {
         if (Mix_PlayChannel(-1, m_pMixChunk, repeats) == -1)
         {
-            Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "No free channel available to play sound";
+            DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "No free channel available to play sound");
         }
     }
     else
     {
-        Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr";
+        DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr");
     }
 }
 
@@ -39,7 +39,7 @@ void SoundByte::SetVolume(uint32_t volume) const
     }
     else
     {
-        Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr";
+        DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr");
     }
 }
 
@@ -51,7 +51,7 @@ void SoundByte::SetVolume(uint32_t volume) const
     }
     else
     {
-        Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr";
+        DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundByte::Play()") << "SoundByte is nullptr");
         return -1;
     }
 }

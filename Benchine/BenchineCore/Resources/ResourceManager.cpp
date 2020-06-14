@@ -23,30 +23,30 @@ void ResourceManager::Initialize(const std::string& dataPath)
 
 	if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) != IMG_INIT_PNG)
 	{
-		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for pngs: " << IMG_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for pngs: " << IMG_GetError());
 	}
 
 	if ((IMG_Init(IMG_INIT_JPG) & IMG_INIT_JPG) != IMG_INIT_JPG)
 	{
-		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to laod support for jpgs" << IMG_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to laod support for jpgs" << IMG_GetError());
 	}
 
 	if (TTF_Init() != 0)
 	{
-		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for fonts: " << TTF_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for fonts: " << TTF_GetError());
 	}
 
 	// load SDL_Mixer support
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 	{
-		Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for sound: " << Mix_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("ResourceManager::Initialize()") << "Failed to load support for sound: " << Mix_GetError());
 	}
 
 
 	// Initialize Loaders
 	AddLoader<Font>(new FontLoader());
 	AddLoader<Texture2D>(new TextureLoader());
-	AddLoader<SoundByteLoader>(new SoundByteLoader());
-	AddLoader<SoundStreamLoader>(new SoundStreamLoader());
+	AddLoader<SoundByte>(new SoundByteLoader());
+	AddLoader<SoundStream>(new SoundStreamLoader());
 
 }

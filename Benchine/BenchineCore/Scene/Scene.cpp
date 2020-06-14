@@ -5,12 +5,14 @@
 #include "Helpers/SAT.h"
 #include "Components/PhysicsComponent2D.h"
 #include "Debugging/DebugRenderer.h"
+#include "../BubbleBobble/Factories/Factories.h"
 #include <future>
 #include <deque>
 Scene::Scene(const std::string_view& name)
-	: m_Name{ name }
-	, m_pGameObjects{  }
-	, m_pRenderComponents{  }
+	: m_Name(name)
+	, m_pGameObjects()
+	, m_pRenderComponents()
+	, m_NewDrops()
 {
 
 }
@@ -37,13 +39,32 @@ void Scene::BaseInitialize()
 
 void Scene::BaseUpdate(float dT)
 {
+
+	for (auto newDrop : m_NewDrops)
+	{
+		AddGameObjectLate(Factories::CreateDrop(newDrop.DropFile, newDrop.DropName, newDrop.Pos, newDrop.Scale));
+	}
+	m_NewDrops.clear();
+
 	// User Defined Update
 	Update(dT);
 
 	// Game Object Update
-	for (auto pGameObject : m_pGameObjects)
+	for (auto pGameObject = m_pGameObjects.begin(); pGameObject != m_pGameObjects.end();)
 	{
-		pGameObject->BaseUpdate(dT);
+		//https://stackoverflow.com/a/16269740
+		(*pGameObject)->BaseUpdate(dT);
+		if ((*pGameObject)->MarkedForDelete())
+		{
+			auto copy = pGameObject;
+			pGameObject = ++pGameObject;
+			RemoveGameObject(*copy);
+		}
+		else
+		{
+			++pGameObject;
+		}
+		
 	}
 	DoPhysics();
 }
@@ -60,7 +81,7 @@ void Scene::Render() const
 		}
 		else
 		{
-			Logger::Log<LEVEL_WARNING>("Scene::Render") << "Trying to render deleted RenderComponent, remember to clean up render components when deleting an object that has one";
+			DEBUGONLY(Logger::Log<LEVEL_WARNING>("Scene::Render") << "Trying to render deleted RenderComponent, remember to clean up render components when deleting an object that has one");
 		}
 	}
 }
@@ -70,9 +91,6 @@ void Scene::DoPhysics()
 	uint32_t maxThreads = std::thread::hardware_concurrency();
 	std::deque<std::future<void>> futures;
 	uint32_t threadCounter = 0;	
-
-
-	
 
 	for (auto dynamicObject : m_pDynamicObjects)
 	{
@@ -137,15 +155,27 @@ GameObject* Scene::AddGameObject(GameObject* pGameObject) noexcept
 	return pGameObject;
 }
 
+GameObject* Scene::AddGameObjectLate(GameObject* pGameObject) noexcept
+{
+	pGameObject->SetParentScene(this);
+	pGameObject->BaseInitialize();
+	m_pGameObjects.push_back(pGameObject);
+	return pGameObject;
+}
+
+void Scene::AddDropNextFrame(const DropSettings& dropSettings) noexcept
+{
+	m_NewDrops.push_back(dropSettings);
+}
+
 // For safety, return the deleted gameobject (now nullptr) to replace any reference in the caller
 GameObject* Scene::RemoveGameObject(GameObject* pGameObject) noexcept
 {
 	if (pGameObject == nullptr)
 	{
-		Logger::Log<LEVEL_WARNING>("Scene::RemoveGameObject") << "You just tried to remove a gameobject that was already nullptr";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("Scene::RemoveGameObject") << "You just tried to remove a gameobject that was already nullptr");
 		return pGameObject;
 	}
-
 	m_pGameObjects.remove(pGameObject);
 
 	auto pRenderComponent = pGameObject->GetRenderComponent();

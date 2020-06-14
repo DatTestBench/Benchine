@@ -33,14 +33,14 @@
 	json j{};
 	if (!std::filesystem::exists(fullPath))
 	{
-		Logger::Log<LEVEL_ERROR>("JsonHelper::ReadJson()") << "File at location: \"" << fullPath << "\" doesn't exist";
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("JsonHelper::ReadJson()") << "File at location: \"" << fullPath << "\" doesn't exist");
 	}
 	else
 	{
 		std::ifstream inputFile(fullPath);
 		if (!inputFile.is_open())
 		{
-			Logger::Log<LEVEL_ERROR>("JsonHelper::ReadJson()") << "Failed to open file at location: \"" << fullPath << "\"";
+			DEBUGONLY(Logger::Log<LEVEL_ERROR>("JsonHelper::ReadJson()") << "Failed to open file at location: \"" << fullPath << "\"");
 		}
 		else
 		{
@@ -58,7 +58,7 @@ void JsonHelper::WriteJson(const json& j, const std::string& filePath) noexcept
 	std::ofstream outputFile(fullPath);
 	if (!outputFile.is_open())
 	{
-		Logger::Log<LEVEL_ERROR>("JsonHelper::WriteJson()") << "Failed to open file at location: \"" << fullPath << "\"";
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("JsonHelper::WriteJson()") << "Failed to open file at location: \"" << fullPath << "\"");
 	}
 	else
 	{

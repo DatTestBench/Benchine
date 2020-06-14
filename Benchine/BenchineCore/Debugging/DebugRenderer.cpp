@@ -208,7 +208,7 @@ void DebugRenderer::DrawArc(const float centerX, const float centerY, const floa
 {
 	if (fromAngle > tillAngle)
 	{
-		Logger::Log<LEVEL_WARNING>("DebugRenderer::DrawArc()") << "fromAngle > tillAngle, arc can not be drawn";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("DebugRenderer::DrawArc()") << "fromAngle > tillAngle, arc can not be drawn");
 		return;
 	}
 
@@ -235,7 +235,7 @@ void DebugRenderer::FillArc(const float centerX, const float centerY, const floa
 {
 	if (fromAngle > tillAngle)
 	{
-		Logger::Log<LEVEL_WARNING>("DebugRenderer::FillArc") << "fromAngle > tillAngle, arc can not be drawn.";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("DebugRenderer::FillArc") << "fromAngle > tillAngle, arc can not be drawn.");
 		return;
 	}
 	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;

@@ -57,8 +57,8 @@ enum class RenderDepth : uint32_t
 	FOREGROUNDLAYER = 5U
 };
 
-//STRUCT EXTENTIONS
-//*****************
+//HELPER STRUCTS
+//**************
 struct Projection2D
 {
 	explicit Projection2D(float val)
@@ -73,11 +73,10 @@ struct Projection2D
 	float Max;
 };
 
-//HELPER STRUCTS
-//**************
+
 struct WindowSettings
 {
-	explicit WindowSettings(const std::string& name = "Window", uint32_t width = 1280U, uint32_t height = 720U, bool enableVSync = true)
+	explicit WindowSettings(const std::string& name = "Window", uint32_t width = 1600U, uint32_t height = 960U, bool enableVSync = true)
 		: Name(name)
 		, Width(width)
 		, Height(height)
@@ -138,6 +137,22 @@ struct FEllipse
 	glm::vec2 Center;
 	float RadX;
 	float RadY;
+};
+
+
+struct DropSettings
+{
+	explicit DropSettings(const std::string& dropFile, const std::string& dropName, const glm::vec2& pos, const glm::vec2& scale)
+		: DropFile(dropFile)
+		, DropName(dropName)
+		, Pos(pos)
+		, Scale(scale)
+	{}
+
+	std::string DropFile;
+	std::string DropName;
+	glm::vec2 Pos;
+	glm::vec2 Scale;
 };
 
 //MATH HELPERS

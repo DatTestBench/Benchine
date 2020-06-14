@@ -39,7 +39,7 @@ public:
 			DEBUGONLY(pLogger->OutputLog());
 			m_pGame->BaseUpdate(deltaTime);
 			RENDERER->PresentRender();
-			std::this_thread::sleep_until(currentTime + std::chrono::milliseconds(MsPerFrame));
+			//std::this_thread::sleep_until(currentTime + std::chrono::milliseconds(MsPerFrame));
 			/*RENDERER->SetupRender();
 			SceneManager::GetInstance()->RenderCurrentScene();
 			while (lag >= MsPerFrame / 1000.f)

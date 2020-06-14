@@ -6,7 +6,7 @@ SoundStream::SoundStream(const std::string& fullPath)
 {
     if (m_pMixMusic == nullptr)
     {
-        Logger::Log<LEVEL_ERROR>("SoundStream::SoundStream()") << "Failed to load soundstream " << Mix_GetError();
+        DEBUGONLY(Logger::Log<LEVEL_ERROR>("SoundStream::SoundStream()") << "Failed to load soundstream " << Mix_GetError());
     }
 }
 
@@ -22,12 +22,12 @@ void SoundStream::Play(bool shouldRepeat) const noexcept
     {
         if (Mix_PlayMusic(m_pMixMusic, shouldRepeat ? -1 : 1))
         {
-            Logger::Log<LEVEL_WARNING>("SoundStream::Play()") << "Couldn't play music";
+            DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundStream::Play()") << "Couldn't play music");
         }
     }
     else
     {
-        Logger::Log<LEVEL_WARNING>("SoundStream::Play()") << "SoundStream is nullptr";
+        DEBUGONLY(Logger::Log<LEVEL_WARNING>("SoundStream::Play()") << "SoundStream is nullptr");
     }
 }
 

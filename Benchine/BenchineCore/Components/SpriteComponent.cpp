@@ -10,7 +10,7 @@ SpriteComponent::SpriteComponent(Texture2D* pSpriteSheet, uint32_t nrCols, uint3
     , m_Fps(fps)
     , m_CurrentElapsed()
     , m_CurrentFrame()
-    , m_CurrentZone(5)
+    , m_CurrentZone(0)
 {
 
 }
@@ -56,7 +56,7 @@ void SpriteComponent::SetCurrentZone(uint32_t zone) noexcept
 {
     if (zone > m_Zones)
     {
-        Logger::Log<LEVEL_WARNING>("SpriteComponent::SetCurrentZone()") << "Trying to use zone \"" << zone << "\", but the spritesheet only has \"" << m_Zones << "\nzones (defaulting to using last zone on sheet)"; 
+        DEBUGONLY(Logger::Log<LEVEL_WARNING>("SpriteComponent::SetCurrentZone()") << "Trying to use zone \"" << zone << "\", but the spritesheet only has \"" << m_Zones << "\nzones (defaulting to using last zone on sheet)"); 
         m_CurrentZone = m_Zones;
     }
     else

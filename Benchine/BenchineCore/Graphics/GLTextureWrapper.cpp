@@ -55,7 +55,7 @@ void GLTextureWrapper::CreateTextureFromSurface(SDL_Surface* pSurface)
 		}
 		break;
 	default:
-		Logger::Log<LEVEL_ERROR>("GLTextureWrapper::CreateTextureFromSurface()") << " Unknown pixel format, BytesPerPixel " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.";
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("GLTextureWrapper::CreateTextureFromSurface()") << " Unknown pixel format, BytesPerPixel " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.");
 		//std::cerr << "Texture::CreateFromSurface, unknow pixel format, BytesPerPixel: " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.\n";
 		m_CreationOk = false;
 		return;
@@ -72,9 +72,9 @@ void GLTextureWrapper::CreateTextureFromSurface(SDL_Surface* pSurface)
 	GLenum e = glGetError();
 	if (e != GL_NO_ERROR)
 	{
-		Logger::Log<LEVEL_ERROR>("GLTextureWrapper::CreateTextureFromSurface()") << "Error Binding Texture, Error ID: " << e;
-		Logger::Log<LEVEL_INFO>("GLTextureWrapper::CreateTextureFromSurface()") << "Can happen if a texture is created before performing the initialization code (e.g. a static Texture object).\n"
-			<< "There  might be a white rectangle instead of the image.";
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("GLTextureWrapper::CreateTextureFromSurface()") << "Error Binding Texture, Error ID: " << e);
+		DEBUGONLY(Logger::Log<LEVEL_INFO>("GLTextureWrapper::CreateTextureFromSurface()") << "Can happen if a texture is created before performing the initialization code (e.g. a static Texture object).\n"
+			<< "There  might be a white rectangle instead of the image.");
 
 		/*std::cerr << "Texture::CreateFromSurface, error binding textures, Error id = " << e << '\n';
 		std::cerr << "Can happen if a texture is created before performing the initialization code (e.g. a static Texture object).\n";

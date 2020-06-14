@@ -7,7 +7,7 @@ Font::Font(const std::string& fullPath, uint32_t size)
 {
 	if (m_pFont == nullptr) 
 	{
-		Logger::Log<LEVEL_ERROR>("Font::Font()") << "Failed to load font " << TTF_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("Font::Font()") << "Failed to load font " << TTF_GetError());
 	}
 }
 
@@ -25,7 +25,7 @@ GLTextureWrapper* Font::GenerateFontTexture(const std::string& text, const SDL_C
 
 	if (pSurface == nullptr)
 	{
-		Logger::Log<LEVEL_ERROR>("Font::GenerateFontTexture()") << TTF_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("Font::GenerateFontTexture()") << TTF_GetError());
 	}
 	
 	m_pTexture = new GLTextureWrapper(pSurface);

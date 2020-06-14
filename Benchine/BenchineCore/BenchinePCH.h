@@ -58,6 +58,8 @@ className& operator= (className&&) noexcept = delete;
 
 #define UNUSED(var) var;
 
+
+
 // Functions
 template<class T>
 inline void SafeDelete(T& pObject)

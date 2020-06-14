@@ -6,8 +6,9 @@
 #include "Graphics/Renderer.h"
 
 GameObject::GameObject()
-	: m_IsInitialized{ false }
-	, m_pTransform{ nullptr }
+	: m_IsInitialized(false)
+	, m_pTransform(nullptr)
+	, m_MarkedForDelete(false)
 {
 	m_pTransform = new TransformComponent();
 	AddComponent(m_pTransform);
@@ -53,11 +54,11 @@ void GameObject::SetParentScene(Scene* pScene)
 {
 	if (m_pParentScene != nullptr)
 	{
-		Logger::Log<LEVEL_WARNING>("GameObject::SetParentScene") << "Object is already parented to another scene, is this reparenting intentional?";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("GameObject::SetParentScene") << "Object is already parented to another scene, is this reparenting intentional?");
 	}
 	if (m_pParentObject != nullptr)
 	{
-		Logger::Log<LEVEL_WARNING>("GameObject::SetParentScene") << "Object is already parented to an object, is this reparenting intentional?";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("GameObject::SetParentScene") << "Object is already parented to an object, is this reparenting intentional?");
 		m_pParentObject = nullptr;
 	}
 	m_pParentScene = pScene;
@@ -67,11 +68,11 @@ void GameObject::SetParentObject(GameObject* pObject)
 {
 	if (m_pParentObject != nullptr)
 	{
-		Logger::Log<LEVEL_WARNING>("GameObject::SetParentObject") << "Object is already parented to another object, is this reparenting intentional?";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("GameObject::SetParentObject") << "Object is already parented to another object, is this reparenting intentional?");
 	}
 	if (m_pParentScene != nullptr)
 	{
-		Logger::Log<LEVEL_WARNING>("GameObject::SetParentObject") << "Object is already parented to a scene, is this reparenting intentional?";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("GameObject::SetParentObject") << "Object is already parented to a scene, is this reparenting intentional?");
 		m_pParentScene = nullptr;
 	}
 	m_pParentObject = pObject;
@@ -89,6 +90,6 @@ Scene* GameObject::GetScene() const
 		return m_pParentScene;
 	}
 
-	Logger::Log<LEVEL_ERROR>("GameObject::GetScene") << "Object has no parent scene or gameobject";
+	DEBUGONLY(Logger::Log<LEVEL_ERROR>("GameObject::GetScene") << "Object has no parent scene or gameobject");
 	return nullptr;
 }

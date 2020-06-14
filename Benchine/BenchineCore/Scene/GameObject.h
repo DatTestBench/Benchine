@@ -37,8 +37,9 @@ public:
 	void SetRenderComponent(RenderComponent* pRenderComponent) { m_pRenderComponent = pRenderComponent; }
 	[[nodiscard]] constexpr auto GetTransform() const noexcept-> TransformComponent* { return m_pTransform; }
 	[[nodiscard]] constexpr auto GetRenderComponent() const noexcept-> RenderComponent* { return m_pRenderComponent; }
+	[[nodiscard]] constexpr auto MarkedForDelete() const noexcept-> bool { return m_MarkedForDelete;  }
 	Scene* GetScene() const;
-
+	void MarkForDelete() { m_MarkedForDelete = true; } 
 
 	template <class T>
 	T* GetComponent()
@@ -84,5 +85,6 @@ private:
 	bool m_IsInitialized;
 	TransformComponent* m_pTransform;
 	RenderComponent* m_pRenderComponent;
+	bool m_MarkedForDelete;
 };
 

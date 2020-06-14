@@ -27,7 +27,7 @@ void SceneManager::Initialize()
 
 	if (m_pScenes.empty())
 	{
-		Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "No scenes loaded, falling back on default scene";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "No scenes loaded, falling back on default scene");
 
 		auto pDefaultScene = new DefaultScene;
 
@@ -62,7 +62,7 @@ void SceneManager::AddScene(Scene* pScene)
 
 	if (currentSize == m_pScenes.size())
 	{
-		Logger::Log<LEVEL_WARNING>("SceneManager::AddScene()") << "A Scene with name: " << pScene->GetSceneName() << " already exists, the scene was not added.";
+		DEBUGONLY(Logger::Log<LEVEL_WARNING>("SceneManager::AddScene()") << "A Scene with name: " << pScene->GetSceneName() << " already exists, the scene was not added.");
 	}
 }
 
@@ -76,7 +76,7 @@ void SceneManager::LoadScene(const std::string_view& sceneName)
 		return;
 	}
 
-	Logger::Log<LEVEL_ERROR>("SceneManager::LoadScene") << "Scene: " << sceneName << " not found, loading failed";
+	DEBUGONLY(Logger::Log<LEVEL_ERROR>("SceneManager::LoadScene") << "Scene: " << sceneName << " not found, loading failed");
 }
 
 void SceneManager::SetStartScene(const std::string_view& sceneName)
@@ -89,7 +89,7 @@ void SceneManager::SetStartScene(const std::string_view& sceneName)
 		return;
 	}
 
-	Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "Scene: " << sceneName << " not found, defaulting to first scene in the map if present";
+	DEBUGONLY(Logger::Log<LEVEL_WARNING>("SceneManager::SetStartScene") << "Scene: " << sceneName << " not found, defaulting to first scene in the map if present");
 
 	if (m_pScenes.empty())
 	{

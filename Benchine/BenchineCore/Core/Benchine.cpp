@@ -7,7 +7,7 @@ void Benchine::Initialize()
 	{
 		throw std::runtime_error(std::string("Benchine::Initialize() > SDL_Init Error") + SDL_GetError());
 	}
-	RENDERER->Initialize(WindowSettings("Window", 1280U, 720U, false));
+	RENDERER->Initialize(WindowSettings("Window", 1600U, 960U, true));
 
 }
 

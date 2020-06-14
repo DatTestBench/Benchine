@@ -220,6 +220,7 @@ xcopy "$(SolutionDir)Resources\*" "$(OutDir)..\Resources\" /y /D /S</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BubbleBobble.cpp" />
+    <ClCompile Include="Factories\Factories.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="BubbleBobblePCH.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

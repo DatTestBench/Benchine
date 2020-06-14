@@ -62,11 +62,7 @@ void PhysicsComponent2D::HandleCollision(PhysicsComponent2D* pOtherComponent)
         case CollisionMode::DYNAMIC:
             if (!m_CallBackOverriden)
             {
-                if (pOtherComponent->GetCollisionMode() == CollisionMode::DYNAMIC)
-                {
-                    GetTransform()->Move(collisionResult.minimumTranslationVector / 2.f);
-                }
-                else if (pOtherComponent->GetCollisionMode() == CollisionMode::STATIC)
+                if (pOtherComponent->GetCollisionMode() == CollisionMode::STATIC)
                 {
                     GetTransform()->Move(collisionResult.minimumTranslationVector);
                 }

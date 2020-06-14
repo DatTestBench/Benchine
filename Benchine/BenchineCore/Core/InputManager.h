@@ -77,6 +77,7 @@ struct Controller
 {
 	bool IsConnected;
 	std::array<bool, MAX_BUTTONS> Buttons;
+	std::array<InputState, MAX_BUTTONS> ButtonStates;
 };
 
 class InputManager final : public Singleton<InputManager>
@@ -92,7 +93,6 @@ public:
 
 	bool AddInputBinding(InputBinding binding);
 	bool IsBindingActive(std::string_view actionId);
-	bool IsKeyDown(SDL_Scancode key);
 
 	bool ProcessInput();
 	bool IsPressed(GamepadButton button, int controllerId);
@@ -104,13 +104,13 @@ private:
 	void LogKeyPressed(SDL_Scancode key);
 	void LogKeyReleased(SDL_Scancode key);
 	std::vector<KeyEvent> m_KeyEvents;
-	//bool m_Keys[512];
 
 	std::array<Controller, XUSER_MAX_COUNT> m_Controllers;
-
-	std::map<std::string_view, InputBinding> m_InputBinds;
+	
+	std::multimap<std::string_view, InputBinding> m_InputBinds;
 
 	void ClearInputs();
+	void CheckControllerInput(DWORD index, XINPUT_STATE xInputState, GamepadButton Button, int xInputConstant);
 };
 
 

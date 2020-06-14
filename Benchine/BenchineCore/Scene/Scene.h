@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene/SceneManager.h"
+#include "Helpers/GeneralHelpers.h"
 #include <future>
 class GameObject;
 class RenderComponent;
@@ -25,6 +26,8 @@ public:
 	 * */
 	GameObject* AddGameObject(GameObject* pGameObject) noexcept;
 
+	GameObject* AddGameObjectLate(GameObject* pGameObject) noexcept;
+	void AddDropNextFrame(const DropSettings&) noexcept;
 	/**
 	 * Adds a gameobject to the current scene
 	 * @param pGameObject The gameobject that will be added to the scene
@@ -54,4 +57,6 @@ private:
 	std::list<PhysicsComponent2D*> m_pDynamicObjects;
 	std::list<PhysicsComponent2D*> m_pStaticObjects;
 	std::list<PhysicsComponent2D*> m_pTriggers;
+	std::vector<DropSettings> m_NewDrops;
+
 };

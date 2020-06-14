@@ -8,7 +8,7 @@ Texture2D::Texture2D(const std::string& fullPath)
 
 	if (pSurface == nullptr)
 	{
-		Logger::Log<LEVEL_ERROR>("Texture2D::Texture2D()") << IMG_GetError();
+		DEBUGONLY(Logger::Log<LEVEL_ERROR>("Texture2D::Texture2D()") << IMG_GetError());
 	}
 
 	m_pTexture = new GLTextureWrapper(pSurface);
