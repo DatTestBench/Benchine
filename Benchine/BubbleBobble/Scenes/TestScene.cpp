@@ -10,15 +10,12 @@ TestScene::TestScene(const std::string_view& sceneName)
 
 TestScene::~TestScene()
 {
-	/*auto playerInfo = JsonHelper::ReadJson("test.json");
-	playerInfo["Pos"][0] = m_pCharacter->GetTransform()->GetPosition().x;
-	playerInfo["Pos"][1] = m_pCharacter->GetTransform()->GetPosition().y; 
-	JsonHelper::WriteJson(playerInfo, "test.json");*/
+
 }
 
 void TestScene::Initialize()
 {
-	m_pCharacter = AddGameObject(Factories::CreateCharacter());
+	m_pCharacter = AddGameObject(Factories::CreateCharacter("GameObjects.json", "Bub", glm::vec2(200, 200), glm::vec2(3.f, 3.f)));
 	m_pObject = AddGameObject(Factories::CreateObject());
 
 	auto pBackground = AddGameObject(new GameObject());
@@ -41,21 +38,12 @@ void TestScene::Initialize()
 
 	AddGameObject(Factories::CreateLevel("Level1.json"));
 
-	/*for (int i = 0; i < 200; ++i)
-	{
-		AddGameObject(Factories::CreateObject());
-	}*/
 	INPUT->AddInputBinding(InputBinding("ting", std::bind(&TestScene::DeleteTing, this), InputState::Pressed, 'f'));
 }
 
 void TestScene::Update([[maybe_unused]] float dT)
 {
-
-
 	m_pFPSText->SetText(std::to_string(m_pFPSComponent->GetFPS()));
-	//const auto collider = m_pCharacter->GetComponent<PhysicsComponent2D>()->GetColliderTransformed();
-	//DEBUGRENDER(DrawPolygon(collider));
-	//DEBUGRENDER(DrawRect(glm::vec2(1.f, 1.f), 10, 10));
 }
 
 void TestScene::DeleteTing()

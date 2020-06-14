@@ -64,3 +64,13 @@ void SpriteComponent::SetCurrentZone(uint32_t zone) noexcept
         m_CurrentZone = zone;
     }
 }
+
+void SpriteComponent::AddAnimation(const std::string& name, uint32_t zone) noexcept
+{
+    m_AnimationMap.emplace(std::pair(name, zone));
+}
+
+void SpriteComponent::SetAnimation(const std::string& name) noexcept
+{
+    m_CurrentZone = m_AnimationMap.at(name);
+}

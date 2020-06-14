@@ -5,6 +5,8 @@
 /*Resource Types*/
 #include "Resources/Font.h"
 #include "Resources/Texture2D.h"
+#include "Resources/SoundByte.h"
+#include "Resources/SoundStream.h"
 
 class Font;
 class FontLoader final : public ResourceLoader<Font>
@@ -39,5 +41,41 @@ public:
 	void Release(Texture2D* pResource) override
 	{
 		SafeDelete(pResource);
+	}
+};
+
+class SoundByte;
+class SoundByteLoader final : public ResourceLoader<SoundByte>
+{
+public:
+	SoundByte* Load(const std::string& filePath) override
+	{
+		const auto fullPath = m_DataPath + filePath;
+		SoundByte* pSoundByte = new SoundByte(fullPath);
+
+		return pSoundByte;
+	}
+
+	void Release(SoundByte* pSoundByte) override
+	{
+		SafeDelete(pSoundByte);
+	}
+};
+
+class SoundStream;
+class SoundStreamLoader final : public ResourceLoader<SoundStream>
+{
+public:
+	SoundStream* Load(const std::string& filePath) override
+	{
+		const auto fullPath = m_DataPath + filePath;
+		SoundStream* pSoundStream = new SoundStream(fullPath);
+
+		return pSoundStream;
+	}
+
+	void Release(SoundStream* pSoundStream) override
+	{
+		SafeDelete(pSoundStream);
 	}
 };

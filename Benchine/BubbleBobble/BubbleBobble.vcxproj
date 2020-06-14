@@ -119,7 +119,8 @@ xcopy "$(SolutionDir)lib\vld\Win32\dbghelp.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\vld\Win32\Microsoft.DTfW.DHL.manifest" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_image\x86\*.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_mixer\x86\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf\x86\*.dll" "$(OutDir)" /y /D</Command>
+xcopy "$(SolutionDir)lib\SDL2_ttf\x86\*.dll" "$(OutDir)" /y /D
+xcopy "$(SolutionDir)Resources\*" "$(OutDir)..\Resources\" /y /D /S</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -147,7 +148,8 @@ xcopy "$(SolutionDir)lib\vld\Win64\dbghelp.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\vld\Win64\Microsoft.DTfW.DHL.manifest" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_image\x64\*.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_mixer\x64\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf\x64\*.dll" "$(OutDir)" /y /D</Command>
+xcopy "$(SolutionDir)lib\SDL2_ttf\x64\*.dll" "$(OutDir)" /y /D
+xcopy "$(SolutionDir)Resources\*" "$(OutDir)..\Resources\" /y /D /S</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,7 +181,8 @@ xcopy "$(SolutionDir)lib\vld\Win32\dbghelp.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\vld\Win32\Microsoft.DTfW.DHL.manifest" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_image\x86\*.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_mixer\x86\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf\x86\*.dll" "$(OutDir)" /y /D</Command>
+xcopy "$(SolutionDir)lib\SDL2_ttf\x86\*.dll" "$(OutDir)" /y /D
+xcopy "$(SolutionDir)Resources\*" "$(OutDir)..\Resources\" /y /D /S</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -211,7 +214,8 @@ xcopy "$(SolutionDir)lib\vld\Win64\dbghelp.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\vld\Win64\Microsoft.DTfW.DHL.manifest" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_image\x64\*.dll" "$(OutDir)" /y /D
 xcopy "$(SolutionDir)lib\SDL2_mixer\x64\*.dll" "$(OutDir)" /y /D
-xcopy "$(SolutionDir)lib\SDL2_ttf\x64\*.dll" "$(OutDir)" /y /D</Command>
+xcopy "$(SolutionDir)lib\SDL2_ttf\x64\*.dll" "$(OutDir)" /y /D
+xcopy "$(SolutionDir)Resources\*" "$(OutDir)..\Resources\" /y /D /S</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

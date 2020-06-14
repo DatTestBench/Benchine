@@ -2,10 +2,9 @@
 #include "Resources/Font.h"
 #include "Graphics/GLTextureWrapper.h"
 Font::Font(const std::string& fullPath, uint32_t size)
-	: m_pFont(nullptr)
+	: m_pFont(TTF_OpenFont(fullPath.c_str(), static_cast<int>(size)))
 	, m_pTexture(nullptr)
 {
-	m_pFont = TTF_OpenFont(fullPath.c_str(), static_cast<int>(size));
 	if (m_pFont == nullptr) 
 	{
 		Logger::Log<LEVEL_ERROR>("Font::Font()") << "Failed to load font " << TTF_GetError();

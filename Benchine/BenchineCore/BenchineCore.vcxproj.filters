@@ -63,6 +63,8 @@
     <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Components\TextureComponent.cpp" />
     <ClCompile Include="Helpers\GeneralHelpers.cpp" />
+    <ClCompile Include="Resources\SoundByte.cpp" />
+    <ClCompile Include="Resources\SoundStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BenchinePCH.h" />
@@ -108,5 +110,8 @@
     <ClInclude Include="Components\SpriteComponent.h" />
     <ClInclude Include="Components\TextureComponent.h" />
     <ClInclude Include="Helpers\json.hpp" />
+    <ClInclude Include="Helpers\Observer.h" />
+    <ClInclude Include="Resources\SoundByte.h" />
+    <ClInclude Include="Resources\SoundStream.h" />
   </ItemGroup>
 </Project>

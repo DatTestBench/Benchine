@@ -25,6 +25,9 @@ public:
     [[nodiscard]] constexpr auto GetTextureWrapper() const noexcept-> GLTextureWrapper* { return m_pSpriteSheet->GetTextureWrapper(); }
 
     void SetCurrentZone(uint32_t zone) noexcept;
+
+    void AddAnimation(const std::string& name, uint32_t zone) noexcept;
+    void SetAnimation(const std::string& name) noexcept;
     
 protected:
     void Initialize() override;
@@ -35,6 +38,8 @@ private:
     uint32_t m_Rows;
     uint32_t m_Zones;
     uint32_t m_CurrentZone;
+
+    std::map<std::string, uint32_t> m_AnimationMap;
 
 
     float m_Fps;

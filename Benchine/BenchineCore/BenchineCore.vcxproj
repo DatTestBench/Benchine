@@ -283,6 +283,8 @@
     <ClCompile Include="Debugging\Logger.cpp" />
     <ClCompile Include="Resources\Font.cpp" />
     <ClCompile Include="Graphics\Renderer.cpp" />
+    <ClCompile Include="Resources\SoundByte.cpp" />
+    <ClCompile Include="Resources\SoundStream.cpp" />
     <ClCompile Include="Resources\Texture2D.cpp" />
     <ClCompile Include="Scene\DefaultScene.cpp" />
     <ClCompile Include="Scene\GameObject.cpp" />
@@ -305,6 +307,7 @@
     <ClInclude Include="Graphics\GLTextureWrapper.h" />
     <ClInclude Include="Helpers\GeneralHelpers.h" />
     <ClInclude Include="Helpers\json.hpp" />
+    <ClInclude Include="Helpers\Observer.h" />
     <ClInclude Include="Helpers\SAT.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
@@ -326,6 +329,8 @@
     <ClInclude Include="Resources\Font.h" />
     <ClInclude Include="Graphics\Renderer.h" />
     <ClInclude Include="Resources\Resources.h" />
+    <ClInclude Include="Resources\SoundByte.h" />
+    <ClInclude Include="Resources\SoundStream.h" />
     <ClInclude Include="Resources\Texture2D.h" />
     <ClInclude Include="Helpers\Singleton.h" />
     <ClInclude Include="Helpers\Utils.h" />

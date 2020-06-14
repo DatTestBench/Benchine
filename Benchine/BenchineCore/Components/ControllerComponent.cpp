@@ -2,6 +2,7 @@
 #include "Components/ControllerComponent.h"
 #include "Components/PhysicsComponent2D.h"
 #include "Components/TransformComponent.h"
+#include "Components/SpriteComponent.h"
 #include "Debugging/DebugRenderer.h"
 #include <functional>
 #include <algorithm>
@@ -28,19 +29,12 @@ void ControllerComponent::Initialize()
 
 void ControllerComponent::Update(float dT)
 {
-	//Logger::Log<LEVEL_INFO>("ControllerComponent::Update()") << GetTransform()->GetPosition().x << " " << GetTransform()->GetPosition().y;
-	//ogger::Log<LEVEL_INFO>("ControllerComponent::Update()") << m_Velocity.x << " " << m_Velocity.y ;
-
 	constexpr float velocity = 100.f;
 	constexpr float gravity = 750.f;
 	constexpr float friction = 500.f;
 	if (!m_pPhysicsComponent->IsOnGround())
 	{
 		m_Velocity.y = std::clamp(m_Velocity.y - gravity * dT, -200.f, 1000.f);
-	}
-	else
-	{
-		//m_Velocity.y = 0;
 	}
 
 	if (abs(m_Velocity.x) > 0.1f)
@@ -61,12 +55,16 @@ void ControllerComponent::MoveLeft()
 {
 	m_Movement.x -= 1;
 	m_Velocity.x = 0;
+
+	GetGameObject()->GetComponent<SpriteComponent>()->SetAnimation("RunLeft");	
 }
 void ControllerComponent::MoveRight()
 {
 	m_Movement.x += 1;
 	m_Velocity.x = 0;
+	GetGameObject()->GetComponent<SpriteComponent>()->SetAnimation("RunRight");	
 }
+
 
 void ControllerComponent::Jump()
 {

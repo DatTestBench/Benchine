@@ -6,24 +6,54 @@
 namespace Factories
 {
 	/*CHARACTER*/
-	static GameObject* CreateCharacter()
+	static GameObject* CreateCharacter(const std::string& characterFile, const std::string& characterName, const glm::vec2& pos = glm::vec2(), const glm::vec2& scale = glm::vec2(1.f, 1.f))
 	{
-		const auto pCharacter = new GameObject();
-		const auto test = JsonHelper::ReadJson("test.json");
-		pCharacter->GetTransform()->SetPosition(test["Pos"][0], test["Pos"][1]);
-		pCharacter->AddComponent(new ControllerComponent());
-		pCharacter->AddComponent(new RenderComponent());
-		auto characterSprite = pCharacter->AddComponent(new SpriteComponent(RESOURCES->Load<Texture2D>("Characters/CharacterSprites.png"), 8U, 16U, 16U, 8.f));
-		characterSprite->GetTextureWrapper()->SetTarget(50.f, 50.f);
-		characterSprite->GetTextureWrapper()->SetRenderPriority(3U);
+		// Read the settings from file
+		const auto characterSettings = JsonHelper::ReadJson("GameObjects/" + characterFile)[characterName];
 
+		// Base gameobject
+		const auto pCharacter = new GameObject();
+		
+		// Scale and move the Character to the set proportions
+		pCharacter->GetTransform()->SetPosition(pos.x, pos.y);
+		pCharacter->GetTransform()->SetScale(scale);
+
+		pCharacter->AddComponent(new ControllerComponent());
+
+		// Character needs to be drawn (duhh)
+		pCharacter->AddComponent(new RenderComponent());
+
+		// Load the texture the level needs
+		const auto spriteSheetFile = characterSettings["SpriteSheet"].get<std::string>();
+		auto spriteComponent = pCharacter->AddComponent(new SpriteComponent(RESOURCES->Load<Texture2D>("GameObjects/" + spriteSheetFile), 8U, 16U, 16U, 8.f));
+
+
+		bool setDefault = false;
+
+		for (auto item : characterSettings["Animations"])
+		{
+			for (auto& [key, value] : item.items())
+			{
+				spriteComponent->AddAnimation(key, value);
+
+				if (!setDefault)
+				{
+					spriteComponent->SetAnimation(key);
+					setDefault = true;
+				}
+			}
+		}
+
+		spriteComponent->GetTextureWrapper()->SetOffsetMode(TextureOffsetMode::CENTER); // Default initialization for player pivot
+		spriteComponent->GetTextureWrapper()->SetRenderPriority(static_cast<uint32_t>(RenderDepth::PLAYERLAYER)); // Default Player
 
 		auto physicsComponent = pCharacter->AddComponent(new PhysicsComponent2D(CollisionMode::DYNAMIC));
-		physicsComponent->SetCollider(Collider2D{
-			glm::vec2(-25, -25),
-			glm::vec2(25, -25),
-			glm::vec2(25, 25),
-			glm::vec2(-25, 25)});
+			physicsComponent->SetCollider(Collider2D{
+				glm::vec2(-8, -8),
+				glm::vec2(8, -8),
+				glm::vec2(8, 8),
+				glm::vec2(-8, 8)});
+
 
 		auto callback = [](PolygonCollisionResult result, PhysicsComponent2D* pSelf, PhysicsComponent2D* pOther){
 			if (pOther->GetCollisionMode() == CollisionMode::STATIC)
@@ -35,7 +65,8 @@ namespace Factories
 				}
 			}
 		};
-		physicsComponent->SetCallback(callback ,true);
+
+		physicsComponent->SetCallback(callback, true);
 
 		return pCharacter;
 	}
