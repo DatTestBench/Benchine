@@ -15,7 +15,7 @@ namespace DebugRenderer
 	void DrawPoints(const std::vector<glm::vec2>& vertices, const float pointSize = 1.0f);
 	//LINES
 	void DrawLine(const float x1, const float y1, const float x2, const float y2, const float lineWidth = 1.0f);
-	void DrawLine(const glm::vec2& p1, const glm::vec2& p2, const float lineWidth = 1.0f);
+	void DrawLine(const glm::vec2& start, const glm::vec2& end, const float lineWidth = 1.0f);
 	//RECTS
 	void DrawRect(const float left, const float bottom, const float width, const float height, const float lineWidth = 1.0f);
 	void DrawRect(const glm::vec2& bottomLeft, const float width, const float height, const float lineWidth = 1.0f);

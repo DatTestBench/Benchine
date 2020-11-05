@@ -2,7 +2,6 @@
 #include "Components/BaseComponent.h"
 #include "Helpers/Sat.h"
 #include "Helpers/GeneralHelpers.h"
-#include "Debugging/DebugRenderer.h"
 #include <functional>
 enum class CollisionMode
 {
@@ -14,7 +13,7 @@ enum class CollisionMode
 class PhysicsComponent2D final : public BaseComponent
 {
 public:
-	PhysicsComponent2D(CollisionMode collisionMode = CollisionMode::STATIC);
+	explicit PhysicsComponent2D(CollisionMode collisionMode = CollisionMode::STATIC);
 	virtual ~PhysicsComponent2D() override;
 	DEL_ROF(PhysicsComponent2D)
 
@@ -25,7 +24,7 @@ public:
 	[[nodiscard]] constexpr auto IsOnGround() const noexcept-> bool { return m_IsOnGround; }
 	void SetCollider(const Collider2D& collider) noexcept { m_BaseCollider = collider; m_Collider = collider; }
 	void SetVelocity(const glm::vec2& velocity) noexcept { m_Velocity = velocity; }
-	void SetCallback(std::function<void(PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*)> callback, bool callbackOverride = false) noexcept { m_PhysicsCallback = callback; m_CallBackOverriden = callbackOverride; }
+	void SetCallback(const std::function<void(PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*)> callback, const bool callbackOverride = false) noexcept { m_PhysicsCallback = callback; m_CallBackOverriden = callbackOverride; }
 	void HandleCollision(PhysicsComponent2D* pOtherActor);
 
 protected:

@@ -12,10 +12,10 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 
 	const auto& colliderA = pActorA->GetCollider(); 
 	const auto& colliderB = pActorB->GetCollider();
-	size_t vertexCountA = colliderA.size();
-	size_t vertexCountB = colliderB.size();
+	auto vertexCountA = colliderA.size();
+	auto vertexCountB = colliderB.size();
 
-	float minIntervalDistance = std::numeric_limits<float>::infinity();
+	auto minIntervalDistance = std::numeric_limits<float>::infinity();
 	glm::vec2 translationAxis{}, currentVertex{}, nextVertex{};
 
 	// Loop through all the vertices of both polygons
@@ -54,7 +54,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 		// Check if the current interval distance is the minimum one. If so store
 		// the interval distance and the current distance.
 		// This will be used to calculate the minimum translation vector
-		float intervalDistance = abs(IntervalDistance(projectionA, projectionB));
+		auto intervalDistance = abs(IntervalDistance(projectionA, projectionB));
 		if (intervalDistance < minIntervalDistance)
 		{
 			minIntervalDistance = intervalDistance;
@@ -67,7 +67,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActorA, Physic
 	}
 
 	// The minimum translation vector
-	// can be used to push the polygons appart.
+	// can be used to push the polygons apart.
 	if (result.intersect)
 		result.minimumTranslationVector = translationAxis * minIntervalDistance;
 
@@ -85,9 +85,9 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 
 	const auto& collider = pActor->GetCollider();
 
-	size_t vertexCountA = collider.size();
-	size_t vertexCountB = staticPoly.size();
-	float minIntervalDistance = std::numeric_limits<float>::infinity();
+	const auto vertexCountA = collider.size();
+	const auto vertexCountB = staticPoly.size();
+	auto minIntervalDistance = std::numeric_limits<float>::infinity();
 	glm::vec2 translationAxis{}, currentVertex{}, nextVertex{};
 
 	// Loop through all the vertices of both polygons
@@ -124,13 +124,13 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 		// Check if the current interval distance is the minimum one. If so store
 		// the interval distance and the current distance.
 		// This will be used to calculate the minimum translation vector
-		float intervalDistance = abs(IntervalDistance(projectionA, projectionB));
+		const auto intervalDistance = abs(IntervalDistance(projectionA, projectionB));
 		if (intervalDistance < minIntervalDistance)
 		{
 			minIntervalDistance = intervalDistance;
 			translationAxis = axis;
 			
-			glm::vec2 delta = MathHelper::PolyCenter(collider) - MathHelper::PolyCenter(staticPoly);
+			auto delta = MathHelper::PolyCenter(collider) - MathHelper::PolyCenter(staticPoly);
 			if (glm::dot(delta, translationAxis) < 0)
 				translationAxis = -translationAxis;
 		}
@@ -148,7 +148,7 @@ PolygonCollisionResult sat::PolygonCollision(PhysicsComponent2D* pActor, const C
 Projection2D sat::ProjectPolygon(const glm::vec2& axis, const Collider2D& polygon)
 {
 	// To project a point on an axis use the dot product
-	float dotProduct = glm::dot(axis, polygon.at(0));
+	auto dotProduct = glm::dot(axis, polygon.at(0));
 	Projection2D projectionBounds{dotProduct};
 	for (size_t i = 0; i < polygon.size(); ++i)
 	{
@@ -172,7 +172,7 @@ float sat::IntervalDistance(const Projection2D& projectionA, const Projection2D&
 glm::vec2 sat::MakeAxis(const glm::vec2& vertexA, const glm::vec2& vertexB)
 {
 	// Get edge
-	const glm::vec2 edge = vertexB - vertexA;
+	const auto edge = vertexB - vertexA;
 	// get either perpendicular vector
 	const glm::vec2 normal{ -edge.y, edge.x };
 	//return normalized

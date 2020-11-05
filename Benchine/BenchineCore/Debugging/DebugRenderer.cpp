@@ -159,7 +159,7 @@ void DebugRenderer::DrawEllipse(const glm::vec2& center, const float radX, const
 
 void DebugRenderer::DrawEllipse(const float centerX, const float centerY, const float radX, const float radY, const float lineWidth)
 {
-	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
+	const float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
 	glLineWidth(lineWidth);
 	glBegin(GL_LINE_LOOP);
@@ -184,7 +184,7 @@ void DebugRenderer::FillEllipse(const glm::vec2& center, const float radX, const
 
 void DebugRenderer::FillEllipse(const float centerX, const float centerY, const float radX, const float radY)
 {
-	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
+	const float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
 	glBegin(GL_POLYGON);
 	{
@@ -212,7 +212,7 @@ void DebugRenderer::DrawArc(const float centerX, const float centerY, const floa
 		return;
 	}
 
-	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
+	const float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
 	glLineWidth(lineWidth);
 	glBegin(GL_LINE_STRIP);
@@ -238,7 +238,7 @@ void DebugRenderer::FillArc(const float centerX, const float centerY, const floa
 		DEBUGONLY(Logger::Log<LEVEL_WARNING>("DebugRenderer::FillArc") << "fromAngle > tillAngle, arc can not be drawn.");
 		return;
 	}
-	float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
+	const float dAngle = radX > radY ? glm::pi<float>() / radX : glm::pi<float>() / radY;
 
 	glBegin(GL_POLYGON);
 	{

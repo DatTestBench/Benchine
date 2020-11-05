@@ -6,7 +6,7 @@ class SceneManager final : public Singleton<SceneManager>
 {
 public:
 	
-	SceneManager(token);
+	explicit SceneManager(token);
 	virtual ~SceneManager();
 	void Initialize();
 	void Update(float dT);

@@ -56,7 +56,7 @@ void GLTextureWrapper::CreateTextureFromSurface(SDL_Surface* pSurface)
 		break;
 	default:
 		DEBUGONLY(Logger::Log<LEVEL_ERROR>("GLTextureWrapper::CreateTextureFromSurface()") << " Unknown pixel format, BytesPerPixel " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.");
-		//std::cerr << "Texture::CreateFromSurface, unknow pixel format, BytesPerPixel: " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.\n";
+		//std::cerr << "Texture::CreateFromSurface, unknown pixel format, BytesPerPixel: " << pSurface->format->BytesPerPixel << "\nUse 32 bit or 24 bit images.\n";
 		m_CreationOk = false;
 		return;
 	}

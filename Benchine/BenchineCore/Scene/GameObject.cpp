@@ -3,7 +3,6 @@
 #include "Components/BaseComponent.h"
 #include "Components/TransformComponent.h"
 #include "Resources/ResourceManager.h"
-#include "Graphics/Renderer.h"
 
 GameObject::GameObject()
 	: m_IsInitialized(false)

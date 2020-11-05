@@ -2,11 +2,15 @@
 #include "Components/PhysicsComponent2D.h"
 #include "Components/TransformComponent.h"
 #include <future>
-PhysicsComponent2D::PhysicsComponent2D(CollisionMode collisionMode)
+
+#include "Debugging/DebugRenderer.h"
+
+PhysicsComponent2D::PhysicsComponent2D(const CollisionMode collisionMode)
     : m_CollisionMode(collisionMode)
+    , m_PhysicsCallback([](PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*){})
     , m_CallBackOverriden(false)
     , m_Velocity()
-    , m_PhysicsCallback([](PolygonCollisionResult, PhysicsComponent2D*, PhysicsComponent2D*){})
+    
     , m_IsOnGround(false)
 {
     
@@ -36,8 +40,8 @@ void PhysicsComponent2D::Initialize()
 void PhysicsComponent2D::Update([[maybe_unused]] float dT)
 {
     m_IsOnGround = false;
-    auto tMat = glm::translate(glm::mat3(1.f), static_cast<glm::vec2>(GetTransform()->GetPosition()));
-    auto sMat = glm::scale(glm::mat3(1.f), GetTransform()->GetScale());
+    const auto tMat = glm::translate(glm::mat3(1.f), static_cast<glm::vec2>(GetTransform()->GetPosition()));
+    const auto sMat = glm::scale(glm::mat3(1.f), GetTransform()->GetScale());
 
     const auto transformMat = tMat * sMat;
 

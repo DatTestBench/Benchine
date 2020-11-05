@@ -1,5 +1,4 @@
 #pragma once
-#include "Scene/SceneManager.h"
 #include "Helpers/GeneralHelpers.h"
 #include <future>
 class GameObject;

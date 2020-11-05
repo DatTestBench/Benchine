@@ -29,9 +29,9 @@ void RenderComponent::Render() const
 {
 	const auto renderPos = GetGameObject()->GetTransform()->GetPosition();
 	const auto renderScale = GetGameObject()->GetTransform()->GetScale();
-	for (auto texture : m_RenderBuffer)
+	for (auto [textureId, texture] : m_RenderBuffer)
 	{
-		Renderer::GetInstance()->RenderTexture(texture.second, renderPos, renderScale);
+		Renderer::GetInstance()->RenderTexture(texture, renderPos, renderScale);
 	}
 }
 

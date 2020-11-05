@@ -1,9 +1,7 @@
 #include "BenchinePCH.h"
 
 #include "Components/TextComponent.h"
-#include "Graphics/Renderer.h"
 #include "Resources/Font.h"
-#include "Resources/Texture2D.h"
 #include "Components/TransformComponent.h"
 #include "Components/RenderComponent.h"
 #include "Scene/GameObject.h"
@@ -32,9 +30,9 @@ void TextComponent::Update([[maybe_unused]] float dT)
 	if (m_NeedsUpdate)
 	{
 
-		auto offsetMode = m_pTexture->GetOffsetMode();
-		auto positionOffset = m_pTexture->GetPositionOffset();
-		auto renderPriority = m_pTexture->GetRenderPriority();
+		const auto offsetMode = m_pTexture->GetOffsetMode();
+		const auto positionOffset = m_pTexture->GetPositionOffset();
+		const auto renderPriority = m_pTexture->GetRenderPriority();
 
 		m_pTexture = m_pFont->GenerateFontTexture(m_Text, m_Color);
 

@@ -2,9 +2,7 @@
 #include "Scene/Scene.h"
 #include "Scene/GameObject.h"
 #include "Components/RenderComponent.h"
-#include "Helpers/SAT.h"
 #include "Components/PhysicsComponent2D.h"
-#include "Debugging/DebugRenderer.h"
 #include "../BubbleBobble/Factories/Factories.h"
 #include <future>
 #include <deque>

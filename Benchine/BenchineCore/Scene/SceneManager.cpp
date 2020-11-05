@@ -14,9 +14,9 @@ SceneManager::SceneManager(token)
 
 SceneManager::~SceneManager()
 {
-	for (auto pScene : m_pScenes)
+	for (auto [sceneName, pScene] : m_pScenes)
 	{
-		SafeDelete(pScene.second);
+		SafeDelete(pScene);
 	}
 }
 

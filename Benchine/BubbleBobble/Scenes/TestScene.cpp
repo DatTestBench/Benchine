@@ -68,7 +68,7 @@ void TestScene::Initialize()
 void TestScene::Update([[maybe_unused]] float dT)
 {
 	m_pFPSText->SetText(std::to_string(m_pFPSComponent->GetFPS()));
-	auto totalScore = m_pScoreComponent1->GetScore() + m_pScoreComponent2->GetScore();
+	const auto totalScore = m_pScoreComponent1->GetScore() + m_pScoreComponent2->GetScore();
 
 	m_pScoreText->SetText(std::to_string(totalScore));
 }

@@ -7,7 +7,7 @@ class GLTextureWrapper;
 class Renderer final : public Singleton<Renderer>
 {
 public:
-	Renderer(token) {}
+	explicit Renderer(token) {}
 	virtual ~Renderer();
 
 	void Initialize(const WindowSettings& windowSettings);

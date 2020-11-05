@@ -8,7 +8,7 @@ public:
     /**
      * Constructor
      * @param pSpriteSheet Texture for the spritesheet
-     * @param nrCols Number of collums
+     * @param nrCols Number of columns
      * @param nrRows Number of rows
      * @param nrZones Amount of different zones in the spritesheet, to use for different sprites in spritesheets
      * @param fps Framerate of the animation

@@ -36,23 +36,23 @@ enum GamepadButton : uint16_t
 };
 struct InputBinding
 {
-	std::string_view ActionId;
-	std::function<void()> CallBack;
-	InputState State;
-	int KeyCode; // Remapped to an SDL keycode
-	int MouseCode;
-	GamepadButton Button;
+	std::string_view actionId;
+	std::function<void()> callBack;
+	InputState inputState;
+	int32_t keyCode; // Remapped to an SDL keycode
+	int32_t mouseButton;
+	GamepadButton padButton;
 	int ControllerId;
 	bool IsActive;
 
-	explicit InputBinding(std::string_view id, std::function<void()> callBack, InputState state, int keyCode = -1, int mouseCode = -1, GamepadButton button = MAX_BUTTONS, int controllerId = 0)
-		: ActionId(id)
-		, CallBack(callBack)
-		, State(state)
-		, KeyCode(SDL_GetScancodeFromKey(keyCode))
-		, MouseCode(mouseCode)
-		, Button(button)
-		, ControllerId(controllerId)
+	explicit InputBinding(const std::string_view id, const std::function<void()> callBack, const InputState state, const int32_t  key = -1, const int32_t mouseCode = -1, const GamepadButton button = MAX_BUTTONS, const uint32_t gamepadId = 0)
+		: actionId(id)
+		, callBack(callBack)
+		, inputState(state)
+		, keyCode(SDL_GetScancodeFromKey(key))
+		, mouseButton(mouseCode)
+		, padButton(button)
+		, ControllerId(gamepadId)
 		, IsActive(false)
 	{
 
@@ -61,13 +61,13 @@ struct InputBinding
 
 struct KeyEvent
 {
-	int KeyCode;
-	InputState State;
-	bool Processed;
-	KeyEvent(int keyCode, InputState state)
-		: KeyCode(keyCode)
-		, State(state)
-		, Processed(false)
+	int32_t keyCode;
+	InputState inputState;
+	bool isProcessed;
+	explicit KeyEvent(const int32_t code, const InputState state)
+		: keyCode(code)
+		, inputState(state)
+		, isProcessed(false)
 	{
 
 	}
@@ -75,15 +75,15 @@ struct KeyEvent
 
 struct Controller
 {
-	bool IsConnected;
-	std::array<bool, MAX_BUTTONS> Buttons;
-	std::array<InputState, MAX_BUTTONS> ButtonStates;
+	bool isConnected;
+	std::array<bool, MAX_BUTTONS> buttons;
+	std::array<InputState, MAX_BUTTONS> buttonStates;
 };
 
 class InputManager final : public Singleton<InputManager>
 {
 public:
-	InputManager(token)
+	explicit InputManager(token)
 		: m_KeyEvents()
 		, m_Controllers()
 		, m_InputBinds()
@@ -110,7 +110,7 @@ private:
 	std::multimap<std::string_view, InputBinding> m_InputBinds;
 
 	void ClearInputs();
-	void CheckControllerInput(DWORD index, XINPUT_STATE xInputState, GamepadButton Button, int xInputConstant);
+	void CheckControllerInput(DWORD index, XINPUT_STATE xInputState, GamepadButton button, int xInputConstant);
 };
 
 

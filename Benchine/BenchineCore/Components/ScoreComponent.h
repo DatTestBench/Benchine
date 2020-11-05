@@ -9,7 +9,7 @@ public:
     DEL_ROF(ScoreComponent)
 
     [[nodiscard]] constexpr auto GetScore() const noexcept-> uint32_t { return m_Score; }
-    void AddScore(uint32_t score) { m_Score += score; }
+    void AddScore(const uint32_t score) { m_Score += score; }
 protected:
     void Initialize() override;
 

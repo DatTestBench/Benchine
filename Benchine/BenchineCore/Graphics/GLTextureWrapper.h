@@ -14,7 +14,7 @@ enum class TextureOffsetMode
 class GLTextureWrapper final
 {
 public:
-	GLTextureWrapper(SDL_Surface* pSurface, TextureOffsetMode offsetMode = TextureOffsetMode::CENTER, uint32_t renderPriority = 1);
+	explicit GLTextureWrapper(SDL_Surface* pSurface, TextureOffsetMode offsetMode = TextureOffsetMode::CENTER, uint32_t renderPriority = 1);
 	~GLTextureWrapper();
 	DEL_ROF(GLTextureWrapper)
 
@@ -33,8 +33,8 @@ public:
 	void SetSource(const IRect& source) noexcept { m_Source = source; }
 	void SetTarget(const float width, const float height) noexcept { m_TargetWidth = width; m_TargetHeight = height; }
 	void SetTarget(const uint32_t width, const uint32_t height) noexcept { m_TargetWidth = static_cast<float>(width); m_TargetHeight = static_cast<float>(height); }
-	void SetRenderPriority(uint32_t renderPriority) noexcept { m_RenderPriority = renderPriority; }
-	void SetOffsetMode(TextureOffsetMode offsetMode) noexcept { m_OffsetMode = offsetMode; }
+	void SetRenderPriority(const uint32_t renderPriority) noexcept { m_RenderPriority = renderPriority; }
+	void SetOffsetMode(const TextureOffsetMode offsetMode) noexcept { m_OffsetMode = offsetMode; }
 	void SetPositionOffset(const glm::vec2& posOffset) noexcept { m_PositionOffset = posOffset; }
 
 

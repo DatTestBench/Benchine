@@ -146,7 +146,7 @@ GameObject* Factories::CreateBubble(const std::string& bubbleFile, const std::st
 	pBubble->GetTransform()->SetPosition(pos.x, pos.y);
 	pBubble->GetTransform()->SetScale(scale);
 	pBubble->AddComponent(new RenderComponent());
-	// Load the texutre the drop needs
+	// Load the texture the drop needs
 	const auto bubbleSpriteFile = bubbleSettings["SpriteSheet"].get<std::string>();
 	const auto spriteComponent = pBubble->AddComponent(new SpriteComponent(RESOURCES->Load<Texture2D>("GameObjects/" + bubbleSpriteFile), 8U, 16U, 16U, 8.f));
 	spriteComponent->GetTextureWrapper()->SetOffsetMode(TextureOffsetMode::CENTER);

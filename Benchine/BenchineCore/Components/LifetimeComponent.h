@@ -4,7 +4,7 @@
 class LifetimeComponent final : public BaseComponent
 {
 public:
-    LifetimeComponent(float lifeTime);
+    explicit LifetimeComponent(float lifeTime);
     virtual ~LifetimeComponent() override = default;
     DEL_ROF(LifetimeComponent)
 

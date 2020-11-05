@@ -7,7 +7,7 @@ void BaseGame::BaseInitialize()
 	Initialize();
 }
 
-void BaseGame::BaseUpdate(float dT)
+void BaseGame::BaseUpdate(const float dT)
 {
 	SceneManager::GetInstance()->Update(dT);
 	// User Defined Update

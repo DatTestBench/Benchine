@@ -3,15 +3,15 @@
 #include "Components/PhysicsComponent2D.h"
 #include "Components/TransformComponent.h"
 #include "Components/SpriteComponent.h"
-#include "Debugging/DebugRenderer.h"
 #include <functional>
 #include <algorithm>
 AIControllerComponent::AIControllerComponent()
 	: m_Velocity(0, 0)
 	, m_Direction(-1, 0)
 	, m_pPhysicsComponent(nullptr)
-	, m_BubbleTimer()
 	, m_State(AIState::FREE)
+	, m_BubbleTimer()
+
 {
 
 }
@@ -50,9 +50,9 @@ void AIControllerComponent::Update(float dT)
 
 
 		m_State = AIState::FREE;
-		constexpr float velocity = 100.f;
-		constexpr float gravity = 750.f;
-		constexpr float friction = 500.f;
+		const float velocity = 100.f;
+		const float gravity = 750.f;
+		const float friction = 500.f;
 		if (!m_pPhysicsComponent->IsOnGround())
 		{
 			m_Velocity.y = std::clamp(m_Velocity.y - gravity * dT, -200.f, 1000.f);

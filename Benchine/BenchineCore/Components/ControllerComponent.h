@@ -11,7 +11,7 @@ enum class MovementDirection
 class ControllerComponent final : public BaseComponent
 {
 public:
-	ControllerComponent(uint32_t playerId);
+	explicit ControllerComponent(uint32_t playerId);
 	virtual ~ControllerComponent() override = default;
 	DEL_ROF(ControllerComponent)
 

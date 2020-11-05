@@ -10,7 +10,7 @@
 [[nodiscard]] auto MathHelper::PolyCenter(const Polygon2D& polygon) noexcept-> const glm::vec2 	// this actually generates the same asm as a simple for loop, but makes it look like I know what I'm doing: https://godbolt.org/z/Z9WeSx
                                                     // And I know this is clang, but MSVC produces 14k lines on O2 :/ https://godbolt.org/z/wphEjY
 {
-    auto vertexSum = std::accumulate(polygon.cbegin(), polygon.cend(), glm::vec2(), [](const glm::vec2& v1, const glm::vec2& v2) {return v1 + v2;});
+    const auto vertexSum = std::accumulate(polygon.cbegin(), polygon.cend(), glm::vec2(), [](const glm::vec2& v1, const glm::vec2& v2) {return v1 + v2;});
     return glm::vec2(vertexSum.x / static_cast<float>(polygon.size()), vertexSum.y / static_cast<float>(polygon.size()));
 }
 
@@ -72,8 +72,7 @@ void JsonHelper::WriteJson(const json& j, const std::string& filePath) noexcept
 [[nodiscard]] auto SvgHelper::ReadSvg(const std::string& filePath) noexcept-> std::vector<Polygon2D>
 {
     const auto fullPath = RESOURCES->GetDataPath() + filePath;
-    struct NSVGimage* image;
-    image = nsvgParseFromFile(fullPath.c_str(), "px", 96);\
+    struct NSVGimage* image = nsvgParseFromFile(fullPath.c_str(), "px", 96);
     
     std::vector<Polygon2D> polygons;
     for (auto shape = image->shapes; shape != nullptr; shape = shape->next)

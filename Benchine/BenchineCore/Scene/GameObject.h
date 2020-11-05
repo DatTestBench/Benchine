@@ -23,7 +23,7 @@ public:
 	 * */
 	template <
 		class T,
-		class = std::enable_if_t<std::is_base_of_v<BaseComponent, T>> // SFINAE doesn't look horrible at all :/
+		class = std::enable_if_t<std::is_base_of_v<BaseComponent, T>>
 	>
 		T* AddComponent(T* pComponent)
 	{

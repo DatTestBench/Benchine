@@ -2,15 +2,16 @@
 #include "Components/SpriteComponent.h"
 #include "Components/RenderComponent.h"
 #include "Graphics/GLTextureWrapper.h"
-SpriteComponent::SpriteComponent(Texture2D* pSpriteSheet, uint32_t nrCols, uint32_t nrRows, uint32_t nrZones, float fps)
+SpriteComponent::SpriteComponent(Texture2D* pSpriteSheet, const uint32_t nrCols, const uint32_t nrRows, const uint32_t nrZones, const float fps)
     : m_pSpriteSheet(pSpriteSheet)
     , m_Cols(nrCols)
     , m_Rows(nrRows)
     , m_Zones(nrZones)
+    , m_CurrentZone(0)
     , m_Fps(fps)
     , m_CurrentElapsed()
     , m_CurrentFrame()
-    , m_CurrentZone(0)
+
 {
 
 }
@@ -22,14 +23,14 @@ void SpriteComponent::Initialize()
     src.Height = GetFrameHeight();
 
     src.Pos.x = 0; 
-    const uint32_t zoneSize = m_Rows / m_Zones;
+    const auto zoneSize = m_Rows / m_Zones;
     src.Pos.y = static_cast<int32_t>(src.Height * ((m_CurrentFrame / m_Cols) + (m_CurrentZone * zoneSize)));
 
     m_pSpriteSheet->GetTextureWrapper()->SetSource(src);
     GetGameObject()->GetRenderComponent()->AddTexture(m_pSpriteSheet->GetTextureWrapper());
 }
 
-void SpriteComponent::Update(float dT)
+void SpriteComponent::Update(const float dT)
 {
     m_CurrentElapsed += dT;
     if (m_CurrentElapsed >= 1.f / m_Fps)
@@ -37,13 +38,13 @@ void SpriteComponent::Update(float dT)
         ++m_CurrentFrame %= (m_Cols * (m_Rows / m_Zones));
         m_CurrentElapsed -= 1.f / m_Fps;
 
-        IRect src{};
+        IRect src;
         src.Width = GetFrameWidth();
         src.Height = GetFrameHeight();
 
         src.Pos.x = static_cast<int32_t>(src.Width * (m_CurrentFrame % m_Cols));
 
-        const uint32_t zoneSize = m_Rows / m_Zones;
+        const auto zoneSize = m_Rows / m_Zones;
 
         src.Pos.y = static_cast<int32_t>(src.Height * ((m_CurrentFrame / m_Cols) + (m_CurrentZone * zoneSize)));
 

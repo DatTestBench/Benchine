@@ -44,9 +44,9 @@ void ControllerComponent::Initialize()
 
 void ControllerComponent::Update(float dT)
 {
-	constexpr float velocity = 100.f;
-	constexpr float gravity = 750.f;
-	constexpr float friction = 500.f;
+	const float velocity = 100.f;
+	const float gravity = 750.f;
+	const float friction = 500.f;
 	if (!m_pPhysicsComponent->IsOnGround())
 	{
 		m_Velocity.y = std::clamp(m_Velocity.y - gravity * dT, -200.f, 1000.f);
